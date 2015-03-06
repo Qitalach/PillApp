@@ -9,14 +9,14 @@ import android.view.View;
 import android.widget.EditText;
 
 
-public class HomePageActivity extends ActionBarActivity {
+public class TodayActivity extends ActionBarActivity {
 
     public final static String EXTRA_MEDICINE = "teamqitalach.pillapp.MEDICINE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
+        setContentView(R.layout.activity_today);
     }
 
 
@@ -49,6 +49,27 @@ public class HomePageActivity extends ActionBarActivity {
         EditText editText = (EditText) findViewById(R.id.edit_message);
         String medicine = editText.getText().toString();
         intent.putExtra(EXTRA_MEDICINE, medicine);
+        startActivity(intent);
+    }
+
+    /** Called when the user clicks the Send button */
+    public void sendHistory(View view) {
+        // Do something in response to button
+        Intent intent = new Intent(this, HistoryActivity.class);
+        startActivity(intent);
+    }
+
+    /** Called when the user clicks the Send button */
+    public void sendToday(View view) {
+        // Do something in response to button
+        Intent intent = new Intent(this, TodayActivity.class);
+        startActivity(intent);
+    }
+
+    /** Called when the user clicks the Send button */
+    public void sendTomorrow(View view) {
+        // Do something in response to button
+        Intent intent = new Intent(this, TomorrowActivity.class);
         startActivity(intent);
     }
 }

@@ -1,37 +1,24 @@
 package teamqitalach.pillapp;
 
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 
-public class DisplayMedicineActivity extends ActionBarActivity {
+public class HistoryActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Get the message from the intent
-        Intent intent = getIntent();
-        String medicine = intent.getStringExtra(TodayActivity.EXTRA_MEDICINE);
-
-        // Create the text view
-        TextView textView = new TextView(this);
-        textView.setTextSize(40);
-        textView.setText(medicine);
-
-        // Set the text view as the activity layout
-        setContentView(textView);
+        setContentView(R.layout.activity_history);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_display_medicine, menu);
+        getMenuInflater().inflate(R.menu.menu_history, menu);
         return true;
     }
 
@@ -49,7 +36,4 @@ public class DisplayMedicineActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
-
 }
