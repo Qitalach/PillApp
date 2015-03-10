@@ -32,6 +32,10 @@
             android:name=".TomorrowActivity"
             android:label="@string/title_activity_tomorrow" >
         </activity>
+        <activity
+            android:name=".NotificationReceiverActivity"
+            android:label="@string/title_activity_notification_receiver" >
+        </activity>
     </application>
 
 </manifest>

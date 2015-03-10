@@ -47,4 +47,15 @@
         android:layout_below="@id/edit_message"
         android:layout_toRightOf="@id/today" />
 
+    <Button
+        android:id="@+id/notificationButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="createNotification"
+        android:text="Create Notification"
+        android:layout_centerVertical="true"
+        android:layout_alignRight="@+id/tomorrow"
+        android:layout_alignEnd="@+id/tomorrow">
+    </Button>
+
 </RelativeLayout>
