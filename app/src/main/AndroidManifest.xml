@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="teamqitalach.pillapp" >
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -36,6 +38,9 @@
             android:name=".NotificationReceiverActivity"
             android:label="@string/title_activity_notification_receiver" >
         </activity>
+        <service android:name=".AlarmService"
+                 android:enabled="true" />
+        <receiver android:name=".AlarmReceiver" />
     </application>
 
 </manifest>
