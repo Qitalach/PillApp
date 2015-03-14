@@ -1,12 +1,22 @@
 package teamqitalach.pillapp;
 
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import java.util.Calendar;
 
 
 public class AddActivity extends ActionBarActivity {
+
+    private PendingIntent pendingIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,5 +45,26 @@ public class AddActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void createNotification(View view) {
+
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.set(Calendar.MONTH, 6);
+        calendar.set(Calendar.YEAR, 2013);
+        calendar.set(Calendar.DAY_OF_MONTH, 13);
+
+        calendar.set(Calendar.HOUR_OF_DAY, 20);
+        calendar.set(Calendar.MINUTE, 48);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.AM_PM, Calendar.PM);
+
+        Intent myIntent = new Intent(AddActivity.this, AlarmReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(AddActivity.this, 0, myIntent, 0);
+
+        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(),pendingIntent);
+
     }
 }

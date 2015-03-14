@@ -18,30 +18,13 @@ import android.app.NotificationManager;
 
 public class TodayActivity extends ActionBarActivity {
 
-    private PendingIntent pendingIntent;
+
     public final static String EXTRA_MEDICINE = "teamqitalach.pillapp.MEDICINE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_today);
-
-        Calendar calendar = Calendar.getInstance();
-
-        calendar.set(Calendar.MONTH, 6);
-        calendar.set(Calendar.YEAR, 2013);
-        calendar.set(Calendar.DAY_OF_MONTH, 13);
-
-        calendar.set(Calendar.HOUR_OF_DAY, 20);
-        calendar.set(Calendar.MINUTE, 48);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.AM_PM, Calendar.PM);
-
-        Intent myIntent = new Intent(TodayActivity.this, AlarmReceiver.class);
-        pendingIntent = PendingIntent.getBroadcast(TodayActivity.this, 0, myIntent, 0);
-
-        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(),pendingIntent);
 
     }
 
@@ -99,28 +82,11 @@ public class TodayActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
-
-
-    public void createNotification(View view) {
-        // Prepare intent which is triggered if the
-        // notification is selected
-        Intent intent = new Intent(this, NotificationReceiverActivity.class);
-        PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
-
-        // Build notification
-        // Actions are just fake
-        Notification noti = new Notification.Builder(this)
-                .setContentTitle("Pill Reminder")
-                .setContentText("It's time to take your Vitamin D!").setSmallIcon(R.drawable.abc_ab_share_pack_holo_dark)
-                .setContentIntent(pIntent)
-                .addAction(R.drawable.abc_ab_share_pack_holo_dark, "Snooze", pIntent)
-                .addAction(R.drawable.abc_ab_share_pack_holo_dark, "Taken", pIntent)
-                .addAction(R.drawable.abc_ab_share_pack_holo_dark, "Skip", pIntent).build();
-        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        // hide the notification after its selected
-        noti.flags |= Notification.FLAG_AUTO_CANCEL;
-
-        notificationManager.notify(0, noti);
-
+    public void sendAdd(View view) {
+        Intent intent = new Intent(this, AddActivity.class);
+        startActivity(intent);
     }
+
+
+
 }

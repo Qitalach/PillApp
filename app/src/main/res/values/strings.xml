@@ -9,6 +9,7 @@
     <string name="title_activity_display_medicine">My Medicine</string>
     <string name="title_activity_history">History</string>
     <string name="title_activity_tomorrow">Tomorrow</string>
+    <string name="title_activity_add">Add Alarm!</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_notification_receiver">NotificationReceiverActivity</string>
 </resources>
