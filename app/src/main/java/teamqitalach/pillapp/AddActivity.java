@@ -12,11 +12,23 @@ import android.view.MenuItem;
 import android.view.View;
 
 import java.util.Calendar;
+import android.app.Activity;
+import android.app.Dialog;
+import android.app.TimePickerDialog;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.TimePicker;
+
+
+import java.util.Calendar;
 
 
 public class AddActivity extends ActionBarActivity {
 
     private PendingIntent pendingIntent;
+    private TimePicker timePicker1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,18 +59,22 @@ public class AddActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void createNotification(View view) {
+    public void addAlarm(View view) {
+
+        timePicker1 = (TimePicker) findViewById(R.id.timePicker1);
 
         Calendar calendar = Calendar.getInstance();
 
-        calendar.set(Calendar.MONTH, 6);
-        calendar.set(Calendar.YEAR, 2013);
-        calendar.set(Calendar.DAY_OF_MONTH, 13);
+        //calendar.set(Calendar.MONTH, 6);
+        //calendar.set(Calendar.YEAR, 2013);
+        //calendar.set(Calendar.DAY_OF_MONTH, 13);
 
-        calendar.set(Calendar.HOUR_OF_DAY, 20);
-        calendar.set(Calendar.MINUTE, 48);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.AM_PM, Calendar.PM);
+
+        calendar.set(Calendar.HOUR_OF_DAY, timePicker1.getCurrentHour());
+        calendar.set(Calendar.MINUTE, timePicker1.getCurrentMinute());
+        //calendar.set(Calendar.SECOND, 0);
+        //TODO figure out AM and PM
+        //calendar.set(Calendar.AM_PM, Calendar.PM);
 
         Intent myIntent = new Intent(AddActivity.this, AlarmReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(AddActivity.this, 0, myIntent, 0);
