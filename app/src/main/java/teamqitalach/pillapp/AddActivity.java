@@ -72,7 +72,7 @@ public class AddActivity extends Activity {
         Button btnSetAlarm = ( Button ) findViewById(R.id.btn_set_alarm);
         btnSetAlarm.setOnClickListener(setClickListener);
 
-        Button btnQuitAlarm = ( Button ) findViewById(R.id.btn_quit_alarm);
+        Button btnQuitAlarm = ( Button ) findViewById(R.id.btn_cancel_alarm);
         btnQuitAlarm.setOnClickListener(quitClickListener);
 
     }

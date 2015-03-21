@@ -14,7 +14,7 @@
 
     <string name="title_activity_alert">Alert Activity Screen</string>
     <string name="str_btn_set_alarm">Set Alarm</string>
-    <string name="str_btn_quit">Quit</string>
+    <string name="str_btn_cancel">Cancel</string>
     <string name="str_tv_message">Opened by Alarm</string>
 
 </resources>

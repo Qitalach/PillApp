@@ -24,13 +24,31 @@ public class AlertAlarm extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         /** Setting title for the alert dialog */
-        builder.setTitle("Alarm");
+        builder.setTitle("PillApp");
 
         /** Setting the content for the alert dialog */
-        builder.setMessage("An Alarm by AlarmManager");
+        builder.setMessage("Did you take your medicine?");
 
-        /** Defining an OK button event listener */
-        builder.setPositiveButton("OK", new OnClickListener() {
+        /** Defining an Yes button event listener */
+        builder.setPositiveButton("Yes", new OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                /** Exit application on click OK */
+                getActivity().finish();
+            }
+        });
+
+        /** Defining an Snooze button event listener */
+        builder.setNeutralButton("Snooze", new OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                /** Exit application on click OK */
+                getActivity().finish();
+            }
+        });
+
+        /** Defining an Cancel button event listener */
+        builder.setNegativeButton("Cancel", new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 /** Exit application on click OK */

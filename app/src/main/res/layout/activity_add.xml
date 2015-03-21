@@ -8,7 +8,7 @@
 
     <DatePicker
         android:id="@+id/dp_date"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
 
@@ -17,6 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/dp_date"
+        android:layout_centerInParent="true"
         />
 
     <RelativeLayout
@@ -29,18 +30,27 @@
 
         <Button
             android:id="@+id/btn_set_alarm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="@string/str_btn_set_alarm"
-
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:background="@drawable/button_set_alarm"
+            android:layout_marginRight="10dip"
+            android:layout_marginLeft="15dip"
             />
 
         <Button
-            android:id="@+id/btn_quit_alarm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/str_btn_quit"
+            android:id="@+id/btn_cancel_alarm"
+            android:text="@string/str_btn_cancel"
             android:layout_toRightOf="@id/btn_set_alarm"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:background="@drawable/button_cancel"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="15dip"
             />
 
     </RelativeLayout>
