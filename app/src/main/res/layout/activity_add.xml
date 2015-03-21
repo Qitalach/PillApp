@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".AddActivity">
+
+    <DatePicker
+        android:id="@+id/dp_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <TimePicker
+        android:id="@+id/tp_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dp_date"
+        />
+
+    <RelativeLayout
+        android:id="@+id/rlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tp_time"
+        android:gravity="center_horizontal"
+        >
+
+        <Button
+            android:id="@+id/btn_set_alarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/str_btn_set_alarm"
+
+            />
+
+        <Button
+            android:id="@+id/btn_quit_alarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/str_btn_quit"
+            android:layout_toRightOf="@id/btn_set_alarm"
+            />
+
+    </RelativeLayout>
+
+</RelativeLayout>
