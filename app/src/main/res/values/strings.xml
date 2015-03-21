@@ -11,5 +11,10 @@
     <string name="title_activity_tomorrow">Tomorrow</string>
     <string name="title_activity_add">Add Alarm!</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_notification_receiver">NotificationReceiverActivity</string>
+
+    <string name="title_activity_alert">Alert Activity Screen</string>
+    <string name="str_btn_set_alarm">Set Alarm</string>
+    <string name="str_btn_quit">Quit</string>
+    <string name="str_tv_message">Opened by Alarm</string>
+
 </resources>

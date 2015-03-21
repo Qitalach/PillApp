@@ -2,22 +2,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="teamqitalach.pillapp" >
 
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
+        android:theme="@style/AppTheme" >
+
         <activity
             android:name=".TodayActivity"
             android:label="@string/title_activity_today" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".DisplayMedicineActivity"
             android:label="@string/title_activity_display_medicine"
@@ -26,25 +25,32 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".TodayActivity" />
         </activity>
+
         <activity
             android:name=".HistoryActivity"
             android:label="@string/title_activity_history" >
         </activity>
+
         <activity
             android:name=".TomorrowActivity"
             android:label="@string/title_activity_tomorrow" >
         </activity>
+
         <activity
             android:name=".AddActivity"
             android:label="@string/title_activity_add" >
         </activity>
+
         <activity
-            android:name=".NotificationReceiverActivity"
-            android:label="@string/title_activity_notification_receiver" >
+            android:name=".AlertActivity"
+            android:label="@string/title_activity_alert"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" >
+            <intent-filter>
+                <action android:name="teamqitalach.pillapp.alertactivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
-        <service android:name=".AlarmService"
-                 android:enabled="true" />
-        <receiver android:name=".AlarmReceiver" />
+
     </application>
 
 </manifest>

@@ -8,14 +8,6 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
 
-import java.util.Calendar;
-import android.app.PendingIntent;
-import android.app.Activity;
-import android.app.AlarmManager;
-import android.content.Intent;
-import android.app.Notification;
-import android.app.NotificationManager;
-
 public class TodayActivity extends ActionBarActivity {
 
 
@@ -32,7 +24,7 @@ public class TodayActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_home_page, menu);
+        getMenuInflater().inflate(R.menu.menu_today, menu);
         return true;
     }
 
@@ -61,32 +53,31 @@ public class TodayActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
-    /** Called when the user clicks the Send button */
+    /** Called when the user clicks the History button */
     public void sendHistory(View view) {
         // Do something in response to button
         Intent intent = new Intent(this, HistoryActivity.class);
         startActivity(intent);
     }
 
-    /** Called when the user clicks the Send button */
+    /** Called when the user clicks the Today button */
     public void sendToday(View view) {
         // Do something in response to button
         Intent intent = new Intent(this, TodayActivity.class);
         startActivity(intent);
     }
 
-    /** Called when the user clicks the Send button */
+    /** Called when the user clicks the Tomorrow button */
     public void sendTomorrow(View view) {
         // Do something in response to button
         Intent intent = new Intent(this, TomorrowActivity.class);
         startActivity(intent);
     }
 
+    /** Called when the user clicks the Add button */
     public void sendAdd(View view) {
         Intent intent = new Intent(this, AddActivity.class);
         startActivity(intent);
     }
-
-
 
 }

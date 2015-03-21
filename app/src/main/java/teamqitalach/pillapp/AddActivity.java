@@ -1,39 +1,80 @@
 package teamqitalach.pillapp;
 
+import java.util.GregorianCalendar;
+
+import android.app.Activity;
 import android.app.AlarmManager;
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-
-import java.util.Calendar;
-import android.app.Activity;
-import android.app.Dialog;
-import android.app.TimePickerDialog;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.DatePicker;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 
-import java.util.Calendar;
-
-
-public class AddActivity extends ActionBarActivity {
-
-    private PendingIntent pendingIntent;
-    private TimePicker timePicker1;
+public class AddActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+
+        OnClickListener setClickListener = new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                /** This intent invokes the activity AlertActivity, which in turn opens the AlertAlarm window */
+                Intent i = new Intent("teamqitalach.pillapp.alertactivity");
+
+                /** Creating a Pending Intent */
+                PendingIntent operation = PendingIntent.getActivity(getBaseContext(), 0, i, Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                /** Getting a reference to the System Service ALARM_SERVICE */
+                AlarmManager alarmManager = (AlarmManager) getBaseContext().getSystemService(ALARM_SERVICE);
+
+                /** Getting a reference to DatePicker object available in the MainActivity */
+                DatePicker dpDate = (DatePicker) findViewById(R.id.dp_date);
+
+                /** Getting a reference to TimePicker object available in the MainActivity */
+                TimePicker tpTime = (TimePicker) findViewById(R.id.tp_time);
+
+                int year = dpDate.getYear();
+                int month = dpDate.getMonth();
+                int day = dpDate.getDayOfMonth();
+                int hour = tpTime.getCurrentHour();
+                int minute = tpTime.getCurrentMinute();
+
+                /** Creating a calendar object corresponding to the date and time set by the user */
+                GregorianCalendar calendar = new GregorianCalendar(year,month,day, hour, minute);
+
+                /** Converting the date and time in to milliseconds elapsed since epoch */
+                long alarm_time = calendar.getTimeInMillis();
+
+                /** Setting an alarm, which invokes the operation at alert_time */
+                alarmManager.set(AlarmManager.RTC_WAKEUP  , alarm_time , operation);
+
+                /** Alert is set successfully */
+                Toast.makeText(getBaseContext(), "Alarm is set successfully",Toast.LENGTH_SHORT).show();
+            }
+        };
+
+        OnClickListener quitClickListener = new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        };
+
+        Button btnSetAlarm = ( Button ) findViewById(R.id.btn_set_alarm);
+        btnSetAlarm.setOnClickListener(setClickListener);
+
+        Button btnQuitAlarm = ( Button ) findViewById(R.id.btn_quit_alarm);
+        btnQuitAlarm.setOnClickListener(quitClickListener);
+
     }
 
 
@@ -44,43 +85,4 @@ public class AddActivity extends ActionBarActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    public void addAlarm(View view) {
-
-        timePicker1 = (TimePicker) findViewById(R.id.timePicker1);
-
-        Calendar calendar = Calendar.getInstance();
-
-        //calendar.set(Calendar.MONTH, 6);
-        //calendar.set(Calendar.YEAR, 2013);
-        //calendar.set(Calendar.DAY_OF_MONTH, 13);
-
-
-        calendar.set(Calendar.HOUR_OF_DAY, timePicker1.getCurrentHour());
-        calendar.set(Calendar.MINUTE, timePicker1.getCurrentMinute());
-        //calendar.set(Calendar.SECOND, 0);
-        //TODO figure out AM and PM
-        //calendar.set(Calendar.AM_PM, Calendar.PM);
-
-        Intent myIntent = new Intent(AddActivity.this, AlarmReceiver.class);
-        pendingIntent = PendingIntent.getBroadcast(AddActivity.this, 0, myIntent, 0);
-
-        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(),pendingIntent);
-
-    }
 }
