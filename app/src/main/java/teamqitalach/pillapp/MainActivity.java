@@ -1,6 +1,6 @@
 package teamqitalach.pillapp;
 
-import teamqitalach.pillapp.adapter.Tabsadapter;
+import teamqitalach.pillapp.adapter.TabsAdapter;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -16,7 +16,6 @@ import android.text.Html;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -27,7 +26,7 @@ public class MainActivity extends ActionBarActivity implements android.support.v
 
     private ViewPager tabsviewPager;
     private ActionBar mActionBar;
-    private Tabsadapter mTabsAdapter;
+    private TabsAdapter mTabsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +35,7 @@ public class MainActivity extends ActionBarActivity implements android.support.v
 
         tabsviewPager = (ViewPager) findViewById(R.id.tabspager);
 
-        mTabsAdapter = new Tabsadapter(getSupportFragmentManager());
+        mTabsAdapter = new TabsAdapter(getSupportFragmentManager());
 
         tabsviewPager.setAdapter(mTabsAdapter);
 

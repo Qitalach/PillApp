@@ -29,9 +29,10 @@ public class AddActivity extends Activity {
             public void onClick(View v) {
                 /** This intent invokes the activity AlertActivity, which in turn opens the AlertAlarm window */
                 Intent i = new Intent("teamqitalach.pillapp.alertactivity");
+                final int _id = (int) System.currentTimeMillis();
 
                 /** Creating a Pending Intent */
-                PendingIntent operation = PendingIntent.getActivity(getBaseContext(), 0, i, Intent.FLAG_ACTIVITY_NEW_TASK);
+                PendingIntent operation = PendingIntent.getActivity(getBaseContext(), _id, i, Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 /** Getting a reference to the System Service ALARM_SERVICE */
                 AlarmManager alarmManager = (AlarmManager) getBaseContext().getSystemService(ALARM_SERVICE);

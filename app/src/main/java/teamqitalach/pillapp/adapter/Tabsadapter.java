@@ -10,11 +10,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-public class Tabsadapter extends FragmentPagerAdapter {
+public class TabsAdapter extends FragmentPagerAdapter {
 
     private int TOTAL_TABS = 3;
 
-    public Tabsadapter(FragmentManager fm) {
+    public TabsAdapter(FragmentManager fm) {
         super(fm);
     }
 
