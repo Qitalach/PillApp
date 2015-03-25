@@ -55,8 +55,14 @@ public class AddActivity extends Activity {
                 /** Converting the date and time in to milliseconds elapsed since epoch */
                 long alarm_time = calendar.getTimeInMillis();
 
+                /** setRepeating() lets you specify a precise custom interval--in this case,
+                    20 seconds. */
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarm_time,
+                        1000 * 20, operation);
+
                 /** Setting an alarm, which invokes the operation at alert_time */
-                alarmManager.set(AlarmManager.RTC_WAKEUP, alarm_time, operation);
+                /** Uncomment below to set alarm once (instead of having it repeat). */
+                //alarmManager.set(AlarmManager.RTC_WAKEUP, alarm_time, operation);
 
                 /** Alert is set successfully */
                 Toast.makeText(getBaseContext(), "Alarm is set successfully", Toast.LENGTH_SHORT).show();
