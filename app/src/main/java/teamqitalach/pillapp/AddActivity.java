@@ -50,16 +50,16 @@ public class AddActivity extends Activity {
                 int minute = tpTime.getCurrentMinute();
 
                 /** Creating a calendar object corresponding to the date and time set by the user */
-                GregorianCalendar calendar = new GregorianCalendar(year,month,day, hour, minute);
+                GregorianCalendar calendar = new GregorianCalendar(year, month, day, hour, minute);
 
                 /** Converting the date and time in to milliseconds elapsed since epoch */
                 long alarm_time = calendar.getTimeInMillis();
 
                 /** Setting an alarm, which invokes the operation at alert_time */
-                alarmManager.set(AlarmManager.RTC_WAKEUP  , alarm_time , operation);
+                alarmManager.set(AlarmManager.RTC_WAKEUP, alarm_time, operation);
 
                 /** Alert is set successfully */
-                Toast.makeText(getBaseContext(), "Alarm is set successfully",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Alarm is set successfully", Toast.LENGTH_SHORT).show();
             }
         };
 
@@ -70,10 +70,10 @@ public class AddActivity extends Activity {
             }
         };
 
-        Button btnSetAlarm = ( Button ) findViewById(R.id.btn_set_alarm);
+        Button btnSetAlarm = (Button) findViewById(R.id.btn_set_alarm);
         btnSetAlarm.setOnClickListener(setClickListener);
 
-        Button btnQuitAlarm = ( Button ) findViewById(R.id.btn_cancel_alarm);
+        Button btnQuitAlarm = (Button) findViewById(R.id.btn_cancel_alarm);
         btnQuitAlarm.setOnClickListener(quitClickListener);
 
     }
