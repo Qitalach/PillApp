@@ -18,6 +18,9 @@ import android.widget.Toast;
 
 public class AddActivity extends Activity {
 
+    private AlarmManager alarmManager;
+    private PendingIntent operation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,14 +31,14 @@ public class AddActivity extends Activity {
             @Override
             public void onClick(View v) {
                 /** This intent invokes the activity AlertActivity, which in turn opens the AlertAlarm window */
-                Intent i = new Intent("teamqitalach.pillapp.alertactivity");
+                Intent i = new Intent(getBaseContext(), AlertActivity.class);
                 final int _id = (int) System.currentTimeMillis();
 
                 /** Creating a Pending Intent */
-                PendingIntent operation = PendingIntent.getActivity(getBaseContext(), _id, i, Intent.FLAG_ACTIVITY_NEW_TASK);
+                operation = PendingIntent.getActivity(getBaseContext(), _id, i, Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 /** Getting a reference to the System Service ALARM_SERVICE */
-                AlarmManager alarmManager = (AlarmManager) getBaseContext().getSystemService(ALARM_SERVICE);
+                alarmManager = (AlarmManager) getBaseContext().getSystemService(ALARM_SERVICE);
 
                 /** Getting a reference to DatePicker object available in the MainActivity */
                 DatePicker dpDate = (DatePicker) findViewById(R.id.dp_date);
@@ -69,9 +72,12 @@ public class AddActivity extends Activity {
             }
         };
 
-        OnClickListener quitClickListener = new OnClickListener() {
+        OnClickListener cancelClickListener = new OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (alarmManager!= null) {
+                    alarmManager.cancel(operation);
+                }
                 finish();
             }
         };
@@ -80,7 +86,7 @@ public class AddActivity extends Activity {
         btnSetAlarm.setOnClickListener(setClickListener);
 
         Button btnQuitAlarm = (Button) findViewById(R.id.btn_cancel_alarm);
-        btnQuitAlarm.setOnClickListener(quitClickListener);
+        btnQuitAlarm.setOnClickListener(cancelClickListener);
 
     }
 
