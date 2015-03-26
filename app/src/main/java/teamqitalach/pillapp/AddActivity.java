@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -31,11 +32,19 @@ public class AddActivity extends Activity {
             @Override
             public void onClick(View v) {
                 /** This intent invokes the activity AlertActivity, which in turn opens the AlertAlarm window */
-                Intent i = new Intent(getBaseContext(), AlertActivity.class);
+                Intent intent = new Intent(getBaseContext(), AlertActivity.class);
+                EditText editText = (EditText) findViewById(R.id.pill_name);
+                String pill_name = editText.getText().toString();
+                intent.putExtra("pill_name", pill_name);
+
                 final int _id = (int) System.currentTimeMillis();
 
+                /** Example of retrieving intent for later usage */
+                //Bundle bundle = intent.getExtras();
+                //String pillName = bundle.getString("pill_name");
+
                 /** Creating a Pending Intent */
-                operation = PendingIntent.getActivity(getBaseContext(), _id, i, Intent.FLAG_ACTIVITY_NEW_TASK);
+                operation = PendingIntent.getActivity(getBaseContext(), _id, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 /** Getting a reference to the System Service ALARM_SERVICE */
                 alarmManager = (AlarmManager) getBaseContext().getSystemService(ALARM_SERVICE);
@@ -68,14 +77,17 @@ public class AddActivity extends Activity {
                 //alarmManager.set(AlarmManager.RTC_WAKEUP, alarm_time, operation);
 
                 /** Alert is set successfully */
-                Toast.makeText(getBaseContext(), "Alarm is set successfully", Toast.LENGTH_SHORT).show();
+                if(pill_name.length() != 0)
+                    Toast.makeText(getBaseContext(), "Alarm for " + pill_name + " is set successfully", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(getBaseContext(), "Alarm is set successfully", Toast.LENGTH_SHORT).show();
             }
         };
 
         OnClickListener cancelClickListener = new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (alarmManager!= null) {
+                if (alarmManager != null) {
                     alarmManager.cancel(operation);
                 }
                 finish();
