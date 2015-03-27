@@ -1,5 +1,7 @@
 package teamqitalach.pillapp;
 
+import Model.Alarm;
+
 import java.util.GregorianCalendar;
 
 import android.app.Activity;
@@ -28,6 +30,8 @@ public class AddActivity extends Activity {
         setContentView(R.layout.activity_add);
 
         OnClickListener setClickListener = new OnClickListener() {
+
+            Alarm alarm = new Alarm();
 
             @Override
             public void onClick(View v) {
@@ -60,9 +64,19 @@ public class AddActivity extends Activity {
                 int day = dpDate.getDayOfMonth();
                 int hour = tpTime.getCurrentHour();
                 int minute = tpTime.getCurrentMinute();
+                String am_pm = (hour < 12) ? "am" : "pm";
 
                 /** Creating a calendar object corresponding to the date and time set by the user */
                 GregorianCalendar calendar = new GregorianCalendar(year, month, day, hour, minute);
+
+                /** Updating Alarm model */
+                alarm.addAlarmName(pill_name);
+                alarm.addId(_id);
+                alarm.addIntent(intent);
+                alarm.addCount();
+                alarm.addHour(hour);
+                alarm.addMinute(minute);
+                alarm.addAm_pm(am_pm);
 
                 /** Converting the date and time in to milliseconds elapsed since epoch */
                 long alarm_time = calendar.getTimeInMillis();
@@ -87,9 +101,9 @@ public class AddActivity extends Activity {
         OnClickListener cancelClickListener = new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (alarmManager != null) {
-                    alarmManager.cancel(operation);
-                }
+                //Uncomment to allow canceling alarms
+                //if (alarmManager != null)
+                //    alarmManager.cancel(operation);
                 finish();
             }
         };

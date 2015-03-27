@@ -12,6 +12,8 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import Model.Alarm;
+
 public class TodayFragment extends Fragment {
 
     @Override
@@ -40,17 +42,38 @@ public class TodayFragment extends Fragment {
 
         stk.addView(tbrow0);
 
-        for (int i = 0; i < 25; i++) {
+        Alarm alarm = new Alarm();
+
+//        for (int i = 0; i < alarm.getCount(); i++) {
+//            TableRow tbrow = new TableRow(container.getContext());
+//
+//            TextView t1v = new TextView(container.getContext());
+//            t1v.setText("VitaminD");
+//            t1v.setTextColor(Color.WHITE);
+//            t1v.setGravity(Gravity.CENTER);
+//            tbrow.addView(t1v);
+//
+//            TextView t2v = new TextView(container.getContext());
+//            t2v.setText("11:00pm");
+//            t2v.setTextColor(Color.WHITE);
+//            t2v.setGravity(Gravity.CENTER);
+//            tbrow.addView(t2v);
+//
+//            stk.addView(tbrow);
+//        }
+
+        for (int i = 0; i<alarm.getCount(); i++) {
             TableRow tbrow = new TableRow(container.getContext());
 
             TextView t1v = new TextView(container.getContext());
-            t1v.setText("VitaminD");
+            t1v.setText(alarm.getAlarmNameList().get(i));
             t1v.setTextColor(Color.WHITE);
             t1v.setGravity(Gravity.CENTER);
             tbrow.addView(t1v);
 
             TextView t2v = new TextView(container.getContext());
-            t2v.setText("11:00pm");
+            String time = alarm.getHourList().get(i) + ":" + alarm.getMinuteList().get(i) + alarm.getAm_pmList().get(i);
+            t2v.setText(time);
             t2v.setTextColor(Color.WHITE);
             t2v.setGravity(Gravity.CENTER);
             tbrow.addView(t2v);
