@@ -18,7 +18,7 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-
+//http://wptrafficanalyzer.in/blog/setting-up-alarm-using-alarmmanager-and-waking-up-screen-and-unlocking-keypad-on-alarm-goes-off-in-android/
 public class AddActivity extends Activity {
 
     private AlarmManager alarmManager;
@@ -83,12 +83,12 @@ public class AddActivity extends Activity {
 
                 /** setRepeating() lets you specify a precise custom interval--in this case,
                     20 seconds. */
-                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarm_time,
-                        1000 * 20, operation);
+                //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarm_time,
+                //        1000 * 20, operation);
 
                 /** Setting an alarm, which invokes the operation at alert_time */
                 /** Uncomment below to set alarm once (instead of having it repeat). */
-                //alarmManager.set(AlarmManager.RTC_WAKEUP, alarm_time, operation);
+                alarmManager.set(AlarmManager.RTC_WAKEUP, alarm_time, operation);
 
                 /** Alert is set successfully */
                 if(pill_name.length() != 0)
