@@ -1,37 +1,22 @@
 package Model;
 
-import java.sql.Time;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
- *
- * Created by Taylor Rose on 3/14/2015.
+ * Created by CharlesPK3 on 4/3/15.
  */
 public class Pill {
+    private String pillName;
+    private List<Alarm> alarms = new LinkedList<Alarm>();
 
-    private String name;
-    private List<PillTime> timesForAlarm;
+    public String getPillName() { return pillName; }
 
-    public Pill(String name, List<PillTime> alarmTime){
-        this.name = name;
-        this.timesForAlarm = alarmTime;
-    }
+    public void setPillName(String pillName) { this.pillName = pillName; }
 
-    public String getName() {
-        return name;
-    }
+    public List<Alarm> getAlarms() { return Collections.unmodifiableList(alarms); }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void addAlarm(Alarm alarm) { alarms.add(alarm); }
 
-    public List<PillTime> getTimesForAlarm() {
-        return timesForAlarm;
-    }
-
-    public void setTimesForAlarm(List<PillTime> timesForAlarm) {
-        this.timesForAlarm = timesForAlarm;
-    }
-
-   // public List<PillTime> pillTimesWithinRange(Time timeOne, Time timeTwo){}
 }

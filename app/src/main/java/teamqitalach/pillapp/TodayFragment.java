@@ -13,6 +13,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import Model.Alarm;
+import Model.PillBox;
 
 public class TodayFragment extends Fragment {
 
@@ -42,7 +43,7 @@ public class TodayFragment extends Fragment {
 
         stk.addView(tbrow0);
 
-        Alarm alarm = new Alarm();
+        PillBox pillBox = new PillBox();
 
 //        for (int i = 0; i < alarm.getCount(); i++) {
 //            TableRow tbrow = new TableRow(container.getContext());
@@ -62,23 +63,26 @@ public class TodayFragment extends Fragment {
 //            stk.addView(tbrow);
 //        }
 
-        for (int i = 0; i<alarm.getCount(); i++) {
-            TableRow tbrow = new TableRow(container.getContext());
+        for (String key: pillBox.getPills().keySet()) {
+            for (Alarm alarm: pillBox.getPills().get(key).getAlarms()){
+                TableRow tbrow = new TableRow(container.getContext());
 
-            TextView t1v = new TextView(container.getContext());
-            t1v.setText(alarm.getAlarmNameList().get(i));
-            t1v.setTextColor(Color.WHITE);
-            t1v.setGravity(Gravity.CENTER);
-            tbrow.addView(t1v);
+                TextView t1v = new TextView(container.getContext());
+                t1v.setText(pillBox.getPills().get(key).getPillName());
+                t1v.setTextColor(Color.WHITE);
+                t1v.setGravity(Gravity.CENTER);
+                tbrow.addView(t1v);
 
-            TextView t2v = new TextView(container.getContext());
-            String time = alarm.getHourList().get(i) + ":" + alarm.getMinuteList().get(i) + alarm.getAm_pmList().get(i);
-            t2v.setText(time);
-            t2v.setTextColor(Color.WHITE);
-            t2v.setGravity(Gravity.CENTER);
-            tbrow.addView(t2v);
+                TextView t2v = new TextView(container.getContext());
+                String time = alarm.getHour() + ":" + alarm.getMinute() + alarm.getAm_pm();
+                t2v.setText(time);
+                t2v.setTextColor(Color.WHITE);
+                t2v.setGravity(Gravity.CENTER);
+                tbrow.addView(t2v);
 
-            stk.addView(tbrow);
+                stk.addView(tbrow);
+            }
+
         }
 
         return rootView;

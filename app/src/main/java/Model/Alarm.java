@@ -2,75 +2,34 @@ package Model;
 
 import android.content.Intent;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-
 /**
- * Created by CharlesPK3 on 3/26/15.
+ * Created by CharlesPK3 on 4/3/15.
  */
 public class Alarm {
-    private static List<String> alarmNameList = new LinkedList<String>();
-    private static List<Intent> intentList = new LinkedList<Intent>();
-    private static List<Integer> idList = new LinkedList<Integer>();
-    private static List<Integer> hourList = new LinkedList<Integer>();
-    private static List<Integer> minuteList = new LinkedList<Integer>();
-    private static List<String> am_pmList = new LinkedList<String>();
-    private static int count = 0;
+    private int id;
+    private Intent intent;
+    private int hour;
+    private int minute;
+    private String am_pm;
 
-    public List<String> getAlarmNameList() {
-        return Collections.unmodifiableList(alarmNameList);
-    }
+    public int getId() { return id; }
 
-    public void addAlarmName(String name) {
-        alarmNameList.add(name);
-    }
+    public void setId(int id) { this.id = id; }
 
-    public List<Intent> getIntentList() {
-        return Collections.unmodifiableList(intentList);
-    }
+    public Intent getIntent() { return intent; }
 
-    public void addIntent(Intent intent) {
-        intentList.add(intent);
-    }
+    public void setIntent(Intent intent) { this.intent = intent; }
 
-    public List<Integer> getIdList() {
-        return Collections.unmodifiableList(idList);
-    }
+    public int getHour() { return hour; }
 
-    public void addId(Integer id) {
-        idList.add(id);
-    }
+    public void setHour(int hour) { this.hour = hour; }
 
-    public void addCount() {
-        count++;
-    }
+    public int getMinute() { return minute; }
 
-    public int getCount() {
-        return count;
-    }
+    public void setMinute(int minute) { this.minute = minute; }
 
-    public List<Integer> getHourList() {
-        return Collections.unmodifiableList(hourList);
-    }
+    public String getAm_pm() { return am_pm; }
 
-    public void addHour(Integer hour) {
-        hourList.add(hour);
-    }
+    public void setAm_pm(String am_pm) { this.am_pm = am_pm; }
 
-    public List<Integer> getMinuteList() {
-        return Collections.unmodifiableList(minuteList);
-    }
-
-    public void addMinute(Integer minute) {
-        minuteList.add(minute);
-    }
-
-    public List<String> getAm_pmList() {
-        return Collections.unmodifiableList(am_pmList);
-    }
-
-    public void addAm_pm(String am_pm) {
-        am_pmList.add(am_pm);
-    }
 }

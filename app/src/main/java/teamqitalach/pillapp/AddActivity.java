@@ -1,6 +1,8 @@
 package teamqitalach.pillapp;
 
 import Model.Alarm;
+import Model.Pill;
+import Model.PillBox;
 
 import java.util.GregorianCalendar;
 
@@ -31,7 +33,7 @@ public class AddActivity extends Activity {
 
         OnClickListener setClickListener = new OnClickListener() {
 
-            Alarm alarm = new Alarm();
+            PillBox pillBox = new PillBox();
 
             @Override
             public void onClick(View v) {
@@ -69,14 +71,30 @@ public class AddActivity extends Activity {
                 /** Creating a calendar object corresponding to the date and time set by the user */
                 GregorianCalendar calendar = new GregorianCalendar(year, month, day, hour, minute);
 
-                /** Updating Alarm model */
-                alarm.addAlarmName(pill_name);
-                alarm.addId(_id);
-                alarm.addIntent(intent);
-                alarm.addCount();
-                alarm.addHour(hour);
-                alarm.addMinute(minute);
-                alarm.addAm_pm(am_pm);
+                /** Updating model */
+                if (pillBox.getPills().containsKey(pill_name)) {
+                    Pill pill = pillBox.getPills().get(pill_name);
+                    Alarm alarm = new Alarm();
+                    alarm.setId(_id);
+                    alarm.setIntent(intent);
+                    alarm.setHour(hour);
+                    alarm.setMinute(minute);
+                    alarm.setAm_pm(am_pm);
+                    pill.addAlarm(alarm);
+                }
+
+                else {
+                    Pill pill = new Pill();
+                    pill.setPillName(pill_name);
+                    Alarm alarm = new Alarm();
+                    alarm.setId(_id);
+                    alarm.setIntent(intent);
+                    alarm.setHour(hour);
+                    alarm.setMinute(minute);
+                    alarm.setAm_pm(am_pm);
+                    pill.addAlarm(alarm);
+                    pillBox.addPill(pill_name, pill);
+                }
 
                 /** Converting the date and time in to milliseconds elapsed since epoch */
                 long alarm_time = calendar.getTimeInMillis();
