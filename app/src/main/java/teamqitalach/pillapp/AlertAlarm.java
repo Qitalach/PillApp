@@ -26,8 +26,12 @@ public class AlertAlarm extends DialogFragment {
         /** Setting title for the alert dialog */
         builder.setTitle("PillApp");
 
+
+        // gets the name of the pill that is triggering the alarm
+        String pillname = getActivity().getIntent().getStringExtra("pill_name");
+
         /** Setting the content for the alert dialog */
-        builder.setMessage("Did you take your medicine?");
+        builder.setMessage("Did you take your "+ pillname + "?");
 
         /** Defining an Yes button event listener */
         builder.setPositiveButton("I took it.", new OnClickListener() {
