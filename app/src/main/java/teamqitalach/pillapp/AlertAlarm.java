@@ -30,7 +30,7 @@ public class AlertAlarm extends DialogFragment {
         builder.setMessage("Did you take your medicine?");
 
         /** Defining an Yes button event listener */
-        builder.setPositiveButton("Yes", new OnClickListener() {
+        builder.setPositiveButton("I took it.", new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 /** Exit application on click OK */
@@ -39,7 +39,7 @@ public class AlertAlarm extends DialogFragment {
         });
 
         /** Defining an Snooze button event listener */
-        builder.setNeutralButton("Snooze", new OnClickListener() {
+        builder.setNeutralButton("Remind Me Later.", new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 /** Exit application on click OK */
@@ -48,7 +48,7 @@ public class AlertAlarm extends DialogFragment {
         });
 
         /** Defining an Cancel button event listener */
-        builder.setNegativeButton("Cancel", new OnClickListener() {
+        builder.setNegativeButton("I won't take it today.", new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 /** Exit application on click OK */
