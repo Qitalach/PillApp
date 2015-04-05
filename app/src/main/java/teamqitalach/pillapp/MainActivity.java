@@ -126,7 +126,6 @@ public class MainActivity extends ActionBarActivity implements android.support.v
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            refresh();
             return true;
         }
 
@@ -161,9 +160,5 @@ public class MainActivity extends ActionBarActivity implements android.support.v
         startActivity(intent);
     }
 
-    public void refresh() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
 }
 

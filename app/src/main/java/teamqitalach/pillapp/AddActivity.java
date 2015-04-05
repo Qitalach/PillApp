@@ -125,8 +125,12 @@ public class AddActivity extends Activity {
                 /** Alert is set successfully */
                 if(counter == 0 || pill_name.length() == 0)
                     Toast.makeText(getBaseContext(), "Please input a pill name or check at least one day!", Toast.LENGTH_SHORT).show();
-                else
+
+                else {
                     Toast.makeText(getBaseContext(), "Alarm for " + pill_name + " is set successfully", Toast.LENGTH_SHORT).show();
+                    Intent returnHome = new Intent(getBaseContext(), MainActivity.class);
+                    startActivity(returnHome);
+                }
             }
         };
 
