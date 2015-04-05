@@ -12,26 +12,70 @@
         android:layout_height="wrap_content"
         android:hint="@string/pill_name" />
 
-    <DatePicker
-        android:id="@+id/dp_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/pill_name"
-        />
-
     <TimePicker
         android:id="@+id/tp_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/dp_date"
+        android:layout_below="@id/pill_name"
         android:layout_centerInParent="true"
         />
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/checkbox_layout"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tp_time"
+        android:layout_centerInParent="true">
+
+        <CheckBox android:id="@+id/checkbox_monday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Monday"
+            android:onClick="onCheckboxClicked"/>
+
+        <CheckBox android:id="@+id/checkbox_tuesday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Tuesday"
+            android:onClick="onCheckboxClicked"/>
+
+        <CheckBox android:id="@+id/checkbox_wednesday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Wednesday"
+            android:onClick="onCheckboxClicked"/>
+
+        <CheckBox android:id="@+id/checkbox_thursday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Thursday"
+            android:onClick="onCheckboxClicked"/>
+
+        <CheckBox android:id="@+id/checkbox_friday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Friday"
+            android:onClick="onCheckboxClicked"/>
+
+        <CheckBox android:id="@+id/checkbox_saturday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Saturday"
+            android:onClick="onCheckboxClicked"/>
+
+        <CheckBox android:id="@+id/checkbox_sunday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Sunday"
+            android:onClick="onCheckboxClicked"/>
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/rlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/tp_time"
+        android:layout_below="@id/checkbox_layout"
         android:gravity="center_horizontal"
         >
 
