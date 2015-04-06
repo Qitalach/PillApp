@@ -28,7 +28,7 @@ public class AlertAlarm extends DialogFragment {
 
 
         // gets the name of the pill that is triggering the alarm
-        String pillname = getActivity().getIntent().getStringExtra("pill_name");
+        final String pillname = getActivity().getIntent().getStringExtra("pill_name");
 
         /** Setting the content for the alert dialog */
         builder.setMessage("Did you take your "+ pillname + "?");
@@ -43,16 +43,18 @@ public class AlertAlarm extends DialogFragment {
         });
 
         /** Defining an Snooze button event listener */
-        builder.setNeutralButton("Remind Me Later.", new OnClickListener() {
+        builder.setNeutralButton("Remind me later.", new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 /** Exit application on click OK */
+                AlertActivity act = (AlertActivity)getActivity();
+                act.doNeutralClick(pillname);
                 getActivity().finish();
             }
         });
 
         /** Defining an Cancel button event listener */
-        builder.setNegativeButton("I won't take it today.", new OnClickListener() {
+        builder.setNegativeButton("I won't take" + pillname + "today.", new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 /** Exit application on click OK */
@@ -70,5 +72,7 @@ public class AlertAlarm extends DialogFragment {
         super.onDestroy();
         getActivity().finish();
     }
+
+
 
 }
