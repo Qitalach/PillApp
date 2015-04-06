@@ -61,8 +61,22 @@ public class AlertActivity extends FragmentActivity {
 
         alarmManager.set(AlarmManager.RTC_WAKEUP, min, operation);
         Toast.makeText(getBaseContext(), "Alarm for " + pillname + " was snoozed", Toast.LENGTH_SHORT).show();
+
+        //not sure if i need this
         this.finish();
 
+
+    }
+/*
+place holder code allows program to react to pill being taken. currently creats a toast saying the time
+med was taken. eventually this should use the pillname input string to create a history object
+ */
+
+    public void doPositiveClick( String pillname){
+        Calendar taketime = Calendar.getInstance();
+        int hour = taketime.get(Calendar.HOUR_OF_DAY);
+        int minute = taketime.get(Calendar.MINUTE);
+        Toast.makeText(getBaseContext(),  pillname + " was taken at "+ hour + ":" +minute, Toast.LENGTH_SHORT).show();
 
     }
 }

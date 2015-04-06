@@ -38,6 +38,8 @@ public class AlertAlarm extends DialogFragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 /** Exit application on click OK */
+                AlertActivity act = (AlertActivity)getActivity();
+                act.doPositiveClick( pillname);
                 getActivity().finish();
             }
         });
