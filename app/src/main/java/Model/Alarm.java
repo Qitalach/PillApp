@@ -11,6 +11,7 @@ public class Alarm {
     private int hour;
     private int minute;
     private String am_pm;
+    private int dayOfWeek;
 
     public int getId() { return id; }
 
@@ -31,5 +32,9 @@ public class Alarm {
     public String getAm_pm() { return am_pm; }
 
     public void setAm_pm(String am_pm) { this.am_pm = am_pm; }
+
+    //public int getDayOfWeek() { return dayOfWeek; }
+
+    public void setDayOfWeek(int dayOfWeek) { this.dayOfWeek = dayOfWeek; }
 
 }

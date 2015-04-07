@@ -25,7 +25,7 @@ public class AddActivity extends Activity {
 
     private AlarmManager alarmManager;
     private PendingIntent operation;
-    private int dayOfWeek[] = new int[7];
+    private int dayOfWeekList[] = new int[7];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class AddActivity extends Activity {
             @Override
             public void onClick(View v) {
                 final int _id = (int) System.currentTimeMillis();
-                int counter = 0;
+                int checkBoxCounter = 0;
 
                 EditText editText = (EditText) findViewById(R.id.pill_name);
                 String pill_name = editText.getText().toString();
@@ -55,8 +55,10 @@ public class AddActivity extends Activity {
                 String am_pm = (hour < 12) ? "am" : "pm";
 
                     for(int i=0; i<7; i++) {
-                        if (dayOfWeek[i] == 1 && pill_name.length() != 0) {
-                            counter++;
+                        if (dayOfWeekList[i] == 1 && pill_name.length() != 0) {
+
+                            int dayOfWeek = i+1;
+                            checkBoxCounter++;
 
                             /** This intent invokes the activity AlertActivity, which in turn opens the AlertAlarm window */
                             Intent intent = new Intent(getBaseContext(), AlertActivity.class);
@@ -84,7 +86,7 @@ public class AddActivity extends Activity {
                             calendar.set(Calendar.MINUTE, minute);
                             calendar.set(Calendar.SECOND, 0);
                             calendar.set(Calendar.MILLISECOND, 0);
-                            calendar.set(Calendar.DAY_OF_WEEK, i+1);
+                            calendar.set(Calendar.DAY_OF_WEEK, dayOfWeek);
 
                             /** Updating model */
                             if (pillBox.getPills().containsKey(pill_name)) {
@@ -95,6 +97,7 @@ public class AddActivity extends Activity {
                                 alarm.setHour(hour);
                                 alarm.setMinute(minute);
                                 alarm.setAm_pm(am_pm);
+                                alarm.setDayOfWeek(dayOfWeek);
                                 pill.addAlarm(alarm);
                             } else {
                                 Pill pill = new Pill();
@@ -105,6 +108,7 @@ public class AddActivity extends Activity {
                                 alarm.setHour(hour);
                                 alarm.setMinute(minute);
                                 alarm.setAm_pm(am_pm);
+                                alarm.setDayOfWeek(dayOfWeek);
                                 pill.addAlarm(alarm);
                                 pillBox.addPill(pill_name, pill);
                             }
@@ -123,7 +127,7 @@ public class AddActivity extends Activity {
                         }
                     }
                 /** Alert is set successfully */
-                if(counter == 0 || pill_name.length() == 0)
+                if(checkBoxCounter == 0 || pill_name.length() == 0)
                     Toast.makeText(getBaseContext(), "Please input a pill name or check at least one day!", Toast.LENGTH_SHORT).show();
 
                 else {
@@ -170,45 +174,45 @@ public class AddActivity extends Activity {
         switch(view.getId()) {
             case R.id.checkbox_monday:
                 if (checked)
-                    dayOfWeek[1] = 1;
+                    dayOfWeekList[1] = 1;
                 else
-                    dayOfWeek[1] = 0;
+                    dayOfWeekList[1] = 0;
                 break;
             case R.id.checkbox_tuesday:
                 if (checked)
-                    dayOfWeek[2] = 1;
+                    dayOfWeekList[2] = 1;
                 else
-                    dayOfWeek[2] = 0;
+                    dayOfWeekList[2] = 0;
                 break;
             case R.id.checkbox_wednesday:
                 if (checked)
-                    dayOfWeek[3] = 1;
+                    dayOfWeekList[3] = 1;
                 else
-                    dayOfWeek[3] = 0;
+                    dayOfWeekList[3] = 0;
                 break;
             case R.id.checkbox_thursday:
                 if (checked)
-                    dayOfWeek[4] = 1;
+                    dayOfWeekList[4] = 1;
                 else
-                    dayOfWeek[4] = 0;
+                    dayOfWeekList[4] = 0;
                 break;
             case R.id.checkbox_friday:
                 if (checked)
-                    dayOfWeek[5] = 1;
+                    dayOfWeekList[5] = 1;
                 else
-                    dayOfWeek[5] = 0;
+                    dayOfWeekList[5] = 0;
                 break;
             case R.id.checkbox_saturday:
                 if (checked)
-                    dayOfWeek[6] = 1;
+                    dayOfWeekList[6] = 1;
                 else
-                    dayOfWeek[6] = 0;
+                    dayOfWeekList[6] = 0;
                 break;
             case R.id.checkbox_sunday:
                 if (checked)
-                    dayOfWeek[0] = 1;
+                    dayOfWeekList[0] = 1;
                 else
-                    dayOfWeek[0] = 0;
+                    dayOfWeekList[0] = 0;
                 break;
         }
 
