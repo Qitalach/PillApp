@@ -10,6 +10,7 @@ import java.util.List;
 public class Pill {
     private String pillName;
     private List<Alarm> alarms = new LinkedList<Alarm>();
+    private List<History> histories = new LinkedList<History>();
 
     public String getPillName() { return pillName; }
 
@@ -18,5 +19,10 @@ public class Pill {
     public List<Alarm> getAlarms() { return Collections.unmodifiableList(alarms); }
 
     public void addAlarm(Alarm alarm) { alarms.add(alarm); }
+
+    public List<History> getHistories() { return Collections.unmodifiableList(histories); }
+
+    public void addHistory(History history) { histories.add(history); }
+
 
 }

@@ -31,7 +31,7 @@ public class AlertAlarm extends DialogFragment {
         final String pillname = getActivity().getIntent().getStringExtra("pill_name");
 
         /** Setting the content for the alert dialog */
-        builder.setMessage("Did you take your "+ pillname + "?");
+        builder.setMessage("Did you take your "+ pillname + " ?");
 
         /** Defining an Yes button event listener */
         builder.setPositiveButton("I took it.", new OnClickListener() {
@@ -39,7 +39,7 @@ public class AlertAlarm extends DialogFragment {
             public void onClick(DialogInterface dialog, int which) {
                 /** Exit application on click OK */
                 AlertActivity act = (AlertActivity)getActivity();
-                act.doPositiveClick( pillname);
+                act.doPositiveClick(pillname);
                 getActivity().finish();
             }
         });
@@ -56,7 +56,7 @@ public class AlertAlarm extends DialogFragment {
         });
 
         /** Defining an Cancel button event listener */
-        builder.setNegativeButton("I won't take" + pillname + "today.", new OnClickListener() {
+        builder.setNegativeButton("I won't take " + pillname + " today.", new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 /** Exit application on click OK */

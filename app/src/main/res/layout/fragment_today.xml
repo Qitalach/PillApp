@@ -6,7 +6,7 @@
     android:background="#3d455b" >
 
     <TableLayout
-        android:id="@+id/table_main"
+        android:id="@+id/table_today"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:stretchColumns="*" >

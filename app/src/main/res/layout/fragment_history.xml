@@ -5,12 +5,12 @@
     android:orientation="vertical"
     android:background="#fa6a6a" >
 
-    <TextView android:layout_width="fill_parent"
+    <TableLayout
+        android:id="@+id/table_history"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="History Tab"
-        android:textSize="20dp"
-        android:layout_centerInParent="true"/>
+        android:stretchColumns="*" >
+    </TableLayout>
 
 
 </RelativeLayout>

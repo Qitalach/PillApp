@@ -23,7 +23,7 @@ public class TodayFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_today, container, false);
 
-        TableLayout stk = (TableLayout) rootView.findViewById(R.id.table_main);
+        TableLayout stk = (TableLayout) rootView.findViewById(R.id.table_today);
 
         TableRow tbrow0 = new TableRow(container.getContext());
 
@@ -84,15 +84,15 @@ public class TodayFragment extends Fragment {
                 //fixes a problem where times were misrepresented "8:4pm" rather than "8:04pm"
                 String minute;
 
-                if (alarm.getMinute()<10){
+                if (alarm.getMinute() < 10){
                     minute = "0" + alarm.getMinute();
-                }else{
+                } else {
                     minute = "" + alarm.getMinute();
                 }
 
 
 
-                String time = nonMilitaryHour + ":" + minute + " " +alarm.getAm_pm();
+                String time = nonMilitaryHour + ":" + minute + " " + alarm.getAm_pm();
                 t2v.setText(time);
                 t2v.setTextColor(Color.WHITE);
                 t2v.setGravity(Gravity.CENTER);
