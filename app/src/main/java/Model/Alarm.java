@@ -33,7 +33,7 @@ public class Alarm {
 
     public void setAm_pm(String am_pm) { this.am_pm = am_pm; }
 
-    //public int getDayOfWeek() { return dayOfWeek; }
+    public int getDayOfWeek() { return dayOfWeek; }
 
     public void setDayOfWeek(int dayOfWeek) { this.dayOfWeek = dayOfWeek; }
 
