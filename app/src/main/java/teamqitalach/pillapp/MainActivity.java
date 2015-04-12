@@ -56,7 +56,7 @@ public class MainActivity extends ActionBarActivity implements android.support.v
         Tab tomorrowtab = getSupportActionBar().newTab().setTabListener(this);
 
         TextView tt1 = new TextView(this);
-        tt1.setText(Html.fromHtml("HISTORY<br><small>By " + todayString + "</small>"));
+        tt1.setText(Html.fromHtml("<b>HISTORY</b><br><small>By " + todayString + "</small>"));
         tt1.setTextColor(Color.WHITE);
         tt1.setGravity(Gravity.CENTER);
         tt1.setTypeface(null, Typeface.BOLD);
@@ -64,7 +64,7 @@ public class MainActivity extends ActionBarActivity implements android.support.v
         historytab.setCustomView(tt1);
 
         TextView tt2 = new TextView(this);
-        tt2.setText(Html.fromHtml("TODAY<br><small>" + todayString + "</small>"));
+        tt2.setText(Html.fromHtml("<b>TODAY</b><br><small>" + todayString + "</small>"));
         tt2.setTextColor(Color.WHITE);
         tt2.setGravity(Gravity.CENTER);
         tt2.setTypeface(null, Typeface.BOLD);
@@ -72,7 +72,7 @@ public class MainActivity extends ActionBarActivity implements android.support.v
         todaytab.setCustomView(tt2);
 
         TextView tt3 = new TextView(this);
-        tt3.setText(Html.fromHtml("TOMORROW<br><small>" + tomorrowString + "</small>"));
+        tt3.setText(Html.fromHtml("<b>TOMORROW</b><br><small>" + tomorrowString + "</small>"));
         tt3.setTextColor(Color.WHITE);
         tt3.setGravity(Gravity.CENTER);
         tt3.setTypeface(null, Typeface.BOLD);

@@ -25,23 +25,25 @@ public class TodayFragment extends Fragment {
 
         TableLayout stk = (TableLayout) rootView.findViewById(R.id.table_today);
 
-        TableRow tbrow0 = new TableRow(container.getContext());
+        Typeface lightFont = Typeface.createFromAsset(container.getContext().getAssets(), "fonts/Roboto-Light.ttf");
 
-        TextView tt1 = new TextView(container.getContext());
-        tt1.setText("Pill Name");
-        tt1.setTextColor(Color.WHITE);
-        tt1.setGravity(Gravity.CENTER);
-        tt1.setTypeface(null, Typeface.BOLD);
-        tbrow0.addView(tt1);
-
-        TextView tt2 = new TextView(container.getContext());
-        tt2.setText("Time");
-        tt2.setTextColor(Color.WHITE);
-        tt2.setGravity(Gravity.CENTER);
-        tt2.setTypeface(null, Typeface.BOLD);
-        tbrow0.addView(tt2);
-
-        stk.addView(tbrow0);
+//        TableRow tbrow0 = new TableRow(container.getContext());
+//
+//        TextView tt1 = new TextView(container.getContext());
+//        tt1.setText("Pill Name");
+//        tt1.setTextColor(Color.WHITE);
+//        tt1.setGravity(Gravity.CENTER);
+//        tt1.setTypeface(null, Typeface.BOLD);
+//        tbrow0.addView(tt1);
+//
+//        TextView tt2 = new TextView(container.getContext());
+//        tt2.setText("Time");
+//        tt2.setTextColor(Color.WHITE);
+//        tt2.setGravity(Gravity.CENTER);
+//        tt2.setTypeface(null, Typeface.BOLD);
+//        tbrow0.addView(tt2);
+//
+//        stk.addView(tbrow0);
 
         PillBox pillBox = new PillBox();
 
@@ -71,6 +73,9 @@ public class TodayFragment extends Fragment {
                 t1v.setText(pillBox.getPills().get(key).getPillName());
                 t1v.setTextColor(Color.WHITE);
                 t1v.setGravity(Gravity.CENTER);
+                t1v.setPadding(30, 30, 30, 30);
+                t1v.setTextSize(25);
+                t1v.setTypeface(lightFont);
                 tbrow.addView(t1v);
 
                 TextView t2v = new TextView(container.getContext());
@@ -96,6 +101,9 @@ public class TodayFragment extends Fragment {
                 t2v.setText(time);
                 t2v.setTextColor(Color.WHITE);
                 t2v.setGravity(Gravity.CENTER);
+                t2v.setPadding(30, 30, 30, 30);
+                t2v.setTextSize(25);
+                t2v.setTypeface(lightFont);
                 tbrow.addView(t2v);
 
                 stk.addView(tbrow);

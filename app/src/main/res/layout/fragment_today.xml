@@ -3,7 +3,7 @@
     android:id="@+id/scrollView1"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="#3d455b" >
+    android:background="#039be5" >
 
     <TableLayout
         android:id="@+id/table_today"
