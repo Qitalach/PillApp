@@ -11,6 +11,7 @@ public class Alarm {
     private int hour;
     private int minute;
     private int dayOfWeek;
+    private String pillName;
 
     public int getId() { return id; }
 
@@ -36,5 +37,11 @@ public class Alarm {
     public int getDayOfWeek() { return dayOfWeek; }
 
     public void setDayOfWeek(int dayOfWeek) { this.dayOfWeek = dayOfWeek; }
+
+    public String getPillName() { return pillName; }
+
+    public void setPillName(String pillName) { this.pillName = pillName; }
+
+
 
 }

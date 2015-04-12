@@ -97,6 +97,7 @@ public class AddActivity extends Activity {
                                 alarm.setHour(hour);
                                 alarm.setMinute(minute);
                                 alarm.setDayOfWeek(dayOfWeek);
+                                alarm.setPillName(pill_name);
                                 pill.addAlarm(alarm);
                             } else {
                                 Pill pill = new Pill();
@@ -107,6 +108,7 @@ public class AddActivity extends Activity {
                                 alarm.setHour(hour);
                                 alarm.setMinute(minute);
                                 alarm.setDayOfWeek(dayOfWeek);
+                                alarm.setPillName(pill_name);
                                 pill.addAlarm(alarm);
                                 pillBox.addPill(pill_name, pill);
                             }
