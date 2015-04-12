@@ -5,12 +5,12 @@
     android:orientation="vertical"
     android:background="#17df0d" >
 
-    <TextView android:layout_width="fill_parent"
+    <TableLayout
+        android:id="@+id/table_tomorrow"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Tomorrow Tab"
-        android:textSize="20dp"
-        android:layout_centerInParent="true"/>
+        android:stretchColumns="*" >
+    </TableLayout>
 
 
 </RelativeLayout>

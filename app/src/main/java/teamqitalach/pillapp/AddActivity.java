@@ -99,6 +99,7 @@ public class AddActivity extends Activity {
                                 alarm.setDayOfWeek(dayOfWeek);
                                 alarm.setPillName(pill_name);
                                 pill.addAlarm(alarm);
+                                pillBox.addAlarm(alarm);
                             } else {
                                 Pill pill = new Pill();
                                 pill.setPillName(pill_name);
@@ -111,6 +112,7 @@ public class AddActivity extends Activity {
                                 alarm.setPillName(pill_name);
                                 pill.addAlarm(alarm);
                                 pillBox.addPill(pill_name, pill);
+                                pillBox.addAlarm(alarm);
                             }
 
                             /** Converting the date and time in to milliseconds elapsed since epoch */
