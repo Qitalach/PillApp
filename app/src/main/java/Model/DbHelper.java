@@ -7,9 +7,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /** sql database helper class, adapted from DrBFraser code on youtube. found at https://youtu.be/Aui-kFuXFYE
+ * and code at http://www.androidhive.info/2013/09/android-sqlite-database-with-multiple-tables/
  * Created by Taylor Rose on 4/7/2015.
  */
 public class DbHelper extends SQLiteOpenHelper {
@@ -58,12 +62,12 @@ public class DbHelper extends SQLiteOpenHelper {
     // Pill Table : create statement
     private static final String CREATE_PILL_TABLE = "create table " +
             PILL_TABLE + "(" + KEY_ROWID + " integer primary key," +
-            KEY_PILLNAME + " text" + ")";
+            KEY_PILLNAME + " text not null" + ")";
 
     // Alarm Table : create statement
     private static final String CREATE_ALARM_TABLE = "create table " +
             ALARM_TABLE + "(" + KEY_ROWID + " integer primary key," +
-            KEY_ALARM_ID + " integer," + KEY_INTENT + " text," +
+            KEY_ALARM_ID + " integer not null," + KEY_INTENT + " text not null," +
             KEY_HOUR + " integer," + KEY_MINUTE + " integer," +
             KEY_AM_PM + " text," + KEY_DAY_WEEK + " integer" + ")";
 
@@ -148,5 +152,143 @@ public class DbHelper extends SQLiteOpenHelper {
         long pillAlarmLink_id = db.insert(PILL_ALARM_LINKS, null, values);
 
         return pillAlarmLink_id;
+    }
+
+    // Get Methods
+
+    // get a single pill
+    public Pill getPill(long pill_id){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String dbPill = "select * from " + PILL_TABLE + " where " +
+                KEY_ROWID + " = " + pill_id;
+
+        Cursor c = db.rawQuery(dbPill, null);
+
+        if (c != null){
+            c.moveToFirst();
+        }
+
+        Pill pill = new Pill();
+        // tutorial i'm following has setID method, do we need that?
+        pill.setPillName(c.getString(c.getColumnIndex(KEY_PILLNAME)));
+
+        return pill;
+    }
+
+    //get all pills
+    public List<Pill> getAllPills() {
+        List<Pill> pills = new ArrayList<Pill>();
+        String dbPills = "select * from " + PILL_TABLE;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(dbPills, null);
+
+        //loop through all rows, add to list
+        if (c.moveToFirst()){
+            do {
+                Pill p = new Pill();
+                p.setPillName(c.getString(c.getColumnIndex(KEY_PILLNAME)));
+
+                pills.add(p);
+            } while (c.moveToNext());
+
+        }
+
+        return pills;
+    }
+
+    // get a single alarm
+    public Alarm getAlarm(long alarm_id){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String dbAlarm = "SELECT * FROM " + ALARM_TABLE + " WHERE "
+                + KEY_ALARM_ID + " = " + alarm_id;
+
+        Cursor c = db.rawQuery(dbAlarm, null);
+
+        if (c != null){
+            c.moveToFirst();
+        }
+
+        Alarm al = new Alarm();
+        al.setId(c.getInt(c.getColumnIndex(KEY_ALARM_ID)));
+        // TODO: set intent
+        //al.setIntent(c.get);
+        al.setHour(c.getInt(c.getColumnIndex(KEY_HOUR)));
+        al.setMinute(c.getInt(c.getColumnIndex(KEY_MINUTE)));
+        al.setDayOfWeek(c.getInt(c.getColumnIndex(KEY_DAY_WEEK)));
+
+        return al;
+    }
+
+    // get all Alarms
+    public List<Alarm> getAllAlarms(){
+        List<Alarm> allAlarms = new ArrayList<Alarm>();
+        String selectQuery = "SELECT * FROM " + ALARM_TABLE;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        if (c.moveToFirst()){
+            do {
+                Alarm al = new Alarm();
+                al.setId(c.getInt(c.getColumnIndex(KEY_ALARM_ID)));
+                // TODO: set intent
+                //al.setIntent(c.get);
+                al.setHour(c.getInt(c.getColumnIndex(KEY_HOUR)));
+                al.setMinute(c.getInt(c.getColumnIndex(KEY_MINUTE)));
+                al.setDayOfWeek(c.getInt(c.getColumnIndex(KEY_DAY_WEEK)));
+
+                allAlarms.add(al);
+            } while (c.moveToNext());
+        }
+
+        return allAlarms;
+    }
+
+
+    public List<Alarm> getAllAlarmsByPill (String pillName){
+        List<Alarm> alarmsByPill = new ArrayList<Alarm>();
+
+        String selectQuery = "SELECT * FROM " + ALARM_TABLE + " alarm, "
+                + PILL_TABLE + " pill, " + PILL_ALARM_LINKS + " pillAlarm WHERE pill."
+                + KEY_PILLNAME + " = '" + pillName + "'" + " AND pill." + KEY_ROWID
+                + " = " + "pillAlarm." + KEY_PILLTABLE_ID + " AND alarm." + KEY_ROWID
+                + " = " + "pillAlarm." + KEY_ALARM_ID;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        if (c.moveToFirst()){
+            do {
+                Alarm al = new Alarm();
+                al.setId(c.getInt(c.getColumnIndex(KEY_ALARM_ID)));
+                // TODO: set intent
+                //al.setIntent(c.get);
+                al.setHour(c.getInt(c.getColumnIndex(KEY_HOUR)));
+                al.setMinute(c.getInt(c.getColumnIndex(KEY_MINUTE)));
+                al.setDayOfWeek(c.getInt(c.getColumnIndex(KEY_DAY_WEEK)));
+
+                alarmsByPill.add(al);
+            } while (c.moveToNext());
+        }
+
+        return alarmsByPill;
+    }
+
+    //TODO: add update and delete methods
+    // TODO: create test for database
+
+    //----------------------------------
+    //--------- close database method --
+    // I don't really understand how this is different than just db.close yet
+    //--------------------------------
+
+    public void closeDB(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        if (db != null && db.isOpen()){
+            db.close();
+        }
     }
 }
