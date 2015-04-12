@@ -89,7 +89,6 @@ med was taken. eventually this should use the pillname input string to create a 
 
         history.setHourTaken(hour);
         history.setMinuteTaken(minute);
-        history.setAm_pmTaken(am_pm);
         history.setDateString(dateString);
 
         pill.addHistory(history);

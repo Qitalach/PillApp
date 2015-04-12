@@ -10,7 +10,6 @@ public class Alarm {
     private Intent intent;
     private int hour;
     private int minute;
-    private String am_pm;
     private int dayOfWeek;
 
     public int getId() { return id; }
@@ -29,9 +28,10 @@ public class Alarm {
 
     public void setMinute(int minute) { this.minute = minute; }
 
-    public String getAm_pm() { return am_pm; }
-
-    public void setAm_pm(String am_pm) { this.am_pm = am_pm; }
+    public String getAm_pm() {
+        String am_pm = (this.hour < 12) ? "am" : "pm";
+        return am_pm;
+    }
 
     public int getDayOfWeek() { return dayOfWeek; }
 
