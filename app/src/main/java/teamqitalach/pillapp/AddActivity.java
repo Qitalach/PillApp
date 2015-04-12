@@ -96,7 +96,6 @@ public class AddActivity extends Activity {
                                 alarm.setIntent(intent);
                                 alarm.setHour(hour);
                                 alarm.setMinute(minute);
-                                alarm.setAm_pm(am_pm);
                                 alarm.setDayOfWeek(dayOfWeek);
                                 pill.addAlarm(alarm);
                             } else {
@@ -107,7 +106,6 @@ public class AddActivity extends Activity {
                                 alarm.setIntent(intent);
                                 alarm.setHour(hour);
                                 alarm.setMinute(minute);
-                                alarm.setAm_pm(am_pm);
                                 alarm.setDayOfWeek(dayOfWeek);
                                 pill.addAlarm(alarm);
                                 pillBox.addPill(pill_name, pill);

@@ -7,7 +7,6 @@ public class History {
 
     private int hourTaken;
     private int minuteTaken;
-    private String am_pmTaken;
     private String dateString;
 
     public int getHourTaken() { return hourTaken; }
@@ -18,9 +17,10 @@ public class History {
 
     public void setMinuteTaken(int minuteTaken) { this.minuteTaken = minuteTaken; }
 
-    public String getAm_pmTaken() { return am_pmTaken; }
-
-    public void setAm_pmTaken(String am_pmTaken) { this.am_pmTaken = am_pmTaken; }
+    public String getAm_pmTaken() {
+        String am_pmTaken = (this.hourTaken < 12) ? "am" : "pm";
+        return am_pmTaken;
+    }
 
     public String getDateString() { return dateString; }
 
