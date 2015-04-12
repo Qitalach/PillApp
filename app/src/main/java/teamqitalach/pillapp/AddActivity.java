@@ -47,9 +47,6 @@ public class AddActivity extends Activity {
                 /** Getting a reference to TimePicker object available in the MainActivity */
                 TimePicker tpTime = (TimePicker) findViewById(R.id.tp_time);
 
-                //int year = dpDate.getYear();
-                //int month = dpDate.getMonth();
-                //int day = dpDate.getDayOfMonth();
                 int hour = tpTime.getCurrentHour();
                 int minute = tpTime.getCurrentMinute();
                 String am_pm = (hour < 12) ? "am" : "pm";

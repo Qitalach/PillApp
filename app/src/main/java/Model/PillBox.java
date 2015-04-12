@@ -29,7 +29,6 @@ public class PillBox {
             schedule.add(alarm);
             dailySchedule.put(alarm.getDayOfWeek(), schedule);
         }
-
     }
 
     public List<Alarm> getAlarms(int dayOfWeek) {

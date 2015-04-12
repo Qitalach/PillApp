@@ -78,8 +78,6 @@ public class TodayFragment extends Fragment {
             }
         }
 
-
-
         return rootView;
     }
 

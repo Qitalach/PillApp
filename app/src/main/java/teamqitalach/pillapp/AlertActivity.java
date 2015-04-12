@@ -26,7 +26,6 @@ public class AlertActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         /** Creating an Alert Dialog Window */
         AlertAlarm alert = new AlertAlarm();
 
@@ -44,7 +43,10 @@ public class AlertActivity extends FragmentActivity {
     public void doNeutralClick(String pillName){
 
         final int _id = (int) System.currentTimeMillis();
-
+        final long minute = 60000;
+        long snoozeLength = 2;
+        long currTime = System.currentTimeMillis();
+        long min = currTime + minute * snoozeLength;
 
         Intent intent = new Intent(getBaseContext(), AlertActivity.class);
         intent.putExtra("pill_name", pillName);
@@ -53,17 +55,13 @@ public class AlertActivity extends FragmentActivity {
 
         /** Getting a reference to the System Service ALARM_SERVICE */
         alarmManager = (AlarmManager) getBaseContext().getSystemService(ALARM_SERVICE);
-        long currTime =  System.currentTimeMillis();
 
-        // time two minutes from now (currtime)
-        long min = currTime + (long)120000;
 
         alarmManager.set(AlarmManager.RTC_WAKEUP, min, operation);
         Toast.makeText(getBaseContext(), "Alarm for " + pillName + " was snoozed.", Toast.LENGTH_SHORT).show();
 
         //not sure if i need this
         this.finish();
-
 
     }
 /*
