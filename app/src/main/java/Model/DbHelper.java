@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,7 +69,7 @@ public class DbHelper extends SQLiteOpenHelper {
             ALARM_TABLE + "(" + KEY_ROWID + " integer primary key," +
             KEY_ALARM_ID + " integer not null," + KEY_INTENT + " text not null," +
             KEY_HOUR + " integer," + KEY_MINUTE + " integer," +
-            KEY_ALARMS_PILL_NAME + " text," + KEY_DAY_WEEK + " integer" + ")";
+            KEY_ALARMS_PILL_NAME + " text not null," + KEY_DAY_WEEK + " integer" + ")";
 
     // Pill-Alarm link table: create statement
     private static final String CREATE_PILL_ALARM_LINKS_TABLE = "create table " +
@@ -105,8 +107,6 @@ public class DbHelper extends SQLiteOpenHelper {
 
     // Create Methods
 
-    // TODO: createPillAlarmLink should be in createAlarm, not createPill.
-
     public long createPill(Pill pill, long[] alarm_ids){
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -116,20 +116,14 @@ public class DbHelper extends SQLiteOpenHelper {
         // insert row
         long pill_id = db.insert(PILL_TABLE, null, values);
 
-        // assigning alarms to pill ??
-        for (long alarm_id : alarm_ids){
-            createPillAlarmLink(pill_id, alarm_id);
-        }
-
         return pill_id;
     }
 
-    public long createAlarm(Alarm alarm){
+    public long createAlarm(Alarm alarm, long pill_id){
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        // TODO: need to serialize intent
-        //values.put(KEY_INTENT, alarm.getIntent());
+        values.put(KEY_INTENT, alarm.getIntentForDb());
         values.put(KEY_HOUR, alarm.getHour());
         values.put(KEY_MINUTE, alarm.getMinute());
         values.put(KEY_ALARMS_PILL_NAME, alarm.getPillName());
@@ -137,6 +131,9 @@ public class DbHelper extends SQLiteOpenHelper {
 
         //insert row
         long alarm_id = db.insert(ALARM_TABLE, null, values);
+
+        //link alarm to a pill
+        createPillAlarmLink(pill_id, alarm_id);
 
         return alarm_id;
     }
@@ -200,7 +197,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     // get a single alarm
-    public Alarm getAlarm(long alarm_id){
+    public Alarm getAlarm(long alarm_id) throws URISyntaxException {
         SQLiteDatabase db = this.getReadableDatabase();
 
         String dbAlarm = "SELECT * FROM " + ALARM_TABLE + " WHERE "
@@ -214,8 +211,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         Alarm al = new Alarm();
         al.setId(c.getInt(c.getColumnIndex(KEY_ALARM_ID)));
-        // TODO: set intent
-        //al.setIntent(c.get);
+        al.setIntentFromDB(c.getString(c.getColumnIndex(KEY_INTENT)));
         al.setHour(c.getInt(c.getColumnIndex(KEY_HOUR)));
         al.setMinute(c.getInt(c.getColumnIndex(KEY_MINUTE)));
         al.setDayOfWeek(c.getInt(c.getColumnIndex(KEY_DAY_WEEK)));
@@ -225,7 +221,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     // get all Alarms
-    public List<Alarm> getAllAlarms(){
+    public List<Alarm> getAllAlarms() throws URISyntaxException {
         List<Alarm> allAlarms = new ArrayList<Alarm>();
         String selectQuery = "SELECT * FROM " + ALARM_TABLE;
 
@@ -236,8 +232,7 @@ public class DbHelper extends SQLiteOpenHelper {
             do {
                 Alarm al = new Alarm();
                 al.setId(c.getInt(c.getColumnIndex(KEY_ALARM_ID)));
-                // TODO: set intent
-                //al.setIntent(c.get);
+                al.setIntentFromDB(c.getString(c.getColumnIndex(KEY_INTENT)));
                 al.setHour(c.getInt(c.getColumnIndex(KEY_HOUR)));
                 al.setMinute(c.getInt(c.getColumnIndex(KEY_MINUTE)));
                 al.setDayOfWeek(c.getInt(c.getColumnIndex(KEY_DAY_WEEK)));
@@ -251,7 +246,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     // get all Alarms linked to a Pill
-    public List<Alarm> getAllAlarmsByPill (String pillName){
+    public List<Alarm> getAllAlarmsByPill (String pillName) throws URISyntaxException {
         List<Alarm> alarmsByPill = new ArrayList<Alarm>();
 
         String selectQuery = "SELECT * FROM " + ALARM_TABLE + " alarm, "
@@ -267,8 +262,7 @@ public class DbHelper extends SQLiteOpenHelper {
             do {
                 Alarm al = new Alarm();
                 al.setId(c.getInt(c.getColumnIndex(KEY_ALARM_ID)));
-                // TODO: set intent
-                //al.setIntent(c.get);
+                al.setIntentFromDB(c.getString(c.getColumnIndex(KEY_INTENT)));
                 al.setHour(c.getInt(c.getColumnIndex(KEY_HOUR)));
                 al.setMinute(c.getInt(c.getColumnIndex(KEY_MINUTE)));
                 al.setDayOfWeek(c.getInt(c.getColumnIndex(KEY_DAY_WEEK)));
@@ -308,6 +302,10 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     //TODO: add delete methods
+    // Delete Methods
+
+
+
     // TODO: create test for database
 
     //----------------------------------

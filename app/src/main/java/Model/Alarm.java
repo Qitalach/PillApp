@@ -2,6 +2,8 @@ package Model;
 
 import android.content.Intent;
 
+import java.net.URISyntaxException;
+
 /**
  * Created by CharlesPK3 on 4/3/15.
  */
@@ -42,6 +44,18 @@ public class Alarm {
 
     public void setPillName(String pillName) { this.pillName = pillName; }
 
+    public String getIntentForDb(){
+        Intent intent = this.getIntent();
+        // don't know what toURI does, or whuy int Flags is 0,
+        // this method found @ http://stackoverflow.com/questions/6740578/stroing-in-intent-in-an-sqlite-database-with-android
+        String databaseIntent = intent.toUri(0);
 
+        return databaseIntent;
+    }
+
+    public void setIntentFromDB(String databaseIntent) throws URISyntaxException {
+        Intent intent = Intent.parseUri(databaseIntent, 0);
+        this.intent = intent;
+    }
 
 }
