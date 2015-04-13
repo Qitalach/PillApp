@@ -44,7 +44,7 @@ public class Alarm implements Comparable<Alarm>{
 
     public void setPillName(String pillName) { this.pillName = pillName; }
 
-    @
+    @Override
     public int compareTo(Alarm another) {
         if (this.getHour()<another.getHour()){
             return -1;
