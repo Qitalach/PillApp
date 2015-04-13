@@ -59,7 +59,7 @@ public class MainActivity extends ActionBarActivity implements android.support.v
         tt1.setText(Html.fromHtml("<b>HISTORY</b><br><small>By " + todayString + "</small>"));
         tt1.setTextColor(Color.WHITE);
         tt1.setGravity(Gravity.CENTER);
-        tt1.setTypeface(null, Typeface.BOLD);
+        //tt1.setTypeface(null, Typeface.BOLD);
         tt1.setHeight(200);
         historytab.setCustomView(tt1);
 
@@ -67,7 +67,7 @@ public class MainActivity extends ActionBarActivity implements android.support.v
         tt2.setText(Html.fromHtml("<b>TODAY</b><br><small>" + todayString + "</small>"));
         tt2.setTextColor(Color.WHITE);
         tt2.setGravity(Gravity.CENTER);
-        tt2.setTypeface(null, Typeface.BOLD);
+        //tt2.setTypeface(null, Typeface.BOLD);
         tt2.setHeight(200);
         todaytab.setCustomView(tt2);
 
@@ -75,7 +75,7 @@ public class MainActivity extends ActionBarActivity implements android.support.v
         tt3.setText(Html.fromHtml("<b>TOMORROW</b><br><small>" + tomorrowString + "</small>"));
         tt3.setTextColor(Color.WHITE);
         tt3.setGravity(Gravity.CENTER);
-        tt3.setTypeface(null, Typeface.BOLD);
+        //tt3.setTypeface(null, Typeface.BOLD);
         tt3.setHeight(200);
         tomorrowtab.setCustomView(tt3);
 
@@ -126,6 +126,7 @@ public class MainActivity extends ActionBarActivity implements android.support.v
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            sendSetting();
             return true;
         }
 
@@ -157,6 +158,11 @@ public class MainActivity extends ActionBarActivity implements android.support.v
 
     public void sendAdd() {
         Intent intent = new Intent(this, AddActivity.class);
+        startActivity(intent);
+    }
+
+    public void sendSetting() {
+        Intent intent = new Intent(this, SettingActivity.class);
         startActivity(intent);
     }
 
