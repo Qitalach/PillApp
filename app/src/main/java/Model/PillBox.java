@@ -24,6 +24,7 @@ public class PillBox {
     public void addAlarm(Alarm alarm){
         if (dailySchedule.containsKey(alarm.getDayOfWeek())){
             dailySchedule.get(alarm.getDayOfWeek()).add(alarm);
+            Collections.sort(dailySchedule.get(alarm.getDayOfWeek()));
         } else {
             List<Alarm> schedule = new LinkedList<Alarm>();
             schedule.add(alarm);

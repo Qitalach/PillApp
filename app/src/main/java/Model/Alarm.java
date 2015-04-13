@@ -2,10 +2,12 @@ package Model;
 
 import android.content.Intent;
 
+import java.util.Comparator;
+
 /**
  * Created by CharlesPK3 on 4/3/15.
  */
-public class Alarm {
+public class Alarm implements Comparable<Alarm>{
     private int id;
     private Intent intent;
     private int hour;
@@ -42,6 +44,21 @@ public class Alarm {
 
     public void setPillName(String pillName) { this.pillName = pillName; }
 
+    @
+    public int compareTo(Alarm another) {
+        if (this.getHour()<another.getHour()){
+            return -1;
+        } else if (this.getHour()>another.getHour()){
+            return 1;
+        }else{
+            if (this.getMinute()<another.getMinute()){
+                return -1;
+            }else if(this.getMinute()>another.getMinute()){
+                return 1;
+            }else{
+                return 0;
+            }
+        }
 
-
+    }
 }
