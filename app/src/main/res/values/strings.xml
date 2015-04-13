@@ -27,5 +27,7 @@
     <string name="Friday">Friday</string>
     <string name="Saturday">Saturday</string>
     <string name="Sunday">Sunday</string>
+    <string name="title_activity_edit">EditActivity</string>
+    <string name="title_activity_setting">SettingActivity</string>
 
 </resources>
