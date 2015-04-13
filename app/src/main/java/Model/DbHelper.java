@@ -6,8 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,8 +46,8 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final String KEY_INTENT = "intent";
     private static final String KEY_HOUR = "hour";
     private static final String KEY_MINUTE = "minute";
-    private static final String KEY_AM_PM = "am_pm";
     private static final String KEY_DAY_WEEK = "day_of_week";
+    private static final String KEY_ALARMS_PILL_NAME = "pillName";
 
     // Pill-Alarm link table columns
     private static final String KEY_PILLTABLE_ID = "pill_id";
@@ -69,7 +67,7 @@ public class DbHelper extends SQLiteOpenHelper {
             ALARM_TABLE + "(" + KEY_ROWID + " integer primary key," +
             KEY_ALARM_ID + " integer not null," + KEY_INTENT + " text not null," +
             KEY_HOUR + " integer," + KEY_MINUTE + " integer," +
-            KEY_AM_PM + " text," + KEY_DAY_WEEK + " integer" + ")";
+            KEY_ALARMS_PILL_NAME + " text," + KEY_DAY_WEEK + " integer" + ")";
 
     // Pill-Alarm link table: create statement
     private static final String CREATE_PILL_ALARM_LINKS_TABLE = "create table " +
@@ -107,6 +105,8 @@ public class DbHelper extends SQLiteOpenHelper {
 
     // Create Methods
 
+    // TODO: createPillAlarmLink should be in createAlarm, not createPill.
+
     public long createPill(Pill pill, long[] alarm_ids){
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -132,7 +132,7 @@ public class DbHelper extends SQLiteOpenHelper {
         //values.put(KEY_INTENT, alarm.getIntent());
         values.put(KEY_HOUR, alarm.getHour());
         values.put(KEY_MINUTE, alarm.getMinute());
-        values.put(KEY_AM_PM, alarm.getAm_pm());
+        values.put(KEY_ALARMS_PILL_NAME, alarm.getPillName());
         values.put(KEY_DAY_WEEK, alarm.getDayOfWeek());
 
         //insert row
@@ -170,6 +170,7 @@ public class DbHelper extends SQLiteOpenHelper {
         }
 
         Pill pill = new Pill();
+        // TODO: add pillId parameters to all database methods and create statement
         // tutorial i'm following has setID method, do we need that?
         pill.setPillName(c.getString(c.getColumnIndex(KEY_PILLNAME)));
 
@@ -218,6 +219,7 @@ public class DbHelper extends SQLiteOpenHelper {
         al.setHour(c.getInt(c.getColumnIndex(KEY_HOUR)));
         al.setMinute(c.getInt(c.getColumnIndex(KEY_MINUTE)));
         al.setDayOfWeek(c.getInt(c.getColumnIndex(KEY_DAY_WEEK)));
+        al.setPillName(c.getString(c.getColumnIndex(KEY_ALARMS_PILL_NAME)));
 
         return al;
     }
@@ -239,6 +241,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 al.setHour(c.getInt(c.getColumnIndex(KEY_HOUR)));
                 al.setMinute(c.getInt(c.getColumnIndex(KEY_MINUTE)));
                 al.setDayOfWeek(c.getInt(c.getColumnIndex(KEY_DAY_WEEK)));
+                al.setPillName(c.getString(c.getColumnIndex(KEY_ALARMS_PILL_NAME)));
 
                 allAlarms.add(al);
             } while (c.moveToNext());
@@ -247,7 +250,7 @@ public class DbHelper extends SQLiteOpenHelper {
         return allAlarms;
     }
 
-
+    // get all Alarms linked to a Pill
     public List<Alarm> getAllAlarmsByPill (String pillName){
         List<Alarm> alarmsByPill = new ArrayList<Alarm>();
 
@@ -269,6 +272,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 al.setHour(c.getInt(c.getColumnIndex(KEY_HOUR)));
                 al.setMinute(c.getInt(c.getColumnIndex(KEY_MINUTE)));
                 al.setDayOfWeek(c.getInt(c.getColumnIndex(KEY_DAY_WEEK)));
+                al.setPillName(c.getString(c.getColumnIndex(KEY_ALARMS_PILL_NAME)));
 
                 alarmsByPill.add(al);
             } while (c.moveToNext());
@@ -277,7 +281,33 @@ public class DbHelper extends SQLiteOpenHelper {
         return alarmsByPill;
     }
 
-    //TODO: add update and delete methods
+    // Update Methods
+
+    public int updatePill (Pill pill){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_PILLNAME, pill.getPillName());
+
+        //updating row
+        return db.update(PILL_TABLE, values, KEY_ROWID + " = ?",
+                new String[] {String.valueOf(pill.getPillId()) });
+    }
+
+    public int updateAlarm (Alarm alarm) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_HOUR, alarm.getHour());
+        values.put(KEY_MINUTE, alarm.getMinute());
+        values.put(KEY_DAY_WEEK, alarm.getDayOfWeek());
+
+        //updating row
+        return db.update(ALARM_TABLE, values, KEY_ROWID + " = ?",
+                new String[] {String.valueOf(alarm.getId())});
+    }
+
+    //TODO: add delete methods
     // TODO: create test for database
 
     //----------------------------------
