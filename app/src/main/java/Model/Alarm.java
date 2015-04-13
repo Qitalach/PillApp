@@ -2,11 +2,9 @@ package Model;
 
 import android.content.Intent;
 
-<<<<<<< HEAD
-import java.util.Comparator;
-=======
+
 import java.net.URISyntaxException;
->>>>>>> origin/master
+
 
 /**
  * Created by CharlesPK3 on 4/3/15.
@@ -48,7 +46,7 @@ public class Alarm implements Comparable<Alarm>{
 
     public void setPillName(String pillName) { this.pillName = pillName; }
 
-<<<<<<< HEAD
+
     @Override
     public int compareTo(Alarm another) {
         if (this.getHour()<another.getHour()){
@@ -66,7 +64,7 @@ public class Alarm implements Comparable<Alarm>{
         }
 
     }
-=======
+
     public String getIntentForDb(){
         Intent intent = this.getIntent();
         // don't know what toURI does, or whuy int Flags is 0,
@@ -81,5 +79,5 @@ public class Alarm implements Comparable<Alarm>{
         this.intent = intent;
     }
 
->>>>>>> origin/master
+
 }
