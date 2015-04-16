@@ -48,17 +48,17 @@ public class Alarm implements Comparable<Alarm>{
 
 
     @Override
-    public int compareTo(Alarm another) {
-        if (this.getHour()<another.getHour()){
+    public int compareTo(Alarm anotherAlarm) {
+        if (this.getHour() < anotherAlarm.getHour()) {
             return -1;
-        } else if (this.getHour()>another.getHour()){
+        } else if (this.getHour() > anotherAlarm.getHour()) {
             return 1;
-        }else{
-            if (this.getMinute()<another.getMinute()){
+        } else {
+            if (this.getMinute() < anotherAlarm.getMinute()) {
                 return -1;
-            }else if(this.getMinute()>another.getMinute()){
+            } else if(this.getMinute() > anotherAlarm.getMinute()) {
                 return 1;
-            }else{
+            } else{
                 return 0;
             }
         }
