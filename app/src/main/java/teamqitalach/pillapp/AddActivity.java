@@ -11,7 +11,10 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -21,7 +24,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 //http://wptrafficanalyzer.in/blog/setting-up-alarm-using-alarmmanager-and-waking-up-screen-and-unlocking-keypad-on-alarm-goes-off-in-android/
-public class AddActivity extends Activity {
+public class AddActivity extends ActionBarActivity {
 
     private AlarmManager alarmManager;
     private PendingIntent operation;
@@ -31,6 +34,8 @@ public class AddActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         OnClickListener setClickListener = new OnClickListener() {
 
@@ -215,6 +220,26 @@ public class AddActivity extends Activity {
                 break;
         }
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+
+        if (id == R.id.home) {
+            NavUtils.navigateUpFromSameTask(this);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }

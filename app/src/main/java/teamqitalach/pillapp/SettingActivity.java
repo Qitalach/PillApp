@@ -1,5 +1,6 @@
 package teamqitalach.pillapp;
 
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,6 +13,8 @@ public class SettingActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 
@@ -30,7 +33,12 @@ public class SettingActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+
+        if (id == R.id.home) {
+            NavUtils.navigateUpFromSameTask(this);
             return true;
         }
 

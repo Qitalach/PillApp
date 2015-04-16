@@ -4,7 +4,6 @@ import teamqitalach.pillapp.adapter.TabsAdapter;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
@@ -25,7 +24,6 @@ import java.util.Date;
 public class MainActivity extends ActionBarActivity implements android.support.v7.app.ActionBar.TabListener{
 
     private ViewPager tabsviewPager;
-    private ActionBar mActionBar;
     private TabsAdapter mTabsAdapter;
 
     @Override
@@ -40,7 +38,8 @@ public class MainActivity extends ActionBarActivity implements android.support.v
         tabsviewPager.setAdapter(mTabsAdapter);
 
         getSupportActionBar().setTitle("Pill Reminder");
-        getSupportActionBar().setHomeButtonEnabled(false);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
         getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         Calendar calendar = Calendar.getInstance();
@@ -113,7 +112,7 @@ public class MainActivity extends ActionBarActivity implements android.support.v
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_home_page, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
