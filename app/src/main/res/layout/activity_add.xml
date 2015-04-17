@@ -48,13 +48,13 @@
                     android:text="@string/Tuesday"
                     android:onClick="onCheckboxClicked"/>
 
-                <CheckBox android:id="@+id/checkbox_thursday"
+                <CheckBox android:id="@+id/checkbox_wednesday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Thursday"
                     android:onClick="onCheckboxClicked"/>
 
-                <CheckBox android:id="@+id/checkbox_wednesday"
+                <CheckBox android:id="@+id/checkbox_thursday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Wednesday"
