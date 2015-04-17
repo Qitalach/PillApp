@@ -51,13 +51,13 @@
                 <CheckBox android:id="@+id/checkbox_wednesday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Thursday"
+                    android:text="@string/Wednesday"
                     android:onClick="onCheckboxClicked"/>
 
                 <CheckBox android:id="@+id/checkbox_thursday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Wednesday"
+                    android:text="@string/Thursday"
                     android:onClick="onCheckboxClicked"/>
 
                 <CheckBox android:id="@+id/checkbox_friday"
