@@ -89,16 +89,20 @@
         android:background="#039be5">
 
         <Button
-            android:id="@+id/btn_set_alarm"
-            android:text="@string/str_btn_set_alarm"
+            android:id="@+id/btn_cancel_alarm"
+            android:text="@string/str_btn_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:layout_weight="1"
             android:textColor="#ffffff"
             style="?android:attr/borderlessButtonStyle"/>
 
+        <View android:layout_height="fill_parent"
+            android:layout_width="2dp"
+            android:background="@color/blue400"/>
+
         <Button
-            android:id="@+id/btn_cancel_alarm"
-            android:text="@string/str_btn_cancel"
+            android:id="@+id/btn_set_alarm"
+            android:text="@string/str_btn_set_alarm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:layout_weight="1"
             android:textColor="#ffffff"

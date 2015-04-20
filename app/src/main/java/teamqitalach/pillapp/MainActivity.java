@@ -134,6 +134,11 @@ public class MainActivity extends ActionBarActivity implements android.support.v
             return true;
         }
 
+        if (id == R.id.action_edit) {
+            sendEdit();
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -162,6 +167,11 @@ public class MainActivity extends ActionBarActivity implements android.support.v
 
     public void sendSetting() {
         Intent intent = new Intent(this, SettingActivity.class);
+        startActivity(intent);
+    }
+
+    public void sendEdit() {
+        Intent intent = new Intent(this, EditActivity.class);
         startActivity(intent);
     }
 
