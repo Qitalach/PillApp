@@ -25,7 +25,6 @@ public class Pill {
 
     public void addHistory(History history) { histories.add(history); }
 
-
     public int getPillId() {
         return pillId;
     }

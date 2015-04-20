@@ -28,7 +28,7 @@ public class AddActivity extends ActionBarActivity {
 
     private AlarmManager alarmManager;
     private PendingIntent operation;
-    private int dayOfWeekList[] = new int[7];
+    private boolean dayOfWeekList[] = new boolean[7];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,80 +56,85 @@ public class AddActivity extends ActionBarActivity {
                 int minute = tpTime.getCurrentMinute();
                 String am_pm = (hour < 12) ? "am" : "pm";
 
-                    for(int i=0; i<7; i++) {
-                        if (dayOfWeekList[i] == 1 && pill_name.length() != 0) {
+                /** Updating model */
+                Alarm alarm = new Alarm();
+                if (pillBox.getPills().containsKey(pill_name)) {
+                    Pill pill = pillBox.getPills().get(pill_name);
+                    //alarm.addId(_id+i);
+                    //alarm.addIntent(intent);
+                    alarm.setHour(hour);
+                    alarm.setMinute(minute);
+                    //alarm.setDayOfWeek(dayOfWeek);
+                    alarm.setPillName(pill_name);
+                    alarm.setDayOfWeek(dayOfWeekList);
+                    pill.addAlarm(alarm);
+                    pillBox.addAlarm(alarm);
+                } else {
+                    Pill pill = new Pill();
+                    pill.setPillName(pill_name);
+                    //alarm.addId(_id+i);
+                    //alarm.addIntent(intent);
+                    alarm.setHour(hour);
+                    alarm.setMinute(minute);
+                    //alarm.setDayOfWeek(dayOfWeek);
+                    alarm.setPillName(pill_name);
+                    alarm.setDayOfWeek(dayOfWeekList);
+                    pill.addAlarm(alarm);
+                    pillBox.addPill(pill_name, pill);
+                    pillBox.addAlarm(alarm);
+                }
 
-                            int dayOfWeek = i+1;
-                            checkBoxCounter++;
+                for(int i=0; i<7; i++) {
+                    if (dayOfWeekList[i] == true && pill_name.length() != 0) {
 
-                            /** This intent invokes the activity AlertActivity, which in turn opens the AlertAlarm window */
-                            Intent intent = new Intent(getBaseContext(), AlertActivity.class);
-                            intent.putExtra("pill_name", pill_name);
+                        int dayOfWeek = i+1;
+                        checkBoxCounter++;
 
-
-                            /** Example of retrieving intent for later usage */
-                            //Bundle bundle = intent.getExtras();
-                            //String pillName = bundle.getString("pill_name");
-
-                            /** Creating a Pending Intent */
-                            operation = PendingIntent.getActivity(getBaseContext(), _id+i, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
-
-                            /** Getting a reference to the System Service ALARM_SERVICE */
-                            alarmManager = (AlarmManager) getBaseContext().getSystemService(ALARM_SERVICE);
-
-                            /** Getting a reference to DatePicker object available in the MainActivity */
-                            //DatePicker dpDate = (DatePicker) findViewById(R.id.dp_date);
+                        /** This intent invokes the activity AlertActivity, which in turn opens the AlertAlarm window */
+                        Intent intent = new Intent(getBaseContext(), AlertActivity.class);
+                        intent.putExtra("pill_name", pill_name);
 
 
-                            /** Creating a calendar object corresponding to the date and time set by the user */
-                            Calendar calendar = Calendar.getInstance();
+                        /** Example of retrieving intent for later usage */
+                        //Bundle bundle = intent.getExtras();
+                        //String pillName = bundle.getString("pill_name");
 
-                            calendar.set(Calendar.HOUR_OF_DAY, hour);
-                            calendar.set(Calendar.MINUTE, minute);
-                            calendar.set(Calendar.SECOND, 0);
-                            calendar.set(Calendar.MILLISECOND, 0);
-                            calendar.set(Calendar.DAY_OF_WEEK, dayOfWeek);
+                        /** Creating a Pending Intent */
+                        operation = PendingIntent.getActivity(getBaseContext(), _id+i, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
 
-                            /** Updating model */
-                            if (pillBox.getPills().containsKey(pill_name)) {
-                                Pill pill = pillBox.getPills().get(pill_name);
-                                Alarm alarm = new Alarm();
-                                alarm.setId(_id+i);
-                                alarm.setIntent(intent);
-                                alarm.setHour(hour);
-                                alarm.setMinute(minute);
-                                alarm.setDayOfWeek(dayOfWeek);
-                                alarm.setPillName(pill_name);
-                                pill.addAlarm(alarm);
-                                pillBox.addAlarm(alarm);
-                            } else {
-                                Pill pill = new Pill();
-                                pill.setPillName(pill_name);
-                                Alarm alarm = new Alarm();
-                                alarm.setId(_id+i);
-                                alarm.setIntent(intent);
-                                alarm.setHour(hour);
-                                alarm.setMinute(minute);
-                                alarm.setDayOfWeek(dayOfWeek);
-                                alarm.setPillName(pill_name);
-                                pill.addAlarm(alarm);
-                                pillBox.addPill(pill_name, pill);
-                                pillBox.addAlarm(alarm);
-                            }
+                        /** Getting a reference to the System Service ALARM_SERVICE */
+                        alarmManager = (AlarmManager) getBaseContext().getSystemService(ALARM_SERVICE);
 
-                            /** Converting the date and time in to milliseconds elapsed since epoch */
-                            long alarm_time = calendar.getTimeInMillis();
+                        /** Getting a reference to DatePicker object available in the MainActivity */
+                        //DatePicker dpDate = (DatePicker) findViewById(R.id.dp_date);
 
-                            /** setRepeating() lets you specify a precise custom interval--in this case,
-                             20 seconds. */
-                            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarm_time,
-                                    alarmManager.INTERVAL_DAY * 7, operation);
 
-                            /** Setting an alarm, which invokes the operation at alert_time */
-                            /** Uncomment below to set alarm once (instead of having it repeat). */
-                            //alarmManager.set(AlarmManager.RTC_WAKEUP, alarm_time, operation);
-                        }
+                        /** Creating a calendar object corresponding to the date and time set by the user */
+                        Calendar calendar = Calendar.getInstance();
+
+                        calendar.set(Calendar.HOUR_OF_DAY, hour);
+                        calendar.set(Calendar.MINUTE, minute);
+                        calendar.set(Calendar.SECOND, 0);
+                        calendar.set(Calendar.MILLISECOND, 0);
+                        calendar.set(Calendar.DAY_OF_WEEK, dayOfWeek);
+
+                        alarm.addId(_id+i);
+                        alarm.addIntent(intent);
+
+
+                        /** Converting the date and time in to milliseconds elapsed since epoch */
+                        long alarm_time = calendar.getTimeInMillis();
+
+                        /** setRepeating() lets you specify a precise custom interval--in this case,
+                         20 seconds. */
+                        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarm_time,
+                                alarmManager.INTERVAL_DAY * 7, operation);
+
+                        /** Setting an alarm, which invokes the operation at alert_time */
+                        /** Uncomment below to set alarm once (instead of having it repeat). */
+                        //alarmManager.set(AlarmManager.RTC_WAKEUP, alarm_time, operation);
                     }
+                }
                 /** Alert is set successfully */
                 if(checkBoxCounter == 0 || pill_name.length() == 0)
                     Toast.makeText(getBaseContext(), "Please input a pill name or check at least one day!", Toast.LENGTH_SHORT).show();
@@ -178,45 +183,45 @@ public class AddActivity extends ActionBarActivity {
         switch(view.getId()) {
             case R.id.checkbox_monday:
                 if (checked)
-                    dayOfWeekList[1] = 1;
+                    dayOfWeekList[1] = true;
                 else
-                    dayOfWeekList[1] = 0;
+                    dayOfWeekList[1] = false;
                 break;
             case R.id.checkbox_tuesday:
                 if (checked)
-                    dayOfWeekList[2] = 1;
+                    dayOfWeekList[2] = true;
                 else
-                    dayOfWeekList[2] = 0;
+                    dayOfWeekList[2] = false;
                 break;
             case R.id.checkbox_wednesday:
                 if (checked)
-                    dayOfWeekList[3] = 1;
+                    dayOfWeekList[3] = true;
                 else
-                    dayOfWeekList[3] = 0;
+                    dayOfWeekList[3] = false;
                 break;
             case R.id.checkbox_thursday:
                 if (checked)
-                    dayOfWeekList[4] = 1;
+                    dayOfWeekList[4] = true;
                 else
-                    dayOfWeekList[4] = 0;
+                    dayOfWeekList[4] = false;
                 break;
             case R.id.checkbox_friday:
                 if (checked)
-                    dayOfWeekList[5] = 1;
+                    dayOfWeekList[5] = true;
                 else
-                    dayOfWeekList[5] = 0;
+                    dayOfWeekList[5] = false;
                 break;
             case R.id.checkbox_saturday:
                 if (checked)
-                    dayOfWeekList[6] = 1;
+                    dayOfWeekList[6] = true;
                 else
-                    dayOfWeekList[6] = 0;
+                    dayOfWeekList[6] = false;
                 break;
             case R.id.checkbox_sunday:
                 if (checked)
-                    dayOfWeekList[0] = 1;
+                    dayOfWeekList[0] = true;
                 else
-                    dayOfWeekList[0] = 0;
+                    dayOfWeekList[0] = false;
                 break;
         }
 
