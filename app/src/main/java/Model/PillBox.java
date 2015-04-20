@@ -22,13 +22,18 @@ public class PillBox {
     }
 
     public void addAlarm(Alarm alarm){
-        if (dailySchedule.containsKey(alarm.getDayOfWeek())){
-            dailySchedule.get(alarm.getDayOfWeek()).add(alarm);
-            Collections.sort(dailySchedule.get(alarm.getDayOfWeek()));
-        } else {
-            List<Alarm> schedule = new LinkedList<Alarm>();
-            schedule.add(alarm);
-            dailySchedule.put(alarm.getDayOfWeek(), schedule);
+        boolean[] days = alarm.getDayOfWeek();
+        for (int i=0; i<7; i++){
+            if (days[i] == true){
+                if (dailySchedule.containsKey(i+1)){
+                    dailySchedule.get(i+1).add(alarm);
+                    Collections.sort(dailySchedule.get(i+1));
+                } else {
+                    List<Alarm> schedule = new LinkedList<Alarm>();
+                    schedule.add(alarm);
+                    dailySchedule.put(i+1, schedule);
+                }
+            }
         }
     }
 
@@ -40,7 +45,4 @@ public class PillBox {
         }
 
     }
-
-
-
 }

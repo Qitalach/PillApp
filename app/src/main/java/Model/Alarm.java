@@ -4,26 +4,33 @@ import android.content.Intent;
 
 
 import java.net.URISyntaxException;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 
 /**
  * Created by CharlesPK3 on 4/3/15.
  */
 public class Alarm implements Comparable<Alarm>{
-    private int id;
-    private Intent intent;
     private int hour;
     private int minute;
-    private int dayOfWeek;
     private String pillName;
+    private List<Intent> intents = new LinkedList<Intent>();
+    private List<Integer> ids = new LinkedList<Integer>();
+    private boolean dayOfWeek[] = new boolean[7];
 
-    public int getId() { return id; }
+    public List<Intent> getIntents() { return Collections.unmodifiableList(intents); }
 
-    public void setId(int id) { this.id = id; }
+    public void addIntent(Intent intent) { intents.add(intent); }
 
-    public Intent getIntent() { return intent; }
+    public List<Integer> getIds() { return Collections.unmodifiableList(ids); }
 
-    public void setIntent(Intent intent) { this.intent = intent; }
+    public boolean[] getDayOfWeek() { return dayOfWeek; }
+
+    public void setDayOfWeek(boolean[] dayOfWeek) { this.dayOfWeek = dayOfWeek; }
+
+    public void addId(Integer id) { ids.add(id); }
 
     public int getHour() { return hour; }
 
@@ -37,10 +44,6 @@ public class Alarm implements Comparable<Alarm>{
         String am_pm = (this.hour < 12) ? "am" : "pm";
         return am_pm;
     }
-
-    public int getDayOfWeek() { return dayOfWeek; }
-
-    public void setDayOfWeek(int dayOfWeek) { this.dayOfWeek = dayOfWeek; }
 
     public String getPillName() { return pillName; }
 
@@ -65,19 +68,19 @@ public class Alarm implements Comparable<Alarm>{
 
     }
 
-    public String getIntentForDb(){
-        Intent intent = this.getIntent();
-        // don't know what toURI does, or whuy int Flags is 0,
-        // this method found @ http://stackoverflow.com/questions/6740578/stroing-in-intent-in-an-sqlite-database-with-android
-        String databaseIntent = intent.toUri(0);
-
-        return databaseIntent;
-    }
-
-    public void setIntentFromDB(String databaseIntent) throws URISyntaxException {
-        Intent intent = Intent.parseUri(databaseIntent, 0);
-        this.intent = intent;
-    }
+//    public String getIntentForDb(){
+//        Intent intent = this.getIntent();
+//        // don't know what toURI does, or whuy int Flags is 0,
+//        // this method found @ http://stackoverflow.com/questions/6740578/stroing-in-intent-in-an-sqlite-database-with-android
+//        String databaseIntent = intent.toUri(0);
+//
+//        return databaseIntent;
+//    }
+//
+//    public void setIntentFromDB(String databaseIntent) throws URISyntaxException {
+//        Intent intent = Intent.parseUri(databaseIntent, 0);
+//        this.intent = intent;
+//    }
 
 
 }
