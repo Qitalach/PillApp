@@ -65,10 +65,12 @@ public class DbHelper extends SQLiteOpenHelper {
             KEY_PILLNAME + " text not null" + ")";
 
     // Alarm Table : create statement
-    private static final String CREATE_ALARM_TABLE = "create table " +
-            ALARM_TABLE + "(" + KEY_ROWID + " integer primary key," +
-            KEY_ALARM_ID + " integer not null," + KEY_INTENT + " text not null," +
-            KEY_HOUR + " integer," + KEY_MINUTE + " integer," +
+    private static final String CREATE_ALARM_TABLE =
+            "create table " + ALARM_TABLE + "("
+                + KEY_ROWID    + " integer primary key,"
+                + KEY_ALARM_ID + " integer not null,"
+                + KEY_INTENT   + " text not null,"
+                + KEY_HOUR     + " integer," + KEY_MINUTE + " integer," +
             KEY_ALARMS_PILL_NAME + " text not null," + KEY_DAY_WEEK + " integer" + ")";
 
     // Pill-Alarm link table: create statement
@@ -77,7 +79,7 @@ public class DbHelper extends SQLiteOpenHelper {
             KEY_PILLTABLE_ID + " integer," + KEY_ALARMTABLE_ID + " integer" + ")";
 
     // Constructor
-    DbHelper(Context context) {
+    public DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -88,6 +90,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_ALARM_TABLE);
         db.execSQL(CREATE_PILL_ALARM_LINKS_TABLE);
     }
+
 
     @Override
     // TODO: change this so that updating doesn't delete old data
@@ -107,7 +110,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     // Create Methods
 
-    public long createPill(Pill pill, long[] alarm_ids){
+    public long createPill(Pill pill){
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -177,9 +180,9 @@ public class DbHelper extends SQLiteOpenHelper {
     //get all pills
     public List<Pill> getAllPills() {
         List<Pill> pills = new ArrayList<Pill>();
-        String dbPills = "select * from " + PILL_TABLE;
+        String dbPills = "SELECT * FROM " + PILL_TABLE;
 
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = getReadableDatabase();
         Cursor c = db.rawQuery(dbPills, null);
 
         //loop through all rows, add to list
@@ -192,7 +195,7 @@ public class DbHelper extends SQLiteOpenHelper {
             } while (c.moveToNext());
 
         }
-
+        c.close();
         return pills;
     }
 
@@ -319,4 +322,5 @@ public class DbHelper extends SQLiteOpenHelper {
             db.close();
         }
     }
+
 }

@@ -1,5 +1,7 @@
 package Model;
 
+import android.content.Context;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -10,6 +12,7 @@ import java.util.Map;
  * Created by CharlesPK3 on 4/3/15.
  */
 public class PillBox {
+    private DbHelper db;
     private static Map<String, Pill> pills = new HashMap<String, Pill>();
     private static Map<Integer, List<Alarm>> dailySchedule = new HashMap<Integer, List<Alarm>>();
 
@@ -17,8 +20,10 @@ public class PillBox {
         return Collections.unmodifiableMap(pills);
     }
 
-    public void addPill(String pillName, Pill pill) {
+    public void addPill(Context c, String pillName, Pill pill) {
+        db = new DbHelper(c);
         pills.put(pillName, pill);
+        long pillId = db.createPill(pill);
     }
 
     public void addAlarm(Alarm alarm){
@@ -39,6 +44,12 @@ public class PillBox {
             return null;
         }
 
+    }
+
+    public List<Pill> getAllPills(Context c){
+        db = new DbHelper(c);
+        List<Pill> pills = db.getAllPills();
+        return pills;
     }
 
 
