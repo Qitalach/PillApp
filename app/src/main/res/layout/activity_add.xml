@@ -18,6 +18,7 @@
             <EditText android:id="@+id/pill_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLength="20"
                 android:hint="@string/pill_name" />
 
             <TimePicker
