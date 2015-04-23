@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import Model.Alarm;
 import Model.History;
+import Model.Pill;
 import Model.PillBox;
 
 public class HistoryFragment extends Fragment {
@@ -72,12 +73,13 @@ public class HistoryFragment extends Fragment {
 //            stk.addView(tbrow);
 //        }
 
-        for (String key: pillBox.getPills().keySet()) {
-            for (History history: pillBox.getPills().get(key).getHistories()){
+        for (Pill pill: pillBox.getPills(getActivity())) {
+            // 04/22 -- Histories not displaying b/c pills are in database now and not hooked to histories
+            for (History history: pill.getHistories()){
                 TableRow tbrow = new TableRow(container.getContext());
 
                 TextView t1v = new TextView(container.getContext());
-                t1v.setText(pillBox.getPills().get(key).getPillName());
+                t1v.setText(pill.getPillName());
                 t1v.setTextColor(Color.WHITE);
                 t1v.setGravity(Gravity.CENTER);
                 tbrow.addView(t1v);

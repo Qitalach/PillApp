@@ -71,7 +71,7 @@ med was taken. eventually this should use the pillname input string to create a 
 
     public void doPositiveClick(String pillName){
         PillBox pillBox = new PillBox();
-        Pill pill = pillBox.getPills().get(pillName);
+        Pill pill = pillBox.getPillByName(this, pillName);
         History history = new History();
 
         Calendar takeTime = Calendar.getInstance();

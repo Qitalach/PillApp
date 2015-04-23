@@ -28,6 +28,11 @@ public class PillBox {
         pill.setPillId(pillId);
     }
 
+    public Pill getPillByName(Context c, String pillName){
+        db = new DbHelper(c);
+        return db.getPillByName(pillName);
+    }
+
     public void addAlarm(Alarm alarm){
         boolean[] days = alarm.getDayOfWeek();
         for (int i=0; i<7; i++){

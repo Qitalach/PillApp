@@ -179,6 +179,33 @@ public class DbHelper extends SQLiteOpenHelper {
         return pill;
     }
 
+    public Pill getPillByName(String pillName){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String dbPill = "select * from "
+                + PILL_TABLE    +   " where "
+                + KEY_PILLNAME  +   " = "
+                + " '" + pillName + "' ";
+
+        Cursor c = db.rawQuery(dbPill, null);
+
+        Pill pill = new Pill();
+
+        if (c.moveToFirst() && c.getCount() >= 1) {
+            // TODO: this is still broken? / not running now b/c of if statement
+
+            System.out.println("------------------- " + c.getLong(c.getColumnIndex(KEY_ROWID)));
+            System.out.println("------------------- " + c.getString(c.getColumnIndex(KEY_PILLNAME)));
+
+
+            pill.setPillName(c.getString(c.getColumnIndex(KEY_PILLNAME)));
+            pill.setPillId(c.getLong(c.getColumnIndex(KEY_ROWID)));
+            c.close();
+        }
+
+        return pill;
+    }
+
     //get all pills
     public List<Pill> getAllPills() {
         List<Pill> pills = new ArrayList<Pill>();

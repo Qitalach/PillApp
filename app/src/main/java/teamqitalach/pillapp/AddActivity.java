@@ -58,18 +58,8 @@ public class AddActivity extends ActionBarActivity {
 
                 /** Updating model */
                 Alarm alarm = new Alarm();
-                if (pillBox.getPills().containsKey(pill_name)) {
-                    Pill pill = pillBox.getPills().get(pill_name);
-                    //alarm.addId(_id+i);
-                    //alarm.addIntent(intent);
-                    alarm.setHour(hour);
-                    alarm.setMinute(minute);
-                    //alarm.setDayOfWeek(dayOfWeek);
-                    alarm.setPillName(pill_name);
-                    alarm.setDayOfWeek(dayOfWeekList);
-                    pill.addAlarm(alarm);
-                    pillBox.addAlarm(alarm);
-                } else {
+                // if Pill does not already exist already exists
+                if (pillBox.getPillByName(getApplicationContext(), pill_name) == null) {
                     Pill pill = new Pill();
                     pill.setPillName(pill_name);
                     //alarm.addId(_id+i);
@@ -80,7 +70,18 @@ public class AddActivity extends ActionBarActivity {
                     alarm.setPillName(pill_name);
                     alarm.setDayOfWeek(dayOfWeekList);
                     pill.addAlarm(alarm);
-                    pillBox.addPill(pill_name, pill);
+                    pillBox.addPill(getApplicationContext() ,pill);
+                    pillBox.addAlarm(alarm);
+                } else {
+                    Pill pill = pillBox.getPillByName(getApplicationContext(), pill_name);
+                    //alarm.addId(_id+i);
+                    //alarm.addIntent(intent);
+                    alarm.setHour(hour);
+                    alarm.setMinute(minute);
+                    //alarm.setDayOfWeek(dayOfWeek);
+                    alarm.setPillName(pill_name);
+                    alarm.setDayOfWeek(dayOfWeekList);
+                    pill.addAlarm(alarm);
                     pillBox.addAlarm(alarm);
                 }
 
