@@ -2,6 +2,7 @@ package Model;
 
 import android.content.Context;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -13,23 +14,24 @@ import java.util.Map;
  */
 public class PillBox {
     private DbHelper db;
-    private static Map<String, Pill> pills = new HashMap<String, Pill>();
+    private static List<Pill> pills = new ArrayList<Pill>();
     private static Map<Integer, List<Alarm>> dailySchedule = new HashMap<Integer, List<Alarm>>();
 
-    public Map<String, Pill> getPills() {
-        return Collections.unmodifiableMap(pills);
+    public List<Pill> getPills(Context c) {
+        db = new DbHelper(c);
+        return db.getAllPills();
     }
 
-    public void addPill(Context c, String pillName, Pill pill) {
+    public void addPill(Context c, Pill pill) {
         db = new DbHelper(c);
-        pills.put(pillName, pill);
         long pillId = db.createPill(pill);
+        pill.setPillId(pillId);
     }
 
     public void addAlarm(Alarm alarm){
         boolean[] days = alarm.getDayOfWeek();
         for (int i=0; i<7; i++){
-            if (days[i] == true){
+            if (days[i]){
                 if (dailySchedule.containsKey(i+1)){
                     dailySchedule.get(i+1).add(alarm);
                     Collections.sort(dailySchedule.get(i+1));
@@ -50,13 +52,6 @@ public class PillBox {
         }
 
     }
-
-    public List<Pill> getAllPills(Context c){
-        db = new DbHelper(c);
-        List<Pill> pills = db.getAllPills();
-        return pills;
-    }
-
 
 
 }
