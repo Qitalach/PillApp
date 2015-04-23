@@ -10,16 +10,16 @@ import java.net.URISyntaxException;
  * Created by CharlesPK3 on 4/3/15.
  */
 public class Alarm implements Comparable<Alarm>{
-    private int id;
+    private long id; // used to hold DB id number
     private Intent intent;
     private int hour;
     private int minute;
     private int dayOfWeek;
     private String pillName;
 
-    public int getId() { return id; }
+    public long getId() { return id; }
 
-    public void setId(int id) { this.id = id; }
+    public void setId(long id) { this.id = id; }
 
     public Intent getIntent() { return intent; }
 

@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Pill {
     private String pillName;
-    private int pillId;
+    private long pillId;
     private List<Alarm> alarms = new LinkedList<Alarm>();
     private List<History> histories = new LinkedList<History>();
 
@@ -26,11 +26,14 @@ public class Pill {
     public void addHistory(History history) { histories.add(history); }
 
 
-    public int getPillId() {
+    // I added this to ease updating a pill in the database. It should always
+    //  be the long returned by inserting a pill in the database.
+    public long getPillId() {
         return pillId;
     }
 
-    public void setPillId(int pillID) {
+    // this is for database lookup, should only be used/set by database or PillBox methods
+    public void setPillId(long pillID) {
         this.pillId = pillID;
     }
 }
