@@ -126,10 +126,10 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_INTENT, alarm.getIntentForDb());
+        //values.put(KEY_INTENT, alarm.getIntentForDb());
         values.put(KEY_HOUR, alarm.getHour());
         values.put(KEY_MINUTE, alarm.getMinute());
-        values.put(KEY_DAY_WEEK, alarm.getDayOfWeek());
+        //values.put(KEY_DAY_WEEK, alarm.getDayOfWeek());
         values.put(KEY_ALARMS_PILL_NAME, alarm.getPillName());
 
         //insert row
@@ -216,10 +216,10 @@ public class DbHelper extends SQLiteOpenHelper {
 
         Alarm al = new Alarm();
         al.setId(c.getInt(c.getColumnIndex(KEY_ROWID)));
-        al.setIntentFromDB(c.getString(c.getColumnIndex(KEY_INTENT)));
+        //al.setIntentFromDB(c.getString(c.getColumnIndex(KEY_INTENT)));
         al.setHour(c.getInt(c.getColumnIndex(KEY_HOUR)));
         al.setMinute(c.getInt(c.getColumnIndex(KEY_MINUTE)));
-        al.setDayOfWeek(c.getInt(c.getColumnIndex(KEY_DAY_WEEK)));
+        //al.setDayOfWeek(c.getInt(c.getColumnIndex(KEY_DAY_WEEK)));
         al.setPillName(c.getString(c.getColumnIndex(KEY_ALARMS_PILL_NAME)));
 
         c.close();
@@ -239,10 +239,10 @@ public class DbHelper extends SQLiteOpenHelper {
             do {
                 Alarm al = new Alarm();
                 al.setId(c.getInt(c.getColumnIndex(KEY_ROWID)));
-                al.setIntentFromDB(c.getString(c.getColumnIndex(KEY_INTENT)));
+                //al.setIntentFromDB(c.getString(c.getColumnIndex(KEY_INTENT)));
                 al.setHour(c.getInt(c.getColumnIndex(KEY_HOUR)));
                 al.setMinute(c.getInt(c.getColumnIndex(KEY_MINUTE)));
-                al.setDayOfWeek(c.getInt(c.getColumnIndex(KEY_DAY_WEEK)));
+                //al.setDayOfWeek(c.getInt(c.getColumnIndex(KEY_DAY_WEEK)));
                 al.setPillName(c.getString(c.getColumnIndex(KEY_ALARMS_PILL_NAME)));
 
                 allAlarms.add(al);
@@ -276,10 +276,10 @@ public class DbHelper extends SQLiteOpenHelper {
             do {
                 Alarm al = new Alarm();
                 al.setId(c.getInt(c.getColumnIndex(KEY_ROWID)));
-                al.setIntentFromDB(c.getString(c.getColumnIndex(KEY_INTENT)));
+                //al.setIntentFromDB(c.getString(c.getColumnIndex(KEY_INTENT)));
                 al.setHour(c.getInt(c.getColumnIndex(KEY_HOUR)));
                 al.setMinute(c.getInt(c.getColumnIndex(KEY_MINUTE)));
-                al.setDayOfWeek(c.getInt(c.getColumnIndex(KEY_DAY_WEEK)));
+                //al.setDayOfWeek(c.getInt(c.getColumnIndex(KEY_DAY_WEEK)));
                 al.setPillName(c.getString(c.getColumnIndex(KEY_ALARMS_PILL_NAME)));
 
                 alarmsByPill.add(al);
@@ -310,7 +310,7 @@ public class DbHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_HOUR, alarm.getHour());
         values.put(KEY_MINUTE, alarm.getMinute());
-        values.put(KEY_DAY_WEEK, alarm.getDayOfWeek());
+        //values.put(KEY_DAY_WEEK, alarm.getDayOfWeek());
 
         //updating row
         return db.update(ALARM_TABLE, values, KEY_ROWID + " = ?",

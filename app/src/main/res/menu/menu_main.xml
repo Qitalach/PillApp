@@ -6,6 +6,10 @@
         android:icon="@drawable/ic_action_new"
         android:title="Add"
         app:showAsAction="ifRoom"  />
+    <item android:id="@+id/action_edit"
+        android:icon="@drawable/ic_action_action_work"
+        android:title="@string/action_edit"
+        app:showAsAction="ifRoom" />
     <item android:id="@+id/action_settings"
         android:icon="@drawable/ic_action_settings"
         android:title="@string/action_settings"
