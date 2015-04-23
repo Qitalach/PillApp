@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -22,9 +21,6 @@ public class DbHelper extends SQLiteOpenHelper {
     // ---------- Constants and Data
     // ----------------------------
 
-    //for logging:
-    private static final String TAG = "DbHelper";
-
     // Database name
     private static final String DATABASE_NAME = "pill_model_database";
 
@@ -38,13 +34,11 @@ public class DbHelper extends SQLiteOpenHelper {
 
     // Common column name and location
     public static final String KEY_ROWID = "id";
-    public static final int COL_ROWID = 0;
 
     // Pill table columns
     private static final String KEY_PILLNAME = "pillName";
 
     // Alarm table columns
-    private static final String KEY_ALARM_ID = "alarm_id";
     private static final String KEY_INTENT = "intent";
     private static final String KEY_HOUR = "hour";
     private static final String KEY_MINUTE = "minute";
@@ -60,23 +54,29 @@ public class DbHelper extends SQLiteOpenHelper {
     // --------------------------------------------------
 
     // Pill Table : create statement
-    private static final String CREATE_PILL_TABLE = "create table " +
-            PILL_TABLE + "(" + KEY_ROWID + " integer primary key," +
-            KEY_PILLNAME + " text not null" + ")";
+    private static final String CREATE_PILL_TABLE =
+            "create table " + PILL_TABLE + "("
+                +  KEY_ROWID   + " integer primary key not null,"
+                + KEY_PILLNAME + " text not null" + ")";
 
     // Alarm Table : create statement
+
+    // added 'not null' to key_rowid, if db doesn't work check this first
     private static final String CREATE_ALARM_TABLE =
             "create table " + ALARM_TABLE + "("
-                + KEY_ROWID    + " integer primary key,"
-                + KEY_ALARM_ID + " integer not null,"
-                + KEY_INTENT   + " text not null,"
-                + KEY_HOUR     + " integer," + KEY_MINUTE + " integer," +
-            KEY_ALARMS_PILL_NAME + " text not null," + KEY_DAY_WEEK + " integer" + ")";
+                + KEY_ROWID             + " integer primary key not null,"
+                + KEY_INTENT            + " text not null,"
+                + KEY_HOUR              + " integer,"
+                + KEY_MINUTE            + " integer,"
+                + KEY_ALARMS_PILL_NAME  + " text not null,"
+                + KEY_DAY_WEEK          + " integer" + ")";
 
     // Pill-Alarm link table: create statement
-    private static final String CREATE_PILL_ALARM_LINKS_TABLE = "create table " +
-            PILL_ALARM_LINKS + "(" + KEY_ROWID + " integer primary key," +
-            KEY_PILLTABLE_ID + " integer," + KEY_ALARMTABLE_ID + " integer" + ")";
+    private static final String CREATE_PILL_ALARM_LINKS_TABLE =
+            "create table " + PILL_ALARM_LINKS + "("
+                + KEY_ROWID         + " integer primary key not null,"
+                + KEY_PILLTABLE_ID  + " integer not null,"
+                + KEY_ALARMTABLE_ID + " integer not null" + ")";
 
     // Constructor
     public DbHelper(Context context) {
@@ -129,8 +129,8 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(KEY_INTENT, alarm.getIntentForDb());
         values.put(KEY_HOUR, alarm.getHour());
         values.put(KEY_MINUTE, alarm.getMinute());
-        values.put(KEY_ALARMS_PILL_NAME, alarm.getPillName());
         values.put(KEY_DAY_WEEK, alarm.getDayOfWeek());
+        values.put(KEY_ALARMS_PILL_NAME, alarm.getPillName());
 
         //insert row
         long alarm_id = db.insert(ALARM_TABLE, null, values);
@@ -141,7 +141,7 @@ public class DbHelper extends SQLiteOpenHelper {
         return alarm_id;
     }
 
-    public long createPillAlarmLink(long pill_id, long alarm_id) {
+    private long createPillAlarmLink(long pill_id, long alarm_id) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -160,8 +160,9 @@ public class DbHelper extends SQLiteOpenHelper {
     public Pill getPill(long pill_id){
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String dbPill = "select * from " + PILL_TABLE + " where " +
-                KEY_ROWID + " = " + pill_id;
+        String dbPill = "select * from "
+                + PILL_TABLE    + " where "
+                + KEY_ROWID     + " = " + pill_id;
 
         Cursor c = db.rawQuery(dbPill, null);
 
@@ -170,9 +171,10 @@ public class DbHelper extends SQLiteOpenHelper {
         }
 
         Pill pill = new Pill();
-        // TODO: add pillId parameters to all database methods and create statement
-        // tutorial i'm following has setID method, do we need that?
         pill.setPillName(c.getString(c.getColumnIndex(KEY_PILLNAME)));
+        pill.setPillId(c.getLong(c.getColumnIndex(KEY_ROWID)));
+
+        c.close();
 
         return pill;
     }
@@ -190,10 +192,10 @@ public class DbHelper extends SQLiteOpenHelper {
             do {
                 Pill p = new Pill();
                 p.setPillName(c.getString(c.getColumnIndex(KEY_PILLNAME)));
+                p.setPillId(c.getLong(c.getColumnIndex(KEY_ROWID)));
 
                 pills.add(p);
             } while (c.moveToNext());
-
         }
         c.close();
         return pills;
@@ -204,7 +206,7 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         String dbAlarm = "SELECT * FROM " + ALARM_TABLE + " WHERE "
-                + KEY_ALARM_ID + " = " + alarm_id;
+                + KEY_ROWID + " = " + alarm_id;
 
         Cursor c = db.rawQuery(dbAlarm, null);
 
@@ -213,12 +215,14 @@ public class DbHelper extends SQLiteOpenHelper {
         }
 
         Alarm al = new Alarm();
-        al.setId(c.getInt(c.getColumnIndex(KEY_ALARM_ID)));
+        al.setId(c.getInt(c.getColumnIndex(KEY_ROWID)));
         al.setIntentFromDB(c.getString(c.getColumnIndex(KEY_INTENT)));
         al.setHour(c.getInt(c.getColumnIndex(KEY_HOUR)));
         al.setMinute(c.getInt(c.getColumnIndex(KEY_MINUTE)));
         al.setDayOfWeek(c.getInt(c.getColumnIndex(KEY_DAY_WEEK)));
         al.setPillName(c.getString(c.getColumnIndex(KEY_ALARMS_PILL_NAME)));
+
+        c.close();
 
         return al;
     }
@@ -234,7 +238,7 @@ public class DbHelper extends SQLiteOpenHelper {
         if (c.moveToFirst()){
             do {
                 Alarm al = new Alarm();
-                al.setId(c.getInt(c.getColumnIndex(KEY_ALARM_ID)));
+                al.setId(c.getInt(c.getColumnIndex(KEY_ROWID)));
                 al.setIntentFromDB(c.getString(c.getColumnIndex(KEY_INTENT)));
                 al.setHour(c.getInt(c.getColumnIndex(KEY_HOUR)));
                 al.setMinute(c.getInt(c.getColumnIndex(KEY_MINUTE)));
@@ -245,6 +249,8 @@ public class DbHelper extends SQLiteOpenHelper {
             } while (c.moveToNext());
         }
 
+        c.close();
+
         return allAlarms;
     }
 
@@ -252,11 +258,16 @@ public class DbHelper extends SQLiteOpenHelper {
     public List<Alarm> getAllAlarmsByPill (String pillName) throws URISyntaxException {
         List<Alarm> alarmsByPill = new ArrayList<Alarm>();
 
-        String selectQuery = "SELECT * FROM " + ALARM_TABLE + " alarm, "
-                + PILL_TABLE + " pill, " + PILL_ALARM_LINKS + " pillAlarm WHERE pill."
-                + KEY_PILLNAME + " = '" + pillName + "'" + " AND pill." + KEY_ROWID
-                + " = " + "pillAlarm." + KEY_PILLTABLE_ID + " AND alarm." + KEY_ROWID
-                + " = " + "pillAlarm." + KEY_ALARM_ID;
+        // when reading string: '.' are not periods ex) pill.rowIdNumber
+        String selectQuery = "SELECT * FROM "               +
+                ALARM_TABLE         + " alarm, "            +
+                PILL_TABLE          + " pill, "             +
+                PILL_ALARM_LINKS    + " pillAlarm WHERE "   +
+                "pill."         + KEY_PILLNAME      + " = '"    + pillName + "'" +
+                " AND pill."    + KEY_ROWID         + " = "     +
+                "pillAlarm."    + KEY_PILLTABLE_ID  +
+                " AND alarm."   + KEY_ROWID         + " = "     +
+                "pillAlarm."    + KEY_ALARMTABLE_ID;
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);
@@ -264,7 +275,7 @@ public class DbHelper extends SQLiteOpenHelper {
         if (c.moveToFirst()){
             do {
                 Alarm al = new Alarm();
-                al.setId(c.getInt(c.getColumnIndex(KEY_ALARM_ID)));
+                al.setId(c.getInt(c.getColumnIndex(KEY_ROWID)));
                 al.setIntentFromDB(c.getString(c.getColumnIndex(KEY_INTENT)));
                 al.setHour(c.getInt(c.getColumnIndex(KEY_HOUR)));
                 al.setMinute(c.getInt(c.getColumnIndex(KEY_MINUTE)));
@@ -274,6 +285,8 @@ public class DbHelper extends SQLiteOpenHelper {
                 alarmsByPill.add(al);
             } while (c.moveToNext());
         }
+
+        c.close();
 
         return alarmsByPill;
     }
@@ -304,12 +317,43 @@ public class DbHelper extends SQLiteOpenHelper {
                 new String[] {String.valueOf(alarm.getId())});
     }
 
-    //TODO: add delete methods
+    //TODO: Test if delete methods work
     // Delete Methods
+    private void deletePillAlarmLinks(long alarmId){
+        SQLiteDatabase db = this.getWritableDatabase();
 
+        db.delete("Delete From "    + PILL_ALARM_LINKS,
+                    " Where "       + KEY_ALARMTABLE_ID     + " = ?",
+                    new String[]{String.valueOf(alarmId)});
+    }
 
+    public void deleteAlarm(long alarmId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        //first delete any link in PillAlarmLink Table
+        deletePillAlarmLinks(alarmId);
 
-    // TODO: create test for database
+        //then delete alarm
+        db.delete("Delete From "    + ALARM_TABLE,
+                " Where "           + KEY_ROWID     + " = ?",
+                new String[]{String.valueOf(alarmId)});
+    }
+
+    public void deletePill(String pillName) throws URISyntaxException {
+        SQLiteDatabase db = this.getWritableDatabase();
+        List<Alarm> pillsAlarms = new ArrayList<Alarm>();
+
+        //first get all alarms and delete them and their pill-links
+        pillsAlarms = getAllAlarmsByPill(pillName);
+        for (Alarm alarm : pillsAlarms){
+            long id = alarm.getId();
+            deleteAlarm(id);
+        }
+
+        //then delete pill
+        db.delete("Delete From "    + PILL_TABLE,
+                " Where "           + KEY_PILLNAME  + " = ?",
+                new String[]{pillName});
+    }
 
     //----------------------------------
     //--------- close database method --
