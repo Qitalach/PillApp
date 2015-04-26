@@ -6,16 +6,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import Model.Alarm;
-import Model.Pill;
-import Model.PillBox;
 import teamqitalach.pillapp.adapter.ExpandableListAdapter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -137,60 +131,26 @@ public class EditActivity extends ActionBarActivity {
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
 
-        PillBox pillbox = new PillBox();
-        Map<String, Pill> pillMap = pillbox.getPills();
-        Set<String> pills = pillMap.keySet();
+        // Adding child data
+        listDataHeader.add("Vitamin A");
+        listDataHeader.add("Vitamin B");
+        listDataHeader.add("Vitamin C");
 
-        for (String name: pills){
-            Pill pill = pillMap.get(name);
-            listDataHeader.add(name);
-            List<String> times = new ArrayList<String>();
-            List<Alarm> alarms= pill.getAlarms();
-            for (Alarm alarm :alarms){
-                //coppied from today fragment. we should put this as a method in alarm
-                int nonMilitaryHour = alarm.getHour()%12;
-                if (nonMilitaryHour == 0){
-                    nonMilitaryHour=12;
-                }
+        // Adding child data
+        List<String> l1 = new ArrayList<String>();
+        l1.add("8:00pm");
 
-                //fixes a problem where times were misrepresented "8:4pm" rather than "8:04pm"
-                String minute;
-
-                if (alarm.getMinute() < 10){
-                    minute = "0" + alarm.getMinute();
-                } else {
-                    minute = "" + alarm.getMinute();
-                }
-
-                String time = nonMilitaryHour + ":" + minute + " " + alarm.getAm_pm() + daysList(alarm);
+        List<String> l2 = new ArrayList<String>();
+        l2.add("8:00pm");
 
 
-
-                times.add(time);
-            }
-            listDataChild.put(name, times);
-
-        }
+        List<String> l3 = new ArrayList<String>();
+        l3.add("8:00pm");
 
 
-    }
-
-    private String daysList(Alarm alarm){
-        String days = "";
-        for (int i = 0; i<7; i++){
-            days += " ";
-            if (alarm.getDayOfWeek()[i] ){
-                if (i==0){days += "S";}
-                else if(i==1){days+= "M";}
-                else if(i==2){days += "T";}
-                else if (i==3){days += "W";}
-                else if(i==4){days += "T";}
-                else if(i==5){days += "F";}
-                else{days+="S";}
-
-            }
-        }
-        return days;
+        listDataChild.put(listDataHeader.get(0), l1); // Header, Child data
+        listDataChild.put(listDataHeader.get(1), l2);
+        listDataChild.put(listDataHeader.get(2), l3);
     }
 
     @Override
