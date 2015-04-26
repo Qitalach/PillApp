@@ -47,15 +47,15 @@ public class MainActivity extends ActionBarActivity implements android.support.v
         calendar.add(Calendar.DAY_OF_YEAR, 1);
         Date tomorrow = calendar.getTime();
 
-        String todayString = new SimpleDateFormat("yyyy-MM-dd").format(today);
-        String tomorrowString = new SimpleDateFormat("yyyy-MM-dd").format(tomorrow);
+        String todayString = new SimpleDateFormat("EEE, MMM d").format(today);
+        String tomorrowString = new SimpleDateFormat("EEE, MMM d").format(tomorrow);
 
         Tab historytab = getSupportActionBar().newTab().setTabListener(this);
         Tab todaytab = getSupportActionBar().newTab().setTabListener(this);
         Tab tomorrowtab = getSupportActionBar().newTab().setTabListener(this);
 
         TextView tt1 = new TextView(this);
-        tt1.setText(Html.fromHtml("<b>HISTORY</b><br><small>By " + todayString + "</small>"));
+        tt1.setText(Html.fromHtml("<b>HISTORY</b>"));
         tt1.setTextColor(Color.WHITE);
         tt1.setGravity(Gravity.CENTER);
         //tt1.setTypeface(null, Typeface.BOLD);
@@ -163,16 +163,24 @@ public class MainActivity extends ActionBarActivity implements android.support.v
     public void sendAdd() {
         Intent intent = new Intent(this, AddActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void sendSetting() {
         Intent intent = new Intent(this, SettingActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void sendEdit() {
         Intent intent = new Intent(this, EditActivity.class);
         startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        return;
     }
 
 }

@@ -1,5 +1,6 @@
 package teamqitalach.pillapp;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -150,6 +151,13 @@ public class EditActivity extends ActionBarActivity {
         listDataChild.put(listDataHeader.get(0), l1); // Header, Child data
         listDataChild.put(listDataHeader.get(1), l2);
         listDataChild.put(listDataHeader.get(2), l3);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent returnHome = new Intent(getBaseContext(), MainActivity.class);
+        startActivity(returnHome);
+        finish();
     }
 
 }

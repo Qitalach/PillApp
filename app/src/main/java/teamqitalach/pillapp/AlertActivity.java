@@ -98,7 +98,7 @@ med was taken. eventually this should use the pillname input string to create a 
             stringMinute = "" + minute;
         }
 
-        Toast.makeText(getBaseContext(),  pillName + " was taken at "+ hour + ":" + stringMinute + ".", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getBaseContext(),  pillName + " was taken at "+ hour%12 + ":" + stringMinute + ".", Toast.LENGTH_SHORT).show();
 
         Intent returnHistory = new Intent(getBaseContext(), MainActivity.class);
         startActivity(returnHistory);

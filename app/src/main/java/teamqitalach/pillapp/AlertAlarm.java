@@ -26,6 +26,8 @@ public class AlertAlarm extends DialogFragment {
         /** Setting title for the alert dialog */
         builder.setTitle("PillApp");
 
+        // This will make it so it can only go away by pressing the buttons.
+        setCancelable(false);
 
         // gets the name of the pill that is triggering the alarm
         final String pillname = getActivity().getIntent().getStringExtra("pill_name");
@@ -34,7 +36,7 @@ public class AlertAlarm extends DialogFragment {
         builder.setMessage("Did you take your "+ pillname + " ?");
 
         /** Defining an Yes button event listener */
-        builder.setPositiveButton("I took it.", new OnClickListener() {
+        builder.setPositiveButton("I took it", new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 /** Exit application on click OK */
@@ -45,7 +47,7 @@ public class AlertAlarm extends DialogFragment {
         });
 
         /** Defining an Snooze button event listener */
-        builder.setNeutralButton("Remind me later.", new OnClickListener() {
+        builder.setNeutralButton("Remind me later", new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 /** Exit application on click OK */
@@ -56,7 +58,7 @@ public class AlertAlarm extends DialogFragment {
         });
 
         /** Defining an Cancel button event listener */
-        builder.setNegativeButton("I won't take " + pillname + " today.", new OnClickListener() {
+        builder.setNegativeButton("I won't take it today", new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 /** Exit application on click OK */
