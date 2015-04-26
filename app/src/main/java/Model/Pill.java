@@ -19,7 +19,11 @@ public class Pill {
 
     public List<Alarm> getAlarms() { return Collections.unmodifiableList(alarms); }
 
-    public void addAlarm(Alarm alarm) { alarms.add(alarm); }
+    //laura modified this method so alarms are stored in order by time of day
+    public void addAlarm(Alarm alarm) {
+        alarms.add(alarm);
+        Collections.sort(alarms);
+    }
 
     public List<History> getHistories() { return Collections.unmodifiableList(histories); }
 
