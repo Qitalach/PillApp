@@ -1,5 +1,7 @@
 package teamqitalach.pillapp;
 
+import Model.Pill;
+import Model.PillBox;
 import teamqitalach.pillapp.adapter.TabsAdapter;
 
 import android.content.Intent;
@@ -106,6 +108,12 @@ public class MainActivity extends ActionBarActivity implements android.support.v
             }
         });
 
+        PillBox pillbox = new PillBox();
+        System.out.println("------------------" + pillbox.getPills(this));
+        for(Pill pill: pillbox.getPills(this)){
+            String name = pill.getPillName();
+            System.out.println(name);
+        }
     }
 
 

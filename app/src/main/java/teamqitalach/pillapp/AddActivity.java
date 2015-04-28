@@ -59,7 +59,7 @@ public class AddActivity extends ActionBarActivity {
                 /** Updating model */
                 Alarm alarm = new Alarm();
                 // if Pill does not already exist already exists
-                if (pillBox.getPillByName(getApplicationContext(), pill_name) == null) {
+                if (!pillBox.pillExist(getApplicationContext(), pill_name)) {
                     Pill pill = new Pill();
                     pill.setPillName(pill_name);
                     //alarm.addId(_id+i);
@@ -84,6 +84,9 @@ public class AddActivity extends ActionBarActivity {
                     pill.addAlarm(alarm);
                     pillBox.addAlarm(alarm);
                 }
+//                Pill pill = new Pill();
+//                pill.setPillName(pill_name);
+//                pillBox.addPill(getApplicationContext(), pill);
 
                 for(int i=0; i<7; i++) {
                     if (dayOfWeekList[i] == true && pill_name.length() != 0) {

@@ -138,11 +138,12 @@ public class EditActivity extends ActionBarActivity {
         listDataChild = new HashMap<String, List<String>>();
 
         PillBox pillbox = new PillBox();
-        Map<String, Pill> pillMap = pillbox.getPills();
-        Set<String> pills = pillMap.keySet();
+        List<Pill> pills = pillbox.getPills(this);
 
-        for (String name: pills){
-            Pill pill = pillMap.get(name);
+//        Set<String> pills = pillMap.keySet();
+
+        for (Pill pill: pills){
+            String name = pill.getPillName();
             listDataHeader.add(name);
             List<String> times = new ArrayList<String>();
             List<Alarm> alarms= pill.getAlarms();

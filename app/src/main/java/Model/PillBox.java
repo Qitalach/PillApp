@@ -26,6 +26,7 @@ public class PillBox {
         db = new DbHelper(c);
         long pillId = db.createPill(pill);
         pill.setPillId(pillId);
+        pills.add(pill);
     }
 
     public Pill getPillByName(Context c, String pillName){
@@ -56,6 +57,15 @@ public class PillBox {
             return null;
         }
 
+    }
+
+    public boolean pillExist(Context c, String pillName) {
+        db = new DbHelper(c);
+        for(Pill pill: this.getPills(c)) {
+            if(pill.getPillName().equals(pillName))
+                return true;
+        }
+        return false;
     }
 
 
