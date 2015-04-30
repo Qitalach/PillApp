@@ -18,15 +18,15 @@
     <string name="str_tv_message">Opened by Alarm</string>
     <string name="title_activity_main">MainActivity</string>
 
-    <string name="pill_name">Please insert pill name!</string>
+    <string name="pill_name">Please insert pill name</string>
 
-    <string name="Monday">Monday</string>
-    <string name="Tuesday">Tuesday</string>
-    <string name="Wednesday">Wednesday</string>
-    <string name="Thursday">Thursday</string>
-    <string name="Friday">Friday</string>
-    <string name="Saturday">Saturday</string>
-    <string name="Sunday">Sunday</string>
+    <string name="Monday">Mo</string>
+    <string name="Tuesday">Tu</string>
+    <string name="Wednesday">We</string>
+    <string name="Thursday">Th</string>
+    <string name="Friday">Fr</string>
+    <string name="Saturday">Sa</string>
+    <string name="Sunday">Su</string>
     <string name="title_activity_edit">EditActivity</string>
     <string name="title_activity_setting">SettingActivity</string>
     <string name="action_edit">edit</string>
