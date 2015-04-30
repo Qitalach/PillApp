@@ -9,7 +9,9 @@ import java.util.Calendar;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
@@ -20,6 +22,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -30,12 +33,47 @@ public class AddActivity extends ActionBarActivity {
     private PendingIntent operation;
     private boolean dayOfWeekList[] = new boolean[7];
 
+    int hour, minute;
+    TextView timeLabel;
+
+    TimePickerDialog.OnTimeSetListener t=new TimePickerDialog.OnTimeSetListener() {
+        public void onTimeSet(TimePicker view, int hourOfDay,
+                              int minuteOfHour) {
+            hour = hourOfDay;
+            minute = minuteOfHour;
+            timeLabel.setText(setTime(hour, minute));
+        }
+    };
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        timeLabel=(TextView)findViewById(R.id.reminder_time);
+
+        Typeface lightFont = Typeface.createFromAsset(this.getAssets(), "fonts/Roboto-Light.ttf");
+        timeLabel.setTypeface(lightFont);
+
+        Calendar rightNow = Calendar.getInstance();
+        hour = rightNow.get(Calendar.HOUR_OF_DAY);
+        minute = rightNow.get(Calendar.MINUTE);
+        timeLabel.setText(setTime(hour, minute));
+
+        timeLabel.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                new TimePickerDialog(AddActivity.this,
+                        //R.style.Theme_AppCompat_Dialog,
+                        t,
+                        hour,
+                        minute,
+                        false).show();
+            }
+        });
+        timeLabel.setText(setTime(hour, minute));
 
         OnClickListener setClickListener = new OnClickListener() {
 
@@ -50,14 +88,15 @@ public class AddActivity extends ActionBarActivity {
                 String pill_name = editText.getText().toString();
 
                 /** Getting a reference to TimePicker object available in the MainActivity */
-                TimePicker tpTime = (TimePicker) findViewById(R.id.tp_time);
-
-                int hour = tpTime.getCurrentHour();
-                int minute = tpTime.getCurrentMinute();
-                String am_pm = (hour < 12) ? "am" : "pm";
+//                TimePicker tpTime = (TimePicker) findViewById(R.id.tp_time);
+//
+//                int hour = tpTime.getCurrentHour();
+//                int minute = tpTime.getCurrentMinute();
+//                String am_pm = (hour < 12) ? "am" : "pm";
 
                 /** Updating model */
                 Alarm alarm = new Alarm();
+
                 // if Pill does not already exist already exists
                 if (!pillBox.pillExist(getApplicationContext(), pill_name)) {
                     Pill pill = new Pill();
@@ -85,9 +124,6 @@ public class AddActivity extends ActionBarActivity {
                     pill.addAlarm(alarm);
                     pillBox.addAlarm(getApplicationContext(), alarm, pill);
                 }
-//                Pill pill = new Pill();
-//                pill.setPillName(pill_name);
-//                pillBox.addPill(getApplicationContext(), pill);
 
                 for(int i=0; i<7; i++) {
                     if (dayOfWeekList[i] == true && pill_name.length() != 0) {
@@ -148,7 +184,6 @@ public class AddActivity extends ActionBarActivity {
                     Toast.makeText(getBaseContext(), "Alarm for " + pill_name + " is set successfully", Toast.LENGTH_SHORT).show();
                     Intent returnHome = new Intent(getBaseContext(), MainActivity.class);
                     startActivity(returnHome);
-                    finish();
                 }
             }
         };
@@ -159,8 +194,6 @@ public class AddActivity extends ActionBarActivity {
                 //Uncomment to allow canceling alarms
                 //if (alarmManager != null)
                 //    alarmManager.cancel(operation);
-                Intent returnHome = new Intent(getBaseContext(), MainActivity.class);
-                startActivity(returnHome);
                 finish();
             }
         };
@@ -255,11 +288,19 @@ public class AddActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent returnHome = new Intent(getBaseContext(), MainActivity.class);
-        startActivity(returnHome);
-        finish();
+    public String setTime(int hour, int minute) {
+        String am_pm = (hour < 12) ? "am" : "pm";
+        int nonMilitaryHour = hour % 12;
+        if (nonMilitaryHour == 0){
+            nonMilitaryHour = 12;
+        }
+        String minuteWithZero;
+        if (minute < 10){
+            minuteWithZero = "0" + minute;
+        } else {
+            minuteWithZero = "" + minute;
+        }
+        return nonMilitaryHour + ":" + minuteWithZero + am_pm;
     }
 
 }
