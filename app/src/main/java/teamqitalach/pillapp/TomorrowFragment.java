@@ -36,7 +36,7 @@ public class TomorrowFragment extends Fragment {
         int day = calendar.get(Calendar.DAY_OF_WEEK)+1;
         if(day == 8)
             day = 1;
-        List<Alarm> alarms = pillBox.getAlarms(day);
+        List<Alarm> alarms = pillBox.getAlarms(container.getContext(), day);
         if(alarms != null) {
             for(Alarm alarm: alarms) {
                 TableRow tbrow = new TableRow(container.getContext());

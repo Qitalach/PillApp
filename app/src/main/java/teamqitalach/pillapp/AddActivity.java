@@ -70,8 +70,9 @@ public class AddActivity extends ActionBarActivity {
                     alarm.setPillName(pill_name);
                     alarm.setDayOfWeek(dayOfWeekList);
                     pill.addAlarm(alarm);
-                    pillBox.addPill(getApplicationContext() ,pill);
-                    pillBox.addAlarm(alarm);
+                    long pillId = pillBox.addPill(getApplicationContext() ,pill);
+                    pill.setPillId(pillId);
+                    pillBox.addAlarm(getApplicationContext(), alarm, pill);
                 } else {
                     Pill pill = pillBox.getPillByName(getApplicationContext(), pill_name);
                     //alarm.addId(_id+i);
@@ -82,7 +83,7 @@ public class AddActivity extends ActionBarActivity {
                     alarm.setPillName(pill_name);
                     alarm.setDayOfWeek(dayOfWeekList);
                     pill.addAlarm(alarm);
-                    pillBox.addAlarm(alarm);
+                    pillBox.addAlarm(getApplicationContext(), alarm, pill);
                 }
 //                Pill pill = new Pill();
 //                pill.setPillName(pill_name);

@@ -25,7 +25,7 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "pill_model_database";
 
     // Database Version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     // Table Names
     private static final String PILL_TABLE = "pills";
@@ -64,8 +64,8 @@ public class DbHelper extends SQLiteOpenHelper {
     // added 'not null' to key_rowid, if db doesn't work check this first
     private static final String CREATE_ALARM_TABLE =
             "create table " + ALARM_TABLE + "("
-                + KEY_ROWID             + " integer primary key not null,"
-                + KEY_INTENT            + " text not null,"
+                + KEY_ROWID             + " integer primary key,"
+                + KEY_INTENT            + " text,"
                 + KEY_HOUR              + " integer,"
                 + KEY_MINUTE            + " integer,"
                 + KEY_ALARMS_PILL_NAME  + " text not null,"
@@ -122,23 +122,33 @@ public class DbHelper extends SQLiteOpenHelper {
         return pill_id;
     }
 
-    public long createAlarm(Alarm alarm, long pill_id){
+    public long[] createAlarm(Alarm alarm, long pill_id){
         SQLiteDatabase db = this.getWritableDatabase();
+        long[] alarm_ids = new long[7];
 
-        ContentValues values = new ContentValues();
-        //values.put(KEY_INTENT, alarm.getIntentForDb());
-        values.put(KEY_HOUR, alarm.getHour());
-        values.put(KEY_MINUTE, alarm.getMinute());
-        //values.put(KEY_DAY_WEEK, alarm.getDayOfWeek());
-        values.put(KEY_ALARMS_PILL_NAME, alarm.getPillName());
+        //Create a separate row in the table for every day of the week for this alarm
+        int arrayPos = 0;
+        for (boolean day: alarm.getDayOfWeek()){
+            if (day){
+                ContentValues values = new ContentValues();
+                //values.put(KEY_INTENT, alarm.getIntentForDb());
+                values.put(KEY_HOUR, alarm.getHour());
+                values.put(KEY_MINUTE, alarm.getMinute());
+                values.put(KEY_DAY_WEEK, arrayPos);
+    System.out.println("------------------- create alarm test, day of week: " + arrayPos);
+    System.out.println("-----------Do Visual Check ------------- does ^ integer represent what you just set? ---");
+                values.put(KEY_ALARMS_PILL_NAME, alarm.getPillName());
 
-        //insert row
-        long alarm_id = db.insert(ALARM_TABLE, null, values);
+                //insert row
+                long alarm_id = db.insert(ALARM_TABLE, null, values);
+                alarm_ids[arrayPos] = alarm_id;
 
-        //link alarm to a pill
-        createPillAlarmLink(pill_id, alarm_id);
-
-        return alarm_id;
+                //link alarm to a pill
+                createPillAlarmLink(pill_id, alarm_id);
+            }
+            arrayPos ++;
+        }
+        return alarm_ids;
     }
 
     private long createPillAlarmLink(long pill_id, long alarm_id) {
@@ -192,10 +202,9 @@ public class DbHelper extends SQLiteOpenHelper {
         Pill pill = new Pill();
 
         if (c.moveToFirst() && c.getCount() >= 1) {
-            // TODO: this is still broken? / not running now b/c of if statement
-
-            System.out.println("------------------- " + c.getLong(c.getColumnIndex(KEY_ROWID)));
-            System.out.println("------------------- " + c.getString(c.getColumnIndex(KEY_PILLNAME)));
+   System.out.println("------------------- Proof that get pill my name method is working");
+   System.out.println("------------------- " + c.getLong(c.getColumnIndex(KEY_ROWID)));
+   System.out.println("------------------- " + c.getString(c.getColumnIndex(KEY_PILLNAME)));
 
 
             pill.setPillName(c.getString(c.getColumnIndex(KEY_PILLNAME)));
@@ -228,7 +237,9 @@ public class DbHelper extends SQLiteOpenHelper {
         return pills;
     }
 
-    // get a single alarm
+    // get a single model-alarm
+    // TODO: pull an alarm from database for every id in list, combine them to one model-alarm (by
+    //      combo-ing dayOfWeek ints into boolean list.
     public Alarm getAlarm(long alarm_id) throws URISyntaxException {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -316,6 +327,34 @@ public class DbHelper extends SQLiteOpenHelper {
         c.close();
 
         return alarmsByPill;
+    }
+
+    public List<Alarm> getAlarmsByDay(int day){
+        List<Alarm> daysAlarms = new ArrayList<Alarm>();
+
+        String selectQuery = "SELECT * FROM "       +
+                ALARM_TABLE     + " alarm WHERE "   +
+                "alarm."        + KEY_DAY_WEEK      +
+                " = '"          + day               + "'";
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        // This doesn't add day to week together or set an alarm's day of week array
+        if (c.moveToFirst()){
+            do{
+                Alarm al = new Alarm();
+                al.setId(c.getInt(c.getColumnIndex(KEY_ROWID)));
+                al.setHour(c.getInt(c.getColumnIndex(KEY_HOUR)));
+                al.setMinute(c.getInt(c.getColumnIndex(KEY_MINUTE)));
+                al.setPillName(c.getString(c.getColumnIndex(KEY_ALARMS_PILL_NAME)));
+
+                daysAlarms.add(al);
+            } while (c.moveToNext());
+        }
+        c.close();
+
+        return daysAlarms;
     }
 
     // Update Methods

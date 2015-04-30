@@ -14,49 +14,50 @@ import java.util.Map;
  */
 public class PillBox {
     private DbHelper db;
-    private static List<Pill> pills = new ArrayList<Pill>();
+    private static List<Pill> pills = new ArrayList<Pill>(); // never queried, do we even need this?
     private static Map<Integer, List<Alarm>> dailySchedule = new HashMap<Integer, List<Alarm>>();
 
     public List<Pill> getPills(Context c) {
         db = new DbHelper(c);
-        return db.getAllPills();
+        List<Pill> allPills = db.getAllPills();
+        db.close();
+        return allPills;
     }
 
-    public void addPill(Context c, Pill pill) {
+    public long addPill(Context c, Pill pill) {
         db = new DbHelper(c);
         long pillId = db.createPill(pill);
         pill.setPillId(pillId);
-        pills.add(pill);
+       // pills.add(pill);
+        db.close();
+
+        return pillId;
     }
 
     public Pill getPillByName(Context c, String pillName){
         db = new DbHelper(c);
-        return db.getPillByName(pillName);
+        Pill wantedPill = db.getPillByName(pillName);
+        db.close();
+        return wantedPill;
     }
 
-    public void addAlarm(Alarm alarm){
-        boolean[] days = alarm.getDayOfWeek();
-        for (int i=0; i<7; i++){
-            if (days[i]){
-                if (dailySchedule.containsKey(i+1)){
-                    dailySchedule.get(i+1).add(alarm);
-                    Collections.sort(dailySchedule.get(i+1));
-                } else {
-                    List<Alarm> schedule = new LinkedList<Alarm>();
-                    schedule.add(alarm);
-                    dailySchedule.put(i+1, schedule);
-                }
-            }
-        }
+    public void addAlarm(Context c, Alarm alarm, Pill pill){
+        db = new DbHelper(c);
+        db.createAlarm(alarm, pill.getPillId());
+        db.close();
     }
 
-    public List<Alarm> getAlarms(int dayOfWeek) {
-        if(dailySchedule.containsKey(dayOfWeek)) {
-            return dailySchedule.get(dayOfWeek);
-        } else {
-            return null;
-        }
+    public List<Alarm> getAlarms(Context c, int dayOfWeek) {
+//        if(dailySchedule.containsKey(dayOfWeek)) {
+//            return dailySchedule.get(dayOfWeek);
+//        } else {
+//            return null;
+//        }
 
+        db = new DbHelper(c);
+        List<Alarm> daysAlarms= db.getAlarmsByDay(dayOfWeek);
+        db.close();
+        return daysAlarms;
     }
 
     public boolean pillExist(Context c, String pillName) {
