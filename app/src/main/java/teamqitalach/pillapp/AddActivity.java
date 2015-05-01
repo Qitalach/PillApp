@@ -184,6 +184,7 @@ public class AddActivity extends ActionBarActivity {
                     Toast.makeText(getBaseContext(), "Alarm for " + pill_name + " is set successfully", Toast.LENGTH_SHORT).show();
                     Intent returnHome = new Intent(getBaseContext(), MainActivity.class);
                     startActivity(returnHome);
+                    finish();
                 }
             }
         };
@@ -194,6 +195,8 @@ public class AddActivity extends ActionBarActivity {
                 //Uncomment to allow canceling alarms
                 //if (alarmManager != null)
                 //    alarmManager.cancel(operation);
+                Intent returnHome = new Intent(getBaseContext(), MainActivity.class);
+                startActivity(returnHome);
                 finish();
             }
         };
@@ -302,5 +305,12 @@ public class AddActivity extends ActionBarActivity {
         }
         return nonMilitaryHour + ":" + minuteWithZero + am_pm;
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent returnHome = new Intent(getBaseContext(), MainActivity.class);
+        startActivity(returnHome);
+        finish();
+        }
 
 }
