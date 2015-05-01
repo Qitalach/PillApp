@@ -2,6 +2,7 @@ package Model;
 
 import android.content.Context;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -58,6 +59,13 @@ public class PillBox {
         List<Alarm> daysAlarms= db.getAlarmsByDay(dayOfWeek);
         db.close();
         return daysAlarms;
+    }
+
+    public List<Alarm> getAlarmByPill (Context c, String pillName) throws URISyntaxException {
+        db = new DbHelper(c);
+        List<Alarm> pillsAlarms = db.getAllAlarmsByPill(pillName);
+        db.close();
+        return pillsAlarms;
     }
 
     public boolean pillExist(Context c, String pillName) {
