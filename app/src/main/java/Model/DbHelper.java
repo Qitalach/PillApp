@@ -134,7 +134,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 //values.put(KEY_INTENT, alarm.getIntentForDb());
                 values.put(KEY_HOUR, alarm.getHour());
                 values.put(KEY_MINUTE, alarm.getMinute());
-                values.put(KEY_DAY_WEEK, arrayPos);
+                values.put(KEY_DAY_WEEK, arrayPos+1);
     System.out.println("------------------- create alarm test, day of week: " + arrayPos);
     System.out.println("-----------Do Visual Check ------------- does ^ integer represent what you just set? ---");
                 values.put(KEY_ALARMS_PILL_NAME, alarm.getPillName());
