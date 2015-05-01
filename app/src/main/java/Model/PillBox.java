@@ -77,5 +77,18 @@ public class PillBox {
         return false;
     }
 
+    //Delete Methods
+    public void deletePill(Context c, String pillName) throws URISyntaxException {
+        db = new DbHelper(c);
+        db.deletePill(pillName);
+        db.close();
+    }
+
+    public void deleteAlarm(Context c, long alarmId) {
+        db = new DbHelper(c);
+        db.deleteAlarm(alarmId);
+        db.close();
+    }
+
 
 }

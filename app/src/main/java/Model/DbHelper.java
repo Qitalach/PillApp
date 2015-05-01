@@ -406,7 +406,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public void deletePill(String pillName) throws URISyntaxException {
         SQLiteDatabase db = this.getWritableDatabase();
-        List<Alarm> pillsAlarms = new ArrayList<Alarm>();
+        List<Alarm> pillsAlarms;
 
         //first get all alarms and delete them and their pill-links
         pillsAlarms = getAllAlarmsByPill(pillName);
