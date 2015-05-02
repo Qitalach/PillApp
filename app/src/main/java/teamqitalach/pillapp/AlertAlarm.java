@@ -47,7 +47,7 @@ public class AlertAlarm extends DialogFragment {
         });
 
         /** Defining an Snooze button event listener */
-        builder.setNeutralButton("Remind me later", new OnClickListener() {
+        builder.setNeutralButton("Snooze", new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 /** Exit application on click OK */
@@ -58,7 +58,7 @@ public class AlertAlarm extends DialogFragment {
         });
 
         /** Defining an Cancel button event listener */
-        builder.setNegativeButton("I won't take it today", new OnClickListener() {
+        builder.setNegativeButton("I won't take", new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 /** Exit application on click OK */
