@@ -44,7 +44,7 @@ public class AlertActivity extends FragmentActivity {
 
         final int _id = (int) System.currentTimeMillis();
         final long minute = 60000;
-        long snoozeLength = 2;
+        long snoozeLength = 10;
         long currTime = System.currentTimeMillis();
         long min = currTime + minute * snoozeLength;
 
@@ -58,7 +58,7 @@ public class AlertActivity extends FragmentActivity {
 
 
         alarmManager.set(AlarmManager.RTC_WAKEUP, min, operation);
-        Toast.makeText(getBaseContext(), "Alarm for " + pillName + " was snoozed.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getBaseContext(), "Alarm for " + pillName + " was snoozed for 10 minutes.", Toast.LENGTH_SHORT).show();
 
         //not sure if i need this
         this.finish();
@@ -76,14 +76,11 @@ med was taken. eventually this should use the pillname input string to create a 
 
         Calendar takeTime = Calendar.getInstance();
         Date date = takeTime.getTime();
-        String dateString = new SimpleDateFormat("yyyy-MM-dd").format(date);
+        String dateString = new SimpleDateFormat("MMM d, yyyy").format(date);
 
         int hour = takeTime.get(Calendar.HOUR_OF_DAY);
         int minute = takeTime.get(Calendar.MINUTE);
         String am_pm = (hour < 12) ? "am" : "pm";
-        int year = takeTime.get(Calendar.YEAR);
-        int month = takeTime.get(Calendar.MONTH);
-        int day = takeTime.get(Calendar.DAY_OF_MONTH);
 
         history.setHourTaken(hour);
         history.setMinuteTaken(minute);
@@ -100,7 +97,7 @@ med was taken. eventually this should use the pillname input string to create a 
             stringMinute = "" + minute;
         }
 
-        Toast.makeText(getBaseContext(),  pillName + " was taken at "+ hour%12 + ":" + stringMinute + ".", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getBaseContext(),  pillName + " was taken at "+ hour%12 + ":" + stringMinute + " " + am_pm + ".", Toast.LENGTH_SHORT).show();
 
         Intent returnHistory = new Intent(getBaseContext(), MainActivity.class);
         startActivity(returnHistory);
