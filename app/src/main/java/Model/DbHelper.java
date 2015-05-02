@@ -25,20 +25,21 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "pill_model_database";
 
     // Database Version
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     // Table Names
     private static final String PILL_TABLE = "pills";
     private static final String ALARM_TABLE = "alarms";
     private static final String PILL_ALARM_LINKS = "pill_alarm";
+    private static final String HISTORIES_TABLE = "histories";
 
     // Common column name and location
     public static final String KEY_ROWID = "id";
 
-    // Pill table columns
+    // Pill table columns, used by History Table
     private static final String KEY_PILLNAME = "pillName";
 
-    // Alarm table columns
+    // Alarm table columns, Hour & Minute used by History Table
     private static final String KEY_INTENT = "intent";
     private static final String KEY_HOUR = "hour";
     private static final String KEY_MINUTE = "minute";
@@ -48,6 +49,11 @@ public class DbHelper extends SQLiteOpenHelper {
     // Pill-Alarm link table columns
     private static final String KEY_PILLTABLE_ID = "pill_id";
     private static final String KEY_ALARMTABLE_ID = "alarm_id";
+
+    // History Table columns, some used above
+    //needs: pillName, date taken, time taken
+    private static final String KEY_DATE_STRING = "date";
+
 
     // --------------------------------------------------
     // ------- statements to create tables --------------
@@ -60,8 +66,6 @@ public class DbHelper extends SQLiteOpenHelper {
                 + KEY_PILLNAME + " text not null" + ")";
 
     // Alarm Table : create statement
-
-    // added 'not null' to key_rowid, if db doesn't work check this first
     private static final String CREATE_ALARM_TABLE =
             "create table " + ALARM_TABLE + "("
                 + KEY_ROWID             + " integer primary key,"
@@ -78,6 +82,15 @@ public class DbHelper extends SQLiteOpenHelper {
                 + KEY_PILLTABLE_ID  + " integer not null,"
                 + KEY_ALARMTABLE_ID + " integer not null" + ")";
 
+    // Histories Table: create statement
+    private static final String CREATE_HISTORIES_TABLE =
+            "CREATE TABLE " + HISTORIES_TABLE   + "("
+                + KEY_ROWID         +   " integer primary key, "
+                + KEY_PILLNAME      +   " text not null, "
+                + KEY_DATE_STRING   +   " text, "
+                + KEY_HOUR          +   " integer, "
+                + KEY_MINUTE        +   " integer " + ")";
+
     // Constructor
     public DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -89,6 +102,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_PILL_TABLE);
         db.execSQL(CREATE_ALARM_TABLE);
         db.execSQL(CREATE_PILL_ALARM_LINKS_TABLE);
+        db.execSQL(CREATE_HISTORIES_TABLE);
     }
 
 
@@ -99,6 +113,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + PILL_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + ALARM_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + PILL_ALARM_LINKS);
+        db.execSQL("DROP TABLE IF EXISTS " + HISTORIES_TABLE);
 
         // create new tables
         onCreate(db);
@@ -162,6 +177,19 @@ public class DbHelper extends SQLiteOpenHelper {
         long pillAlarmLink_id = db.insert(PILL_ALARM_LINKS, null, values);
 
         return pillAlarmLink_id;
+    }
+
+    public void createHistory (History history){
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_PILLNAME, history.getPillName());
+        values.put(KEY_DATE_STRING, history.getDateString());
+        values.put(KEY_HOUR, history.getHourTaken());
+        values.put(KEY_MINUTE, history.getMinuteTaken());
+
+        //insert row
+        db.insert(HISTORIES_TABLE, null, values);
     }
 
     // Get Methods
@@ -355,6 +383,28 @@ public class DbHelper extends SQLiteOpenHelper {
         c.close();
 
         return daysAlarms;
+    }
+
+    public List<History> getHistory(){
+        List<History> allHistory = new ArrayList<>();
+        String dbHist = "SELECT * FROM " + HISTORIES_TABLE;
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.rawQuery(dbHist, null);
+
+        if (c.moveToFirst()){
+            do{
+                History h = new History();
+                h.setPillName(c.getString(c.getColumnIndex(KEY_PILLNAME)));
+                h.setDateString(c.getString(c.getColumnIndex(KEY_DATE_STRING)));
+                h.setHourTaken(c.getInt(c.getColumnIndex(KEY_HOUR)));
+                h.setMinuteTaken(c.getInt(c.getColumnIndex(KEY_MINUTE)));
+
+                allHistory.add(h);
+            } while (c.moveToNext());
+        }
+        c.close();
+        return allHistory;
     }
 
     // Update Methods

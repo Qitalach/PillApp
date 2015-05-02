@@ -73,53 +73,52 @@ public class HistoryFragment extends Fragment {
 //            stk.addView(tbrow);
 //        }
 
-        for (Pill pill: pillBox.getPills(getActivity())) {
-            // 04/22 -- Histories not displaying b/c pills are in database now and not hooked to histories
-            for (History history: pill.getHistories()){
-                TableRow tbrow = new TableRow(container.getContext());
 
-                TextView t1v = new TextView(container.getContext());
-                t1v.setText(pill.getPillName());
-                t1v.setTextColor(Color.WHITE);
-                t1v.setGravity(Gravity.CENTER);
-                tbrow.addView(t1v);
+            // 05/01 -- Histories displaying but totally buggy
+            //          -- bug in alert activity?
+        for (History history: pillBox.getHistory(container.getContext())){
+            TableRow tbrow = new TableRow(container.getContext());
 
-                TextView t2v = new TextView(container.getContext());
-                String date = history.getDateString();
-                t2v.setText(date);
-                t2v.setTextColor(Color.WHITE);
-                t2v.setGravity(Gravity.CENTER);
-                tbrow.addView(t2v);
+            TextView t1v = new TextView(container.getContext());
+            t1v.setText(history.getPillName());
+            t1v.setTextColor(Color.WHITE);
+            t1v.setGravity(Gravity.CENTER);
+            tbrow.addView(t1v);
 
-                TextView t3v = new TextView(container.getContext());
+            TextView t2v = new TextView(container.getContext());
+            String date = history.getDateString();
+            t2v.setText(date);
+            t2v.setTextColor(Color.WHITE);
+            t2v.setGravity(Gravity.CENTER);
+            tbrow.addView(t2v);
 
-                //changes display to non military time
-                int nonMilitaryHour = history.getHourTaken()%12;
-                if (nonMilitaryHour == 0){
-                    nonMilitaryHour=12;
-                }
+            TextView t3v = new TextView(container.getContext());
 
-                //fixes a problem where times were misrepresented "8:4pm" rather than "8:04pm"
-                String minute;
-
-                if (history.getMinuteTaken() < 10){
-                    minute = "0" + history.getMinuteTaken();
-                } else {
-                    minute = "" + history.getMinuteTaken();
-                }
-
-
-                String time = nonMilitaryHour + ":" + minute + " " + history.getAm_pmTaken();
-                t3v.setText(time);
-                t3v.setTextColor(Color.WHITE);
-                t3v.setGravity(Gravity.CENTER);
-                tbrow.addView(t3v);
-
-
-                stk.addView(tbrow);
+            //changes display to non military time
+            int nonMilitaryHour = history.getHourTaken()%12;
+            if (nonMilitaryHour == 0){
+                nonMilitaryHour=12;
             }
 
-        }
+            //fixes a problem where times were misrepresented "8:4pm" rather than "8:04pm"
+            String minute;
+
+            if (history.getMinuteTaken() < 10){
+                minute = "0" + history.getMinuteTaken();
+            } else {
+                minute = "" + history.getMinuteTaken();
+            }
+
+
+            String time = nonMilitaryHour + ":" + minute + " " + history.getAm_pmTaken();
+            t3v.setText(time);
+            t3v.setTextColor(Color.WHITE);
+            t3v.setGravity(Gravity.CENTER);
+            tbrow.addView(t3v);
+
+
+            stk.addView(tbrow);
+         }
 
         return rootView;
     }

@@ -8,6 +8,7 @@ public class History {
     private int hourTaken;
     private int minuteTaken;
     private String dateString;
+    private String pillName;
 
     public int getHourTaken() { return hourTaken; }
 
@@ -27,4 +28,11 @@ public class History {
     public void setDateString(String dateString) { this.dateString = dateString; }
 
 
+    public String getPillName() {
+        return pillName;
+    }
+
+    public void setPillName(String pillName) {
+        this.pillName = pillName;
+    }
 }

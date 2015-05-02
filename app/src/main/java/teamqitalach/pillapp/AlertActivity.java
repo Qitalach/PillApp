@@ -88,8 +88,10 @@ med was taken. eventually this should use the pillname input string to create a 
         history.setHourTaken(hour);
         history.setMinuteTaken(minute);
         history.setDateString(dateString);
+        history.setPillName(pillName);
 
         pill.addHistory(history);
+        pillBox.addToHistory(this, history);
 
         String stringMinute;
         if (minute < 10){

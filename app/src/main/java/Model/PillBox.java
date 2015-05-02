@@ -90,5 +90,18 @@ public class PillBox {
         db.close();
     }
 
+    public void addToHistory(Context c, History h){
+        db = new DbHelper(c);
+        db.createHistory(h);
+        db.close();
+    }
+
+    public List<History> getHistory (Context c){
+        db = new DbHelper(c);
+        List<History> history = db.getHistory();
+        db.close();
+        return  history;
+    }
+
 
 }
