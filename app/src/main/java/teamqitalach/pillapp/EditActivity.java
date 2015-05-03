@@ -10,6 +10,8 @@ import Model.Alarm;
 import Model.Pill;
 import Model.PillBox;
 import teamqitalach.pillapp.adapter.ExpandableListAdapter;
+
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,7 +44,11 @@ public class EditActivity extends ActionBarActivity {
         expListView = (ExpandableListView) findViewById(R.id.lvExp);
 
         // preparing list data
-        prepareListData();
+        try {
+            prepareListData();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
 
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
 
@@ -133,7 +139,7 @@ public class EditActivity extends ActionBarActivity {
     /*
      * Preparing the list data
      */
-    private void prepareListData() {
+    private void prepareListData() throws URISyntaxException {
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
 
@@ -144,30 +150,31 @@ public class EditActivity extends ActionBarActivity {
 
         for (Pill pill: pills){
             String name = pill.getPillName();
+
+
             listDataHeader.add(name);
             List<String> times = new ArrayList<String>();
-            List<Alarm> alarms= pill.getAlarms();
+            List<Alarm> alarms= pillbox.getAlarmByPill(this.getBaseContext(), name);
             for (Alarm alarm :alarms){
-                //coppied from today fragment. we should put this as a method in alarm
-                int nonMilitaryHour = alarm.getHour()%12;
-                if (nonMilitaryHour == 0){
-                    nonMilitaryHour=12;
+                System.out.print(daysList(alarm));
+
+                String time = alarm.getStringTime() + daysList(alarm);
+                boolean hasTime= false;
+
+
+
+
+                for (String listTime: times){
+                    if (time.equals(listTime)){
+
+                        hasTime = true;
+                    }
+                }
+                if (!hasTime){
+                    times.add(time);
                 }
 
-                //fixes a problem where times were misrepresented "8:4pm" rather than "8:04pm"
-                String minute;
 
-                if (alarm.getMinute() < 10){
-                    minute = "0" + alarm.getMinute();
-                } else {
-                    minute = "" + alarm.getMinute();
-                }
-
-                String time = nonMilitaryHour + ":" + minute + " " + alarm.getAm_pm() + daysList(alarm);
-
-
-
-                times.add(time);
             }
             listDataChild.put(name, times);
 
@@ -191,6 +198,7 @@ public class EditActivity extends ActionBarActivity {
 
             }
         }
+        System.out.println( " days= " + days);
         return days;
     }
 

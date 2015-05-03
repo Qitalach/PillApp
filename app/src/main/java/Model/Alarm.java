@@ -74,6 +74,28 @@ public class Alarm implements Comparable<Alarm>{
 
     }
 
+
+    public String getStringTime(){
+        int nonMilitaryHour = this.getHour()%12;
+        if (nonMilitaryHour == 0){
+            nonMilitaryHour=12;
+        }
+
+        //fixes a problem where times were misrepresented "8:4pm" rather than "8:04pm"
+        String minute;
+
+        if (this.getMinute() < 10){
+            minute = "0" + this.getMinute();
+        } else {
+            minute = "" + this.getMinute();
+        }
+
+        String time = nonMilitaryHour + ":" + minute + " " + this.getAm_pm();
+
+        return time;
+
+    }
+
 //    public String getIntentForDb(){
 //        Intent intent = this.getIntent();
 //        // don't know what toURI does, or whuy int Flags is 0,
