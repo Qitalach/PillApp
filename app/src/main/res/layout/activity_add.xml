@@ -26,7 +26,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@color/blue600"
-                android:layout_marginTop="8sp"/>
+                android:layout_marginTop="8dp"/>
 
             <EditText android:id="@+id/pill_name"
                 android:layout_width="match_parent"
@@ -48,7 +48,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@color/blue600"
-                android:layout_marginTop="8sp"/>
+                android:layout_marginTop="8dp"/>
 
             <TextView android:id="@+id/reminder_time"
                 android:layout_width="match_parent"
@@ -57,7 +57,7 @@
                 android:textSize="30sp"
                 android:gravity="center"
                 android:clickable="true"
-                android:layout_marginTop="8sp"/>
+                android:layout_marginTop="8dp"/>
 
             <TextView android:id="@+id/schedule"
                 android:layout_width="match_parent"
@@ -67,7 +67,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@color/blue600"
-                android:layout_marginTop="8sp"/>
+                android:layout_marginTop="8dp"/>
 
 
             <!--<TimePicker-->
@@ -78,14 +78,21 @@
                 <!--android:layout_centerInParent="true"-->
                 <!--/>-->
 
+            <CheckBox android:id="@+id/every_monday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Every day"
+                android:onClick="onCheckboxClicked"
+                android:layout_below="@+id/schedule"/>
+
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/checkbox_layout"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/schedule"
+                android:layout_below="@+id/every_monday"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="8sp">
+                android:layout_marginTop="8dp">
 
                 <teamqitalach.pillapp.CustomCheckBox android:id="@+id/checkbox_monday"
                     android:layout_width="0dp"
@@ -94,6 +101,7 @@
                     android:text="@string/Monday"
                     android:button="@null"
                     android:onClick="onCheckboxClicked"
+                    android:padding="1dp"
                     android:gravity="center"/>
 
                 <teamqitalach.pillapp.CustomCheckBox android:id="@+id/checkbox_tuesday"
@@ -103,6 +111,7 @@
                     android:text="@string/Tuesday"
                     android:button="@null"
                     android:onClick="onCheckboxClicked"
+                    android:padding="1dp"
                     android:gravity="center"/>
 
                 <teamqitalach.pillapp.CustomCheckBox android:id="@+id/checkbox_wednesday"
@@ -112,6 +121,7 @@
                     android:text="@string/Wednesday"
                     android:button="@null"
                     android:onClick="onCheckboxClicked"
+                    android:padding="1dp"
                     android:gravity="center"/>
 
                 <teamqitalach.pillapp.CustomCheckBox android:id="@+id/checkbox_thursday"
@@ -121,6 +131,7 @@
                     android:text="@string/Thursday"
                     android:button="@null"
                     android:onClick="onCheckboxClicked"
+                    android:padding="1dp"
                     android:gravity="center"/>
 
                 <teamqitalach.pillapp.CustomCheckBox android:id="@+id/checkbox_friday"
@@ -130,6 +141,7 @@
                     android:text="@string/Friday"
                     android:button="@null"
                     android:onClick="onCheckboxClicked"
+                    android:padding="1dp"
                     android:gravity="center"/>
 
                 <teamqitalach.pillapp.CustomCheckBox android:id="@+id/checkbox_saturday"
@@ -139,6 +151,7 @@
                     android:text="@string/Saturday"
                     android:button="@null"
                     android:onClick="onCheckboxClicked"
+                    android:padding="1dp"
                     android:gravity="center"/>
 
                 <teamqitalach.pillapp.CustomCheckBox android:id="@+id/checkbox_sunday"
@@ -148,6 +161,7 @@
                     android:text="@string/Sunday"
                     android:button="@null"
                     android:onClick="onCheckboxClicked"
+                    android:padding="1dp"
                     android:gravity="center"/>
             </LinearLayout>
 

@@ -22,6 +22,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -266,6 +267,16 @@ public class AddActivity extends ActionBarActivity {
                     dayOfWeekList[0] = true;
                 else
                     dayOfWeekList[0] = false;
+                break;
+
+
+            case R.id.every_monday:
+                LinearLayout ll = (LinearLayout) findViewById(R.id.checkbox_layout);
+                for (int i = 0; i < ll.getChildCount(); i++) {
+                    View v = ll.getChildAt(i);
+                    ((CheckBox) v).setChecked(checked);
+                    onCheckboxClicked(v);
+                }
                 break;
         }
 

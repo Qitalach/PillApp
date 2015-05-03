@@ -3,9 +3,9 @@
     <solid android:color="@color/blue400" />
 
     <corners
-        android:topLeftRadius="30sp"
-        android:topRightRadius="30sp"
-        android:bottomLeftRadius="30sp"
-        android:bottomRightRadius="30sp"
+        android:topLeftRadius="30dp"
+        android:topRightRadius="30dp"
+        android:bottomLeftRadius="30dp"
+        android:bottomRightRadius="30dp"
         />
 </shape>
