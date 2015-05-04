@@ -49,6 +49,8 @@ public class TodayFragment extends Fragment {
                 t1v.setPadding(30, 30, 30, 30);
                 t1v.setTextSize(25);
                 t1v.setTypeface(lightFont);
+                t1v.setMaxEms(6);
+
                 tbrow.addView(t1v);
 
                 TextView t2v = new TextView(container.getContext());
