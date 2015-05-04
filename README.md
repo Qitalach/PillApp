@@ -1,14 +1,16 @@
-#PillApp for Android
-
+PillApp for Android
+========================
 
 PillApp is a mobile app that reminds users to take their medications at a specific time of day repeatedly.
 
 
-##General Information
+General Information
+--------------------
 
 Placeholder...
 
-##Source Build
+Source Build
+--------------------
 
 Placeholder...
 
