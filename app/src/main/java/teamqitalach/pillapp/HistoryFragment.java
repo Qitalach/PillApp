@@ -83,6 +83,7 @@ public class HistoryFragment extends Fragment {
             t1v.setText(history.getPillName());
             t1v.setTextColor(Color.WHITE);
             t1v.setGravity(Gravity.CENTER);
+            t1v.setMaxEms(4);
             tbrow.addView(t1v);
 
             TextView t2v = new TextView(container.getContext());
