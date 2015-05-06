@@ -181,7 +181,7 @@ public class MainActivity extends ActionBarActivity implements android.support.v
     }
 
     public void sendEdit() {
-        Intent intent = new Intent(this, EditActivity.class);
+        Intent intent = new Intent(this, PillBoxActivity.class);
         startActivity(intent);
         finish();
     }

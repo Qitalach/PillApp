@@ -15,11 +15,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
-import android.app.Activity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
@@ -28,7 +24,7 @@ import android.widget.ExpandableListView.OnGroupCollapseListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.Toast;
 
-public class EditActivity extends ActionBarActivity {
+public class PillBoxActivity extends ActionBarActivity {
 
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
@@ -38,7 +34,7 @@ public class EditActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit);
+        setContentView(R.layout.activity_pill_box);
 
         // get the listview
         expListView = (ExpandableListView) findViewById(R.id.lvExp);
@@ -116,7 +112,7 @@ public class EditActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_edit, menu);
+        getMenuInflater().inflate(R.menu.menu_pill_box, menu);
         return true;
     }
 

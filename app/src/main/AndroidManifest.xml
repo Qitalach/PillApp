@@ -36,7 +36,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".EditActivity"
+            android:name=".PillBoxActivity"
             android:label="@string/title_activity_edit" >
         </activity>
         <activity
