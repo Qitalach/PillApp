@@ -154,7 +154,7 @@ public class EditActivity extends ActionBarActivity {
 
             listDataHeader.add(name);
             List<String> times = new ArrayList<String>();
-            List<Alarm> alarms= pillbox.getAlarmByPill(this.getBaseContext(), name);
+            List<Alarm> alarms = pillbox.getAlarmByPill(this.getBaseContext(), name);
             for (Alarm alarm :alarms){
                 System.out.print(daysList(alarm));
 

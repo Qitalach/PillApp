@@ -19,7 +19,7 @@ public class Alarm implements Comparable<Alarm>{
     private int minute;
     private String pillName;
     private List<Intent> intents = new LinkedList<Intent>();
-    private List<Integer> ids = new LinkedList<Integer>();
+    private List<Long> ids = new LinkedList<Long>();
     private boolean dayOfWeek[] = new boolean[7];
 
     public long getId() { return id; }
@@ -30,13 +30,13 @@ public class Alarm implements Comparable<Alarm>{
 
     public void addIntent(Intent intent) { intents.add(intent); }
 
-    public List<Integer> getIds() { return Collections.unmodifiableList(ids); }
+    public List<Long> getIds() { return Collections.unmodifiableList(ids); }
 
     public boolean[] getDayOfWeek() { return dayOfWeek; }
 
     public void setDayOfWeek(boolean[] dayOfWeek) { this.dayOfWeek = dayOfWeek; }
 
-    public void addId(Integer id) { ids.add(id); }
+    public void addId(long id) { ids.add(id); }
 
     public int getHour() { return hour; }
 

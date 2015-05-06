@@ -48,7 +48,7 @@ public class PillBox {
         db.close();
     }
 
-    public List<Alarm> getAlarms(Context c, int dayOfWeek) {
+    public List<Alarm> getAlarms(Context c, int dayOfWeek) throws URISyntaxException {
 //        if(dailySchedule.containsKey(dayOfWeek)) {
 //            return dailySchedule.get(dayOfWeek);
 //        } else {

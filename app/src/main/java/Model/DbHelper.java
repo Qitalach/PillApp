@@ -150,8 +150,6 @@ public class DbHelper extends SQLiteOpenHelper {
                 values.put(KEY_HOUR, alarm.getHour());
                 values.put(KEY_MINUTE, alarm.getMinute());
                 values.put(KEY_DAY_WEEK, arrayPos+1);
-    System.out.println("------------------- create alarm test, day of week: " + arrayPos);
-    System.out.println("-----------Do Visual Check ------------- does ^ integer represent what you just set? ---");
                 values.put(KEY_ALARMS_PILL_NAME, alarm.getPillName());
 
                 //insert row
@@ -230,9 +228,9 @@ public class DbHelper extends SQLiteOpenHelper {
         Pill pill = new Pill();
 
         if (c.moveToFirst() && c.getCount() >= 1) {
-   System.out.println("------------------- Proof that get pill my name method is working");
-   System.out.println("------------------- " + c.getLong(c.getColumnIndex(KEY_ROWID)));
-   System.out.println("------------------- " + c.getString(c.getColumnIndex(KEY_PILLNAME)));
+//   System.out.println("------------------- Proof that get pill my name method is working");
+//   System.out.println("------------------- " + c.getLong(c.getColumnIndex(KEY_ROWID)));
+//   System.out.println("------------------- " + c.getString(c.getColumnIndex(KEY_PILLNAME)));
 
 
             pill.setPillName(c.getString(c.getColumnIndex(KEY_PILLNAME)));
@@ -265,34 +263,6 @@ public class DbHelper extends SQLiteOpenHelper {
         return pills;
     }
 
-    // get a single model-alarm
-    // TODO: pull an alarm from database for every id in list, combine them to one model-alarm (by
-    //      combo-ing dayOfWeek ints into boolean list.
-    public Alarm getAlarm(long alarm_id) throws URISyntaxException {
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        String dbAlarm = "SELECT * FROM " + ALARM_TABLE + " WHERE "
-                + KEY_ROWID + " = " + alarm_id;
-
-        Cursor c = db.rawQuery(dbAlarm, null);
-
-        if (c != null){
-            c.moveToFirst();
-        }
-
-        Alarm al = new Alarm();
-        al.setId(c.getInt(c.getColumnIndex(KEY_ROWID)));
-        //al.setIntentFromDB(c.getString(c.getColumnIndex(KEY_INTENT)));
-        al.setHour(c.getInt(c.getColumnIndex(KEY_HOUR)));
-        al.setMinute(c.getInt(c.getColumnIndex(KEY_MINUTE)));
-        //al.setDayOfWeek(c.getInt(c.getColumnIndex(KEY_DAY_WEEK)));
-        al.setPillName(c.getString(c.getColumnIndex(KEY_ALARMS_PILL_NAME)));
-
-        c.close();
-
-        return al;
-    }
-
     // get all Alarms
     public List<Alarm> getAllAlarms() throws URISyntaxException {
         List<Alarm> allAlarms = new ArrayList<Alarm>();
@@ -323,6 +293,7 @@ public class DbHelper extends SQLiteOpenHelper {
     // get all Alarms linked to a Pill
     public List<Alarm> getAllAlarmsByPill (String pillName) throws URISyntaxException {
         List<Alarm> alarmsByPill = new ArrayList<Alarm>();
+        Boolean[] daysOfWeek = new Boolean[7];
 
         // when reading string: '.' are not periods ex) pill.rowIdNumber
         String selectQuery = "SELECT * FROM "               +
@@ -354,10 +325,10 @@ public class DbHelper extends SQLiteOpenHelper {
 
         c.close();
 
-        return alarmsByPill;
+        return combineAlarms(alarmsByPill);
     }
 
-    public List<Alarm> getAlarmsByDay(int day){
+    public List<Alarm> getAlarmsByDay(int day) {
         List<Alarm> daysAlarms = new ArrayList<Alarm>();
 
         String selectQuery = "SELECT * FROM "       +
@@ -385,7 +356,78 @@ public class DbHelper extends SQLiteOpenHelper {
         return daysAlarms;
     }
 
-    public List<History> getHistory(){
+   // get a single model-alarm
+   // \
+   // making this a helper function that combos dbAlarms into ModelAlarms
+    private List<Alarm> combineAlarms(List<Alarm> dbAlarms) throws URISyntaxException {
+        List<String> timesOfDay     = new ArrayList<>();
+        List<Alarm>  combinedAlarms = new ArrayList<>();
+
+        for (Alarm al : dbAlarms){
+            if (timesOfDay.contains(al.getStringTime())){
+                // add this db row to alarm object
+                for (Alarm ala : combinedAlarms){
+                    if (ala.getStringTime().equals(al.getStringTime())){
+                        int day = getDayOfWeek(al.getId());
+                        boolean[] days = ala.getDayOfWeek();
+                        days[day - 1] = true;
+    System.out.println(" ------------------------- added new day");
+                        ala.setDayOfWeek(days);
+                        ala.addId(al.getId());
+                    }
+                }
+
+            } else {
+                // create new alarm object w/ day of week array
+                Alarm newAlarm = new Alarm();
+                boolean[] days = new boolean[7];
+
+                newAlarm.setPillName(al.getPillName());
+                newAlarm.setMinute(al.getMinute());
+                newAlarm.setHour(al.getHour());
+                newAlarm.addId(al.getId());
+
+                int day = getDayOfWeek(al.getId());
+                days[day] = true;
+    System.out.println("---------------------- added initial day");
+                newAlarm.setDayOfWeek(days);
+
+                timesOfDay.add(al.getStringTime());
+                combinedAlarms.add(newAlarm);
+            }
+        }
+for (Alarm alarm : combinedAlarms){
+    System.out.println("-------- Test Print from combineAlarms in Db ---------------");
+    System.out.println("-------- Pill Name " + alarm.getPillName());
+    for (boolean b : alarm.getDayOfWeek()){
+        System.out.println("-------- Days of Week " + b);
+
+    }
+}
+  System.out.println("----------------- Number of Combined Alarms: ");
+        return combinedAlarms;
+    }
+
+    // get a single model-alarm
+    // used as helper function?
+    private int getDayOfWeek(long alarm_id) throws URISyntaxException {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String dbAlarm = "SELECT * FROM " + ALARM_TABLE + " WHERE "
+                + KEY_ROWID + " = " + alarm_id;
+
+        Cursor c = db.rawQuery(dbAlarm, null);
+
+        if (c != null){
+            c.moveToFirst();
+        }
+        int dayOfWeek = c.getInt(c.getColumnIndex(KEY_DAY_WEEK));
+        c.close();
+
+        return dayOfWeek;
+    }
+
+   public List<History> getHistory(){
         List<History> allHistory = new ArrayList<>();
         String dbHist = "SELECT * FROM " + HISTORIES_TABLE;
 
@@ -438,9 +480,8 @@ public class DbHelper extends SQLiteOpenHelper {
     private void deletePillAlarmLinks(long alarmId){
         SQLiteDatabase db = this.getWritableDatabase();
 
-        db.delete("Delete From "    + PILL_ALARM_LINKS,
-                    " Where "       + KEY_ALARMTABLE_ID     + " = ?",
-                    new String[]{String.valueOf(alarmId)});
+        db.delete(PILL_ALARM_LINKS,  KEY_ALARMTABLE_ID
+                        + " = ?", new String[]{String.valueOf(alarmId)});
     }
 
     public void deleteAlarm(long alarmId) {
@@ -449,9 +490,8 @@ public class DbHelper extends SQLiteOpenHelper {
         deletePillAlarmLinks(alarmId);
 
         //then delete alarm
-        db.delete("Delete From "    + ALARM_TABLE,
-                " Where "           + KEY_ROWID     + " = ?",
-                new String[]{String.valueOf(alarmId)});
+        db.delete(ALARM_TABLE, KEY_ROWID
+                        + " = ?", new String[]{String.valueOf(alarmId)});
     }
 
     public void deletePill(String pillName) throws URISyntaxException {
@@ -466,9 +506,8 @@ public class DbHelper extends SQLiteOpenHelper {
         }
 
         //then delete pill
-        db.delete("Delete From "    + PILL_TABLE,
-                " Where "           + KEY_PILLNAME  + " = ?",
-                new String[]{pillName});
+        db.delete(PILL_TABLE, KEY_PILLNAME
+                        + " = ?", new String[]{pillName});
     }
 
     //----------------------------------

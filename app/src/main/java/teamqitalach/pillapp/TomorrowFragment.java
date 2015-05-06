@@ -12,6 +12,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import java.net.URISyntaxException;
 import java.util.Calendar;
 import java.util.List;
 
@@ -36,7 +37,12 @@ public class TomorrowFragment extends Fragment {
         int day = calendar.get(Calendar.DAY_OF_WEEK)+1;
         if(day == 8)
             day = 1;
-        List<Alarm> alarms = pillBox.getAlarms(container.getContext(), day);
+        List<Alarm> alarms = null;
+        try {
+            alarms = pillBox.getAlarms(container.getContext(), day);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         if(alarms != null) {
             for(Alarm alarm: alarms) {
                 TableRow tbrow = new TableRow(container.getContext());
