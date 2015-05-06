@@ -1,12 +1,7 @@
 package teamqitalach.pillapp.adapter;
 
-/**
- * http://www.androidhive.info/2013/07/android-expandable-list-view-tutorial/
- */
-
 import java.util.HashMap;
 import java.util.List;
-
 import android.content.Context;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -14,9 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
-
 import teamqitalach.pillapp.R;
 
+/**
+ * Utilized the link below as a reference guide:
+ * http://www.androidhive.info/2013/07/android-expandable-list-view-tutorial/
+ */
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     private Context _context;

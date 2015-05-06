@@ -4,7 +4,6 @@ package Model;
  * Created by CharlesPK3 on 4/7/15.
  */
 public class History {
-
     private int hourTaken;
     private int minuteTaken;
     private String dateString;
@@ -18,15 +17,11 @@ public class History {
 
     public void setMinuteTaken(int minuteTaken) { this.minuteTaken = minuteTaken; }
 
-    public String getAm_pmTaken() {
-        String am_pmTaken = (this.hourTaken < 12) ? "am" : "pm";
-        return am_pmTaken;
-    }
+    public String getAm_pmTaken() { return (hourTaken < 12) ? "am" : "pm"; }
 
     public String getDateString() { return dateString; }
 
     public void setDateString(String dateString) { this.dateString = dateString; }
-
 
     public String getPillName() {
         return pillName;

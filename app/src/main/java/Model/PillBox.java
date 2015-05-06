@@ -1,12 +1,10 @@
 package Model;
 
 import android.content.Context;
-
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -15,8 +13,6 @@ import java.util.Map;
  */
 public class PillBox {
     private DbHelper db;
-    private static List<Pill> pills = new ArrayList<Pill>(); // never queried, do we even need this?
-    private static Map<Integer, List<Alarm>> dailySchedule = new HashMap<Integer, List<Alarm>>();
 
     public List<Pill> getPills(Context c) {
         db = new DbHelper(c);
@@ -29,9 +25,7 @@ public class PillBox {
         db = new DbHelper(c);
         long pillId = db.createPill(pill);
         pill.setPillId(pillId);
-       // pills.add(pill);
         db.close();
-
         return pillId;
     }
 
@@ -49,12 +43,6 @@ public class PillBox {
     }
 
     public List<Alarm> getAlarms(Context c, int dayOfWeek) throws URISyntaxException {
-//        if(dailySchedule.containsKey(dayOfWeek)) {
-//            return dailySchedule.get(dayOfWeek);
-//        } else {
-//            return null;
-//        }
-
         db = new DbHelper(c);
         List<Alarm> daysAlarms= db.getAlarmsByDay(dayOfWeek);
         db.close();
@@ -78,7 +66,6 @@ public class PillBox {
         return false;
     }
 
-    //Delete Methods
     public void deletePill(Context c, String pillName) throws URISyntaxException {
         db = new DbHelper(c);
         db.deletePill(pillName);
@@ -103,6 +90,4 @@ public class PillBox {
         db.close();
         return  history;
     }
-
-
 }

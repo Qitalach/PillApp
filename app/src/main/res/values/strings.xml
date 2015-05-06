@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <string name="app_name">PillApp</string>
-    <string name="title_activity_today">Today</string>
-    <string name="edit_message">Enter your Medicine</string>
-    <string name="button_send">Send</string>
+    <string name="app_name">Pill Reminder</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_display_medicine">My Medicine</string>
+    <string name="title_activity_today">Today</string>
     <string name="title_activity_history">History</string>
     <string name="title_activity_tomorrow">Tomorrow</string>
     <string name="title_activity_add">Add Alarm!</string>
