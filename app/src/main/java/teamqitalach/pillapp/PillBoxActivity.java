@@ -111,7 +111,7 @@ public class PillBoxActivity extends ActionBarActivity {
                     PillBox pillbox = new PillBox();
                     pillbox.deleteAlarm(getApplicationContext(), alarmID);
 
-                    Intent intent = new Intent(getBaseContext(), PillBoxActivity.class);
+                    Intent intent = new Intent(getBaseContext(), AlertActivity.class);
                     PendingIntent operation = PendingIntent.getActivity(getBaseContext(), (int) alarmID, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
                     AlarmManager alarmManager = (AlarmManager) getBaseContext().getSystemService(ALARM_SERVICE);
                     alarmManager.cancel(operation);
