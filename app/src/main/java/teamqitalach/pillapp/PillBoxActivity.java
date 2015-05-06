@@ -155,21 +155,8 @@ public class PillBoxActivity extends ActionBarActivity {
                 System.out.print(daysList(alarm));
 
                 String time = alarm.getStringTime() + daysList(alarm);
-                boolean hasTime= false;
 
-
-
-
-                for (String listTime: times){
-                    if (time.equals(listTime)){
-
-                        hasTime = true;
-                    }
-                }
-                if (!hasTime){
                     times.add(time);
-                }
-
 
             }
             listDataChild.put(name, times);
