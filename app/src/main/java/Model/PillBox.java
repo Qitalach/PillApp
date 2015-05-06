@@ -58,6 +58,7 @@ public class PillBox {
         db = new DbHelper(c);
         List<Alarm> daysAlarms= db.getAlarmsByDay(dayOfWeek);
         db.close();
+        Collections.sort(daysAlarms);
         return daysAlarms;
     }
 

@@ -60,7 +60,7 @@ public class TodayFragment extends Fragment {
                 tbrow.addView(t1v);
 
                 TextView t2v = new TextView(container.getContext());
- 
+
 
                 String time = alarm.getStringTime();
                 t2v.setText(time);

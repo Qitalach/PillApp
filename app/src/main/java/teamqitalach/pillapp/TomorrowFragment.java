@@ -59,21 +59,9 @@ public class TomorrowFragment extends Fragment {
                 TextView t2v = new TextView(container.getContext());
 
                 //changes display to non military time
-                int nonMilitaryHour = alarm.getHour()%12;
-                if (nonMilitaryHour == 0){
-                    nonMilitaryHour=12;
-                }
 
-                //fixes a problem where times were misrepresented "8:4pm" rather than "8:04pm"
-                String minute;
+                String time = alarm.getStringTime();
 
-                if (alarm.getMinute() < 10){
-                    minute = "0" + alarm.getMinute();
-                } else {
-                    minute = "" + alarm.getMinute();
-                }
-
-                String time = nonMilitaryHour + ":" + minute + " " + alarm.getAm_pm();
                 t2v.setText(time);
                 t2v.setTextColor(Color.WHITE);
                 t2v.setGravity(Gravity.CENTER);
