@@ -193,6 +193,13 @@ public class AddActivity extends ActionBarActivity {
                         /** Converting the date and time in to milliseconds elapsed since epoch */
                         long alarm_time = calendar.getTimeInMillis();
 
+
+                        //from stack overflow to
+
+                        if (calendar.before(Calendar.getInstance())) {
+                            alarm_time += AlarmManager.INTERVAL_DAY * 7;
+                        }
+
                         /** setRepeating() lets you specify a precise custom interval--in this case,
                          20 seconds. */
                         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarm_time,
