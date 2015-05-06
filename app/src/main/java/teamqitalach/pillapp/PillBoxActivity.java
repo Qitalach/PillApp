@@ -1,5 +1,7 @@
 package teamqitalach.pillapp;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -30,6 +32,7 @@ public class PillBoxActivity extends ActionBarActivity {
     ExpandableListView expListView;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
+    List<List<List<Long>>> alarmIDData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,14 +97,29 @@ public class PillBoxActivity extends ActionBarActivity {
             public boolean onChildClick(ExpandableListView parent, View v,
                                         int groupPosition, int childPosition, long id) {
                 // TODO Auto-generated method stub
-                Toast.makeText(
-                        getApplicationContext(),
-                        listDataHeader.get(groupPosition)
-                                + " : "
-                                + listDataChild.get(
-                                listDataHeader.get(groupPosition)).get(
-                                childPosition), Toast.LENGTH_SHORT)
-                        .show();
+//                Toast.makeText(
+//                        getApplicationContext(),
+//                        listDataHeader.get(groupPosition)
+//                                + " : "
+//                                + listDataChild.get(
+//                                listDataHeader.get(groupPosition)).get(
+//                                childPosition), Toast.LENGTH_SHORT)
+//                        .show();
+
+                List<Long> ids = alarmIDData.get(groupPosition).get(childPosition);
+                for (long alarmID : ids) {
+                    PillBox pillbox = new PillBox();
+                    pillbox.deleteAlarm(getApplicationContext(), alarmID);
+
+                    Intent intent = new Intent(getBaseContext(), PillBoxActivity.class);
+                    PendingIntent operation = PendingIntent.getActivity(getBaseContext(), (int) alarmID, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
+                    AlarmManager alarmManager = (AlarmManager) getBaseContext().getSystemService(ALARM_SERVICE);
+                    alarmManager.cancel(operation);
+
+                }
+                Intent intent = new Intent(getApplicationContext(), PillBoxActivity.class);
+                startActivity(intent);
+                finish();
                 return false;
             }
         });
@@ -138,6 +156,7 @@ public class PillBoxActivity extends ActionBarActivity {
     private void prepareListData() throws URISyntaxException {
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
+        alarmIDData = new ArrayList<List<List<Long>>>();
 
         PillBox pillbox = new PillBox();
         List<Pill> pills = pillbox.getPills(this);
@@ -147,18 +166,24 @@ public class PillBoxActivity extends ActionBarActivity {
         for (Pill pill: pills){
             String name = pill.getPillName();
 
-
             listDataHeader.add(name);
+
             List<String> times = new ArrayList<String>();
             List<Alarm> alarms = pillbox.getAlarmByPill(this.getBaseContext(), name);
+
+            List<List<Long>> ids = new ArrayList<List<Long>>();
+
             for (Alarm alarm :alarms){
                 System.out.print(daysList(alarm));
-
                 String time = alarm.getStringTime() + daysList(alarm);
+                times.add(time);
 
-                    times.add(time);
+                ids.add(alarm.getIds());
 
             }
+
+            alarmIDData.add(ids);
+
             listDataChild.put(name, times);
 
         }
