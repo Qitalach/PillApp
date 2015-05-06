@@ -11,6 +11,7 @@
             android:name=".AddActivity"
             android:label="@string/title_activity_add"
             android:parentActivityName=".MainActivity" >
+
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -43,10 +44,15 @@
             android:name=".SettingActivity"
             android:label="@string/title_activity_setting"
             android:parentActivityName=".MainActivity" >
+
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".EditActivity"
+            android:label="@string/title_activity_edit" >
         </activity>
     </application>
 

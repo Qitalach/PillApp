@@ -410,7 +410,7 @@ for (Alarm alarm : combinedAlarms){
 
     // get a single model-alarm
     // used as helper function?
-    private int getDayOfWeek(long alarm_id) throws URISyntaxException {
+    public int getDayOfWeek(long alarm_id) throws URISyntaxException {
         SQLiteDatabase db = this.getReadableDatabase();
 
         String dbAlarm = "SELECT * FROM " + ALARM_TABLE + " WHERE "
@@ -508,6 +508,29 @@ for (Alarm alarm : combinedAlarms){
         //then delete pill
         db.delete(PILL_TABLE, KEY_PILLNAME
                         + " = ?", new String[]{pillName});
+    }
+
+    public Alarm getAlarmById(long alarm_id) throws URISyntaxException{
+
+        String dbAlarm = "SELECT * FROM " + ALARM_TABLE + " WHERE "
+                + KEY_ROWID + " = " + alarm_id;
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.rawQuery(dbAlarm, null);
+
+        if (c != null) {
+            c.moveToFirst();
+        }
+
+        Alarm al = new Alarm();
+        al.setId(c.getInt(c.getColumnIndex(KEY_ROWID)));
+        al.setHour(c.getInt(c.getColumnIndex(KEY_HOUR)));
+        al.setMinute(c.getInt(c.getColumnIndex(KEY_MINUTE)));
+        al.setPillName(c.getString(c.getColumnIndex(KEY_ALARMS_PILL_NAME)));
+
+        c.close();
+
+        return al;
     }
 
     //----------------------------------

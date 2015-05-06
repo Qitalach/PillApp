@@ -13,6 +13,16 @@ import java.util.Map;
  */
 public class PillBox {
     private DbHelper db;
+    private static List<Long> tempIds;
+    private static String tempName;
+
+    public List<Long> getTempIds() { return Collections.unmodifiableList(tempIds); }
+
+    public void setTempIds(List<Long> tempIds) { this.tempIds = tempIds; }
+
+    public String getTempName() { return tempName; }
+
+    public void setTempName(String tempName) { this.tempName = tempName; }
 
     public List<Pill> getPills(Context c) {
         db = new DbHelper(c);
@@ -88,6 +98,20 @@ public class PillBox {
         db = new DbHelper(c);
         List<History> history = db.getHistory();
         db.close();
-        return  history;
+        return history;
+    }
+
+    public Alarm getAlarmById(Context c, long alarm_id) throws URISyntaxException{
+        db = new DbHelper(c);
+        Alarm alarm = db.getAlarmById(alarm_id);
+        db.close();
+        return alarm;
+    }
+
+    public int getDayOfWeek(Context c, long alarm_id) throws URISyntaxException{
+        db = new DbHelper(c);
+        int getDayOfWeek = db.getDayOfWeek(alarm_id);
+        db.close();
+        return getDayOfWeek;
     }
 }

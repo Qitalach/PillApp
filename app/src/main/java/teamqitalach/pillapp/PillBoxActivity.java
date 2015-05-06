@@ -106,20 +106,30 @@ public class PillBoxActivity extends ActionBarActivity {
 //                                childPosition), Toast.LENGTH_SHORT)
 //                        .show();
 
-                List<Long> ids = alarmIDData.get(groupPosition).get(childPosition);
-                for (long alarmID : ids) {
-                    PillBox pillbox = new PillBox();
-                    pillbox.deleteAlarm(getApplicationContext(), alarmID);
+                //uncommenting deletion stuff
+//                List<Long> ids = alarmIDData.get(groupPosition).get(childPosition);
+//                for (long alarmID : ids) {
+//                    PillBox pillbox = new PillBox();
+//                    pillbox.deleteAlarm(getApplicationContext(), alarmID);
+//
+//                    Intent intent = new Intent(getBaseContext(), AlertActivity.class);
+//                    PendingIntent operation = PendingIntent.getActivity(getBaseContext(), (int) alarmID, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    AlarmManager alarmManager = (AlarmManager) getBaseContext().getSystemService(ALARM_SERVICE);
+//                    alarmManager.cancel(operation);
+//
+//                }
+//                Intent intent = new Intent(getApplicationContext(), PillBoxActivity.class);
+//                startActivity(intent);
+//                finish();
 
-                    Intent intent = new Intent(getBaseContext(), AlertActivity.class);
-                    PendingIntent operation = PendingIntent.getActivity(getBaseContext(), (int) alarmID, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
-                    AlarmManager alarmManager = (AlarmManager) getBaseContext().getSystemService(ALARM_SERVICE);
-                    alarmManager.cancel(operation);
+                PillBox pillBox = new PillBox();
+                pillBox.setTempIds(alarmIDData.get(groupPosition).get(childPosition));
+//                System.out.println(pillBox.getTempIds());
 
-                }
-                Intent intent = new Intent(getApplicationContext(), PillBoxActivity.class);
+                Intent intent = new Intent(getApplicationContext(), EditActivity.class);
                 startActivity(intent);
                 finish();
+
                 return false;
             }
         });
@@ -192,21 +202,14 @@ public class PillBoxActivity extends ActionBarActivity {
     }
 
     private String daysList(Alarm alarm){
-        String days = "";
+        String days = "#";
         for (int i = 0; i<7; i++){
-            days += " ";
             if (alarm.getDayOfWeek()[i] ){
-                if (i==0){days += "S";}
-                else if(i==1){days+= "M";}
-                else if(i==2){days += "T";}
-                else if (i==3){days += "W";}
-                else if(i==4){days += "T";}
-                else if(i==5){days += "F";}
-                else{days+="S";}
-
+                days += "1";
+            } else {
+                days += "0";
             }
         }
-        System.out.println( " days= " + days);
         return days;
     }
 
