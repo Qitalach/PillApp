@@ -3,6 +3,7 @@ package teamqitalach.pillapp.adapter;
 import java.util.HashMap;
 import java.util.List;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,10 +53,78 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             convertView = infalInflater.inflate(R.layout.list_item, null);
         }
 
-        TextView txtListChild = (TextView) convertView
-                .findViewById(R.id.lblListItem);
+        String[] parts = childText.split("#");
+        String time = parts[0];
+        String daysOfWeek = parts[1];
 
-        txtListChild.setText(childText);
+        TextView timeListChild = (TextView) convertView
+                .findViewById(R.id.pill_box_time);
+        timeListChild.setText(time);
+
+        TextView monday = (TextView) convertView
+                .findViewById(R.id.pill_box_monday);
+        TextView tuesday = (TextView) convertView
+                .findViewById(R.id.pill_box_tuesday);
+        TextView wednesday = (TextView) convertView
+                .findViewById(R.id.pill_box_wednesday);
+        TextView thursday = (TextView) convertView
+                .findViewById(R.id.pill_box_thursday);
+        TextView friday = (TextView) convertView
+                .findViewById(R.id.pill_box_friday);
+        TextView saturday = (TextView) convertView
+                .findViewById(R.id.pill_box_saturday);
+        TextView sunday = (TextView) convertView
+                .findViewById(R.id.pill_box_sunday);
+
+        int colorSelected = _context.getResources().getColor(R.color.blue600);
+        int colorNotSelected = Color.parseColor("#f4f4f4");
+
+        for (int i = 0; i < 7; i++){
+            if (i==0) {
+                if (daysOfWeek.substring(i, i+1).equals("1")) {
+                    sunday.setTextColor(colorSelected);
+                } else {
+                    sunday.setTextColor(colorNotSelected);
+                }
+            } else if (i==1) {
+                if (daysOfWeek.substring(i, i+1).equals("1")) {
+                    monday.setTextColor(colorSelected);
+                } else {
+                    monday.setTextColor(colorNotSelected);
+                }
+            } else if (i==2) {
+                if (daysOfWeek.substring(i, i+1).equals("1")) {
+                    tuesday.setTextColor(colorSelected);
+                } else {
+                    tuesday.setTextColor(colorNotSelected);
+                }
+            } else if (i==3) {
+                if (daysOfWeek.substring(i, i+1).equals("1")) {
+                    wednesday.setTextColor(colorSelected);
+                } else {
+                    wednesday.setTextColor(colorNotSelected);
+                }
+            } else if (i==4) {
+                if (daysOfWeek.substring(i, i+1).equals("1")) {
+                    thursday.setTextColor(colorSelected);
+                } else {
+                    thursday.setTextColor(colorNotSelected);
+                }
+            } else if (i==5) {
+                if (daysOfWeek.substring(i, i+1).equals("1")) {
+                    friday.setTextColor(colorSelected);
+                } else {
+                    friday.setTextColor(colorNotSelected);
+                }
+            } else if (i==6) {
+                if (daysOfWeek.substring(i, i+1).equals("1")) {
+                    saturday.setTextColor(colorSelected);
+                } else {
+                    saturday.setTextColor(colorNotSelected);
+                }
+            }
+        }
+
         return convertView;
     }
 
