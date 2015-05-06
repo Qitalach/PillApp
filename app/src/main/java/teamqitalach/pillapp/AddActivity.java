@@ -4,7 +4,10 @@ import Model.Alarm;
 import Model.Pill;
 import Model.PillBox;
 
+import java.net.URISyntaxException;
 import java.util.Calendar;
+import java.util.LinkedList;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -82,7 +85,7 @@ public class AddActivity extends ActionBarActivity {
 
             @Override
             public void onClick(View v) {
-                final int _id = (int) System.currentTimeMillis();
+//                final int _id = (int) System.currentTimeMillis();
                 int checkBoxCounter = 0;
 
                 EditText editText = (EditText) findViewById(R.id.pill_name);
@@ -126,10 +129,30 @@ public class AddActivity extends ActionBarActivity {
                     pillBox.addAlarm(getApplicationContext(), alarm, pill);
                 }
 
+                List<Long> ids = new LinkedList<Long>();
+                try {
+                    List<Alarm> alarms = pillBox.getAlarmByPill(getApplicationContext(), pill_name);
+                    //List<Long> days;
+                    for(Alarm tempAlarm: alarms) {
+                        if(tempAlarm.getHour() == hour && tempAlarm.getMinute() == minute) {
+                            ids = tempAlarm.getIds();
+
+                            break;
+                        }
+                    }
+
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
+
+
                 for(int i=0; i<7; i++) {
-                    if (dayOfWeekList[i] == true && pill_name.length() != 0) {
+                    if (dayOfWeekList[i] && pill_name.length() != 0) {
 
                         int dayOfWeek = i+1;
+
+                        long _id = ids.get(checkBoxCounter);
+                        int id = (int) _id;
                         checkBoxCounter++;
 
                         /** This intent invokes the activity AlertActivity, which in turn opens the AlertAlarm window */
@@ -142,7 +165,7 @@ public class AddActivity extends ActionBarActivity {
                         //String pillName = bundle.getString("pill_name");
 
                         /** Creating a Pending Intent */
-                        operation = PendingIntent.getActivity(getBaseContext(), _id+i, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
+                        operation = PendingIntent.getActivity(getBaseContext(), id, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
 
                         /** Getting a reference to the System Service ALARM_SERVICE */
                         alarmManager = (AlarmManager) getBaseContext().getSystemService(ALARM_SERVICE);
@@ -160,8 +183,8 @@ public class AddActivity extends ActionBarActivity {
                         calendar.set(Calendar.MILLISECOND, 0);
                         calendar.set(Calendar.DAY_OF_WEEK, dayOfWeek);
 
-                        alarm.addId(_id+i);
-                        alarm.addIntent(intent);
+//                        alarm.addId(_id+i);
+//                        alarm.addIntent(intent);
 
 
                         /** Converting the date and time in to milliseconds elapsed since epoch */
@@ -175,6 +198,8 @@ public class AddActivity extends ActionBarActivity {
                         /** Setting an alarm, which invokes the operation at alert_time */
                         /** Uncomment below to set alarm once (instead of having it repeat). */
                         //alarmManager.set(AlarmManager.RTC_WAKEUP, alarm_time, operation);
+
+
                     }
                 }
                 /** Alert is set successfully */

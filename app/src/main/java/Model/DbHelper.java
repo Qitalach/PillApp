@@ -388,7 +388,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 newAlarm.addId(al.getId());
 
                 int day = getDayOfWeek(al.getId());
-                days[day] = true;
+                days[day-1] = true;
     System.out.println("---------------------- added initial day");
                 newAlarm.setDayOfWeek(days);
 
