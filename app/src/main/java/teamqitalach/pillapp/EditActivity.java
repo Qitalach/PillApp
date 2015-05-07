@@ -217,6 +217,14 @@ public class EditActivity extends ActionBarActivity {
                         alarmManager.cancel(operation);
                     }
 
+                    try {
+                        List<Alarm> tempTracker = pillBox.getAlarmByPill(getBaseContext(), tempPill_name);
+                        if(tempTracker.size() == 0)
+                            pillBox.deletePill(getBaseContext(), tempPill_name);
+                    } catch (URISyntaxException e) {
+                        e.printStackTrace();
+                    }
+
                     Toast.makeText(getBaseContext(), "Alarm for " + pill_name + " is set successfully", Toast.LENGTH_SHORT).show();
                     Intent returnHome = new Intent(getBaseContext(), MainActivity.class);
                     startActivity(returnHome);
@@ -329,6 +337,15 @@ public class EditActivity extends ActionBarActivity {
                 AlarmManager alarmManager = (AlarmManager) getBaseContext().getSystemService(ALARM_SERVICE);
                 alarmManager.cancel(operation);
             }
+
+            try {
+                List<Alarm> tempTracker = pillBox.getAlarmByPill(getBaseContext(), tempPill_name);
+                if(tempTracker.size() == 0)
+                    pillBox.deletePill(getBaseContext(), tempPill_name);
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+
             Intent returnPillBox = new Intent(getBaseContext(), PillBoxActivity.class);
             startActivity(returnPillBox);
             finish();
