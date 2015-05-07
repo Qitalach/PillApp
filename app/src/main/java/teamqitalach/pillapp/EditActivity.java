@@ -42,6 +42,7 @@ public class EditActivity extends ActionBarActivity {
     TextView timeLabel;
     PillBox pillBox = new PillBox();
     List<Long> tempIds = pillBox.getTempIds();
+    String tempPill_name;
 
     TimePickerDialog.OnTimeSetListener t=new TimePickerDialog.OnTimeSetListener() {
         public void onTimeSet(TimePicker view, int hourOfDay,
@@ -83,8 +84,8 @@ public class EditActivity extends ActionBarActivity {
         }
 
         EditText editText = (EditText) findViewById(R.id.pill_name);
-        String pill_name = pillBox.getTempName();
-        editText.setText(pill_name);
+        tempPill_name = pillBox.getTempName();
+        editText.setText(tempPill_name);
 
         for(Long id: tempIds){
             try{
@@ -208,8 +209,7 @@ public class EditActivity extends ActionBarActivity {
                     Toast.makeText(getBaseContext(), "Please input a pill name or check at least one day!", Toast.LENGTH_SHORT).show();
                 else { // Input form is completely filled out
                     for (long alarmID : tempIds) {
-                        PillBox pillbox = new PillBox();
-                        pillbox.deleteAlarm(getApplicationContext(), alarmID);
+                        pillBox.deleteAlarm(getApplicationContext(), alarmID);
 
                         Intent intent = new Intent(getBaseContext(), AlertActivity.class);
                         PendingIntent operation = PendingIntent.getActivity(getBaseContext(), (int) alarmID, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -319,13 +319,23 @@ public class EditActivity extends ActionBarActivity {
             NavUtils.navigateUpFromSameTask(this);
             return true;
         }
+
         if (id == R.id.action_delete) {
+            for (long alarmID : tempIds) {
+                pillBox.deleteAlarm(getApplicationContext(), alarmID);
 
-            //TODO: link the button to delete function
+                Intent intent = new Intent(getBaseContext(), AlertActivity.class);
+                PendingIntent operation = PendingIntent.getActivity(getBaseContext(), (int) alarmID, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
+                AlarmManager alarmManager = (AlarmManager) getBaseContext().getSystemService(ALARM_SERVICE);
+                alarmManager.cancel(operation);
+            }
+            Intent returnPillBox = new Intent(getBaseContext(), PillBoxActivity.class);
+            startActivity(returnPillBox);
+            finish();
 
+            Toast.makeText(getBaseContext(), "Alarm for " + tempPill_name + " is deleted successfully", Toast.LENGTH_SHORT).show();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
