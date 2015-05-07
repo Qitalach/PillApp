@@ -99,11 +99,9 @@ public class SettingActivity extends ActionBarActivity {
      * as you specify a parent activity in AndroidManifest.xml.
      */
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.home) {
-            NavUtils.navigateUpFromSameTask(this);
-            return true;
-        }
+        Intent returnHome = new Intent(getBaseContext(), MainActivity.class);
+        startActivity(returnHome);
+        finish();
         return super.onOptionsItemSelected(item);
     }
 

@@ -265,6 +265,9 @@ public class AddActivity extends ActionBarActivity {
             NavUtils.navigateUpFromSameTask(this);
             return true;
         }
+        Intent returnHome = new Intent(getBaseContext(), MainActivity.class);
+        startActivity(returnHome);
+        finish();
         return super.onOptionsItemSelected(item);
     }
 

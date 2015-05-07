@@ -1,6 +1,7 @@
 package teamqitalach.pillapp;
 
 import android.content.Intent;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -34,6 +35,7 @@ public class PillBoxActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_pill_box);
 
         expListView = (ExpandableListView) findViewById(R.id.lvExp);
@@ -95,9 +97,9 @@ public class PillBoxActivity extends ActionBarActivity {
      * as you specify a parent activity in AndroidManifest.xml.
      */
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings)
-            return true;
+        Intent returnHome = new Intent(getBaseContext(), MainActivity.class);
+        startActivity(returnHome);
+        finish();
         return super.onOptionsItemSelected(item);
     }
 

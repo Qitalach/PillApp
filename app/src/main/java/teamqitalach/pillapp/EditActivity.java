@@ -323,11 +323,6 @@ public class EditActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.home) {
-            NavUtils.navigateUpFromSameTask(this);
-            return true;
-        }
-
         if (id == R.id.action_delete) {
             for (long alarmID : tempIds) {
                 pillBox.deleteAlarm(getApplicationContext(), alarmID);
@@ -353,6 +348,9 @@ public class EditActivity extends ActionBarActivity {
             Toast.makeText(getBaseContext(), "Alarm for " + tempPill_name + " is deleted successfully", Toast.LENGTH_SHORT).show();
             return true;
         }
+        Intent returnHome = new Intent(getBaseContext(), PillBoxActivity.class);
+        startActivity(returnHome);
+        finish();
         return super.onOptionsItemSelected(item);
     }
 
@@ -371,8 +369,8 @@ public class EditActivity extends ActionBarActivity {
 
     @Override
     public void onBackPressed() {
-        Intent returnHome = new Intent(getBaseContext(), MainActivity.class);
-        startActivity(returnHome);
+        Intent returnPillBoxActivity = new Intent(getBaseContext(), PillBoxActivity.class);
+        startActivity(returnPillBoxActivity);
         finish();
     }
 }
