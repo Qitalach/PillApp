@@ -243,7 +243,7 @@ public class EditActivity extends ActionBarActivity {
     @Override
     /** Inflate the menu; this adds items to the action bar if it is present */
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_add, menu);
+        getMenuInflater().inflate(R.menu.menu_edit, menu);
         return true;
     }
 
@@ -313,10 +313,18 @@ public class EditActivity extends ActionBarActivity {
      */
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+
         if (id == R.id.home) {
             NavUtils.navigateUpFromSameTask(this);
             return true;
         }
+        if (id == R.id.action_delete) {
+
+            //TODO: link the button to delete function
+
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
