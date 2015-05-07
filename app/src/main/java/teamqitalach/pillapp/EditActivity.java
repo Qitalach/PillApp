@@ -42,6 +42,8 @@ public class EditActivity extends ActionBarActivity {
 
     int hour, minute;
     TextView timeLabel;
+    PillBox pillBox = new PillBox();
+    List<Long> tempIds = pillBox.getTempIds();
 
     TimePickerDialog.OnTimeSetListener t=new TimePickerDialog.OnTimeSetListener() {
         public void onTimeSet(TimePicker view, int hourOfDay,
@@ -65,11 +67,11 @@ public class EditActivity extends ActionBarActivity {
         Typeface lightFont = Typeface.createFromAsset(this.getAssets(), "fonts/Roboto-Light.ttf");
         timeLabel.setTypeface(lightFont);
 
-        PillBox pillBox = new PillBox();
-        List<Long> ids = pillBox.getTempIds();
+
+
 
         try {
-            Alarm firstAlarm = pillBox.getAlarmById(getApplicationContext(), ids.get(0));
+            Alarm firstAlarm = pillBox.getAlarmById(getApplicationContext(), tempIds.get(0));
             hour = firstAlarm.getHour();
             minute = firstAlarm.getMinute();
             timeLabel.setText(setTime(hour, minute));
@@ -94,7 +96,7 @@ public class EditActivity extends ActionBarActivity {
         String pill_name = pillBox.getTempName();
         editText.setText(pill_name);
 
-        for(Long id: ids){
+        for(Long id: tempIds){
             try{
                 int day = pillBox.getDayOfWeek(getApplicationContext(), id);
                 CheckBox checkBoxMon = (CheckBox) findViewById(R.id.checkbox_monday);
@@ -104,20 +106,34 @@ public class EditActivity extends ActionBarActivity {
                 CheckBox checkBoxFri = (CheckBox) findViewById(R.id.checkbox_friday);
                 CheckBox checkBoxSat = (CheckBox) findViewById(R.id.checkbox_saturday);
                 CheckBox checkBoxSun = (CheckBox) findViewById(R.id.checkbox_sunday);
-                if(day == 2)
+                if(day == 2) {
                     checkBoxMon.setChecked(true);
-                else if(day == 3)
+                    dayOfWeekList[1] = true;
+                }
+                else if(day == 3) {
                     checkBoxTues.setChecked(true);
-                else if(day == 4)
+                    dayOfWeekList[2] = true;
+                }
+                else if(day == 4) {
                     checkBoxWed.setChecked(true);
-                else if(day == 5)
+                    dayOfWeekList[3] = true;
+                }
+                else if(day == 5) {
                     checkBoxThur.setChecked(true);
-                else if(day == 6)
+                    dayOfWeekList[4] = true;
+                }
+                else if(day == 6) {
                     checkBoxFri.setChecked(true);
-                else if(day == 7)
+                    dayOfWeekList[5] = true;
+                }
+                else if(day == 7) {
                     checkBoxSat.setChecked(true);
-                else if(day == 1)
+                    dayOfWeekList[6] = true;
+                }
+                else if(day == 1) {
                     checkBoxSun.setChecked(true);
+                    dayOfWeekList[0] = true;
+                }
 
             } catch (URISyntaxException e) {
                 e.printStackTrace();
@@ -127,14 +143,16 @@ public class EditActivity extends ActionBarActivity {
 
         OnClickListener setClickListener = new OnClickListener() {
 
-            PillBox pillBox = new PillBox();
+
 
             @Override
             public void onClick(View v) {
 //                final int _id = (int) System.currentTimeMillis();
                 int checkBoxCounter = 0;
 
-                String pill_name = pillBox.getTempName();
+
+                EditText editText = (EditText) findViewById(R.id.pill_name);
+                String pill_name = editText.getText().toString();
 
 
                 /** Getting a reference to TimePicker object available in the MainActivity */
@@ -253,10 +271,21 @@ public class EditActivity extends ActionBarActivity {
                     Toast.makeText(getBaseContext(), "Please input a pill name or check at least one day!", Toast.LENGTH_SHORT).show();
 
                 else {
+                    for (long alarmID : tempIds) {
+                        PillBox pillbox = new PillBox();
+                        pillbox.deleteAlarm(getApplicationContext(), alarmID);
+
+                        Intent intent = new Intent(getBaseContext(), AlertActivity.class);
+                        PendingIntent operation = PendingIntent.getActivity(getBaseContext(), (int) alarmID, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
+                        AlarmManager alarmManager = (AlarmManager) getBaseContext().getSystemService(ALARM_SERVICE);
+                        alarmManager.cancel(operation);
+                    }
+
                     Toast.makeText(getBaseContext(), "Alarm for " + pill_name + " is set successfully", Toast.LENGTH_SHORT).show();
                     Intent returnHome = new Intent(getBaseContext(), MainActivity.class);
                     startActivity(returnHome);
                     finish();
+                    System.out.println("checkBoxCounter" + checkBoxCounter);
                 }
             }
         };
