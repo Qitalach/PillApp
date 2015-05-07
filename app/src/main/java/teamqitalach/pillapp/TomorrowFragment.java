@@ -34,15 +34,18 @@ public class TomorrowFragment extends Fragment {
         PillBox pillBox = new PillBox();
 
         Calendar calendar = Calendar.getInstance();
-        int day = calendar.get(Calendar.DAY_OF_WEEK)+1;
+        int day = calendar.get(Calendar.DAY_OF_WEEK) + 1;
         if(day == 8)
             day = 1;
+
         List<Alarm> alarms = null;
+
         try {
             alarms = pillBox.getAlarms(container.getContext(), day);
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
+
         if(alarms != null) {
             for(Alarm alarm: alarms) {
                 TableRow tbrow = new TableRow(container.getContext());
@@ -58,8 +61,6 @@ public class TomorrowFragment extends Fragment {
 
                 TextView t2v = new TextView(container.getContext());
 
-                //changes display to non military time
-
                 String time = alarm.getStringTime();
 
                 t2v.setText(time);
@@ -73,9 +74,7 @@ public class TomorrowFragment extends Fragment {
                 stk.addView(tbrow);
             }
         }
-
         return rootView;
     }
 }
-
 

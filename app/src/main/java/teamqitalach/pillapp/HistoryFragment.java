@@ -12,9 +12,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import Model.Alarm;
 import Model.History;
-import Model.Pill;
 import Model.PillBox;
 
 public class HistoryFragment extends Fragment {
@@ -24,7 +22,6 @@ public class HistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_history, container, false);
-
 
         TableLayout stk = (TableLayout) rootView.findViewById(R.id.table_history);
 
@@ -55,27 +52,6 @@ public class HistoryFragment extends Fragment {
 
         PillBox pillBox = new PillBox();
 
-//        for (int i = 0; i < alarm.getCount(); i++) {
-//            TableRow tbrow = new TableRow(container.getContext());
-//
-//            TextView t1v = new TextView(container.getContext());
-//            t1v.setText("VitaminD");
-//            t1v.setTextColor(Color.WHITE);
-//            t1v.setGravity(Gravity.CENTER);
-//            tbrow.addView(t1v);
-//
-//            TextView t2v = new TextView(container.getContext());
-//            t2v.setText("11:00pm");
-//            t2v.setTextColor(Color.WHITE);
-//            t2v.setGravity(Gravity.CENTER);
-//            tbrow.addView(t2v);
-//
-//            stk.addView(tbrow);
-//        }
-
-
-            // 05/01 -- Histories displaying but totally buggy
-            //          -- bug in alert activity?
         for (History history: pillBox.getHistory(container.getContext())){
             TableRow tbrow = new TableRow(container.getContext());
 
@@ -95,21 +71,15 @@ public class HistoryFragment extends Fragment {
 
             TextView t3v = new TextView(container.getContext());
 
-            //changes display to non military time
-            int nonMilitaryHour = history.getHourTaken()%12;
-            if (nonMilitaryHour == 0){
-                nonMilitaryHour=12;
-            }
+            int nonMilitaryHour = history.getHourTaken() % 12;
+            if (nonMilitaryHour == 0)
+                nonMilitaryHour = 12;
 
-            //fixes a problem where times were misrepresented "8:4pm" rather than "8:04pm"
             String minute;
-
-            if (history.getMinuteTaken() < 10){
+            if (history.getMinuteTaken() < 10)
                 minute = "0" + history.getMinuteTaken();
-            } else {
+            else
                 minute = "" + history.getMinuteTaken();
-            }
-
 
             String time = nonMilitaryHour + ":" + minute + " " + history.getAm_pmTaken();
             t3v.setText(time);
@@ -117,11 +87,8 @@ public class HistoryFragment extends Fragment {
             t3v.setGravity(Gravity.CENTER);
             tbrow.addView(t3v);
 
-
             stk.addView(tbrow);
          }
-
         return rootView;
     }
 }
-

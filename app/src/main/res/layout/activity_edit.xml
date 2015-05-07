@@ -68,15 +68,6 @@
                 android:textColor="@color/blue600"
                 android:layout_marginTop="8dp"/>
 
-
-            <!--<TimePicker-->
-            <!--android:id="@+id/tp_time"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_below="@id/pill_name"-->
-            <!--android:layout_centerInParent="true"-->
-            <!--/>-->
-
             <CheckBox android:id="@+id/every_monday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

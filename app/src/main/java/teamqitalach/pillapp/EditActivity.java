@@ -180,7 +180,6 @@ public class EditActivity extends ActionBarActivity {
 
                         /** This intent invokes the activity AlertActivity, which in turn opens the AlertAlarm window */
                         Intent intent = new Intent(getBaseContext(), AlertActivity.class);
-                        intent.putExtra("pill_name", pill_name);
 
                         operation = PendingIntent.getActivity(getBaseContext(), id, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
 

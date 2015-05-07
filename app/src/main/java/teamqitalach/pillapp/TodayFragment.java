@@ -17,7 +17,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import Model.Alarm;
-import Model.Pill;
 import Model.PillBox;
 
 public class TodayFragment extends Fragment {
@@ -36,14 +35,14 @@ public class TodayFragment extends Fragment {
 
         Calendar calendar = Calendar.getInstance();
         int day = calendar.get(Calendar.DAY_OF_WEEK);
-//        List<Alarm> alarms = pillBox.getAlarms(day);
-//        List<Pill> pills = pillBox.getPills(container.getContext());
         List<Alarm> alarms = null;
+
         try {
             alarms = pillBox.getAlarms(container.getContext(), day);
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
+
         if(alarms != null) {
             for(Alarm alarm: alarms) {
                 TableRow tbrow = new TableRow(container.getContext());
@@ -61,7 +60,6 @@ public class TodayFragment extends Fragment {
 
                 TextView t2v = new TextView(container.getContext());
 
-
                 String time = alarm.getStringTime();
                 t2v.setText(time);
                 t2v.setTextColor(Color.WHITE);
@@ -70,14 +68,10 @@ public class TodayFragment extends Fragment {
                 t2v.setTextSize(25);
                 t2v.setTypeface(lightFont);
                 tbrow.addView(t2v);
-//
+
                 stk.addView(tbrow);
             }
         }
-
         return rootView;
     }
-
 }
-
-

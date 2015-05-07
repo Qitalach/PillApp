@@ -13,7 +13,6 @@ import android.support.v4.app.DialogFragment;
 import android.view.WindowManager.LayoutParams;
 
 public class AlertAlarm extends DialogFragment {
-
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
@@ -26,38 +25,32 @@ public class AlertAlarm extends DialogFragment {
         /** Setting title for the alert dialog */
         builder.setTitle("PillApp");
 
-        // This will make it so it can only go away by pressing the buttons.
+        /** Making it so notification can only go away by pressing the buttons */
         setCancelable(false);
 
-        // gets the name of the pill that is triggering the alarm
-        final String pillname = getActivity().getIntent().getStringExtra("pill_name");
+        final String pill_name = getActivity().getIntent().getStringExtra("pill_name");
 
-        /** Setting the content for the alert dialog */
-        builder.setMessage("Did you take your "+ pillname + " ?");
+        builder.setMessage("Did you take your "+ pill_name + " ?");
 
-        /** Defining an Yes button event listener */
         builder.setPositiveButton("I took it", new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                /** Exit application on click OK */
                 AlertActivity act = (AlertActivity)getActivity();
-                act.doPositiveClick(pillname);
+                act.doPositiveClick(pill_name);
                 getActivity().finish();
             }
         });
 
-        /** Defining an Snooze button event listener */
         builder.setNeutralButton("Snooze", new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 /** Exit application on click OK */
                 AlertActivity act = (AlertActivity)getActivity();
-                act.doNeutralClick(pillname);
+                act.doNeutralClick(pill_name);
                 getActivity().finish();
             }
         });
 
-        /** Defining an Cancel button event listener */
         builder.setNegativeButton("I won't take", new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -66,17 +59,12 @@ public class AlertAlarm extends DialogFragment {
             }
         });
 
-        /** Creating the alert dialog window */
         return builder.create();
     }
 
-    /** The application should be exit, if the user presses the back button */
     @Override
     public void onDestroy() {
         super.onDestroy();
         getActivity().finish();
     }
-
-
-
 }

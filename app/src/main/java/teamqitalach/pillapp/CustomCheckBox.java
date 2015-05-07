@@ -6,24 +6,21 @@ import android.util.AttributeSet;
 import android.widget.CheckBox;
 
 /**
- * Created by Qinghao on 4/27/2015.
- * From http://stackoverflow.com/questions/20015463/defining-custom-checkbox-in-android
+ * Utilized the link below as a reference guide:
+ * http://stackoverflow.com/questions/20015463/defining-custom-checkbox-in-android
  */
 public class CustomCheckBox extends CheckBox {
 
     public CustomCheckBox(Context context, AttributeSet attrs) {
         super(context, attrs);
-        //setButtonDrawable(new StateListDrawable());
     }
+
     @Override
     public void setChecked(boolean t){
-        if(t)
-        {
+        if(t) {
             this.setBackgroundResource(R.drawable.checkbox_background);
             this.setTextColor(Color.WHITE);
-        }
-        else
-        {
+        } else {
             this.setBackgroundColor(Color.TRANSPARENT);
             this.setTextColor(Color.BLACK);
         }
