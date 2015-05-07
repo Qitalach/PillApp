@@ -2,11 +2,8 @@ package Model;
 
 import android.content.Context;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by CharlesPK3 on 4/3/15.
