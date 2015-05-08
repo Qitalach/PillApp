@@ -3,10 +3,8 @@ package teamqitalach.pillapp;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TableLayout;
@@ -25,7 +23,7 @@ public class ScheduleActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting);
+        setContentView(R.layout.activity_schedule);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -96,7 +94,7 @@ public class ScheduleActivity extends ActionBarActivity {
     @Override
     /** Inflate the menu; this adds items to the action bar if it is present */
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_setting, menu);
+        getMenuInflater().inflate(R.menu.menu_schedule, menu);
         return true;
     }
 

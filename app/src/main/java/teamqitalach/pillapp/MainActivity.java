@@ -1,8 +1,5 @@
 package teamqitalach.pillapp;
 
-import Model.Pill;
-import Model.PillBox;
-
 import teamqitalach.pillapp.adapter.TabsAdapter;
 
 import android.content.Intent;
@@ -92,10 +89,12 @@ public class MainActivity extends ActionBarActivity implements android.support.v
             }
 
             @Override
-            public void onPageScrolled(int arg0, float arg1, int arg2) {}
+            public void onPageScrolled(int arg0, float arg1, int arg2) {
+            }
 
             @Override
-            public void onPageScrollStateChanged(int arg0) {}
+            public void onPageScrollStateChanged(int arg0) {
+            }
         });
     }
 
@@ -156,7 +155,7 @@ public class MainActivity extends ActionBarActivity implements android.support.v
     }
 
     public void sendSetting() {
-        Intent intent = new Intent(this, SettingActivity.class);
+        Intent intent = new Intent(this, ScheduleActivity.class);
         startActivity(intent);
         finish();
     }
