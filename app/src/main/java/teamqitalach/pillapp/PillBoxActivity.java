@@ -36,6 +36,7 @@ public class PillBoxActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Pill Box");
         setContentView(R.layout.activity_pill_box);
 
         expListView = (ExpandableListView) findViewById(R.id.lvExp);

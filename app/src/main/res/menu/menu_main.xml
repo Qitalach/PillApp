@@ -11,7 +11,7 @@
         android:title="@string/action_edit"
         app:showAsAction="always" />
     <item android:id="@+id/action_settings"
-        android:icon="@drawable/ic_action_settings"
+        android:icon="@drawable/ic_action_notification_event_note"
         android:title="@string/action_settings"
         app:showAsAction="always" />
 </menu>

@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TableLayout;
@@ -26,6 +27,7 @@ public class ScheduleActivity extends ActionBarActivity {
         setContentView(R.layout.activity_schedule);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Week at a Glance");
 
         TableLayout stk = (TableLayout) findViewById(R.id.table_calendar);
 
@@ -43,13 +45,20 @@ public class ScheduleActivity extends ActionBarActivity {
             String day = days.get(i-1);
             TableRow headerRow = new TableRow(this);
             TextView headerText = new TextView(this);
+
             headerText.setText(day);
             headerText.setTextColor(Color.WHITE);
             headerText.setPadding(30, 0, 0, 0);
             headerText.setTypeface(null, Typeface.BOLD);
+            headerText.setGravity(Gravity.CENTER);
+
             headerRow.addView(headerText);
             headerRow.setBackgroundColor(color);
             stk.addView(headerRow);
+
+            TableRow.LayoutParams params = (TableRow.LayoutParams)headerText.getLayoutParams();
+            params.span = 2;
+            headerText.setLayoutParams(params);
 
             try {
                 alarms = pillBox.getAlarms(this, i);
@@ -64,12 +73,14 @@ public class ScheduleActivity extends ActionBarActivity {
                     TextView t1v = new TextView(this);
                     t1v.setText(alarm.getPillName());
                     t1v.setMaxEms(6);
+                    t1v.setGravity(Gravity.CENTER);
                     tbrow.addView(t1v);
 
                     TextView t2v = new TextView(this);
 
                     String time = alarm.getStringTime();
                     t2v.setText(time);
+                    t2v.setGravity(Gravity.CENTER);
                     tbrow.addView(t2v);
 
                     stk.addView(tbrow);
@@ -77,9 +88,16 @@ public class ScheduleActivity extends ActionBarActivity {
             } else {
                 TableRow tbrow = new TableRow(this);
                 TextView tv = new TextView(this);
+                tv.setGravity(Gravity.CENTER);
                 tv.setText("You don't have any alarms for " + day + ".");
+
                 tbrow.addView(tv);
                 stk.addView(tbrow);
+
+                TableRow.LayoutParams params2 = (TableRow.LayoutParams)tv.getLayoutParams();
+                params2.span = 2;
+                tv.setLayoutParams(params2);
+
             }
 
         }

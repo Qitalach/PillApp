@@ -58,6 +58,7 @@ public class EditActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Edit an Alarm");
         timeLabel=(TextView)findViewById(R.id.reminder_time);
         Typeface lightFont = Typeface.createFromAsset(this.getAssets(), "fonts/Roboto-Light.ttf");
         timeLabel.setTypeface(lightFont);

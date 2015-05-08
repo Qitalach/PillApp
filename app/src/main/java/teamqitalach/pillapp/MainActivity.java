@@ -36,8 +36,9 @@ public class MainActivity extends ActionBarActivity implements android.support.v
 
         tabsviewPager.setAdapter(mTabsAdapter);
 
-        getSupportActionBar().setTitle("Pill Reminder");
+        getSupportActionBar().setTitle("Home");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        //getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setIcon(R.mipmap.ic_launcher);
         getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
