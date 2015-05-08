@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import java.net.URISyntaxException;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 import Model.Alarm;
@@ -38,7 +39,7 @@ public class TomorrowFragment extends Fragment {
         if(day == 8)
             day = 1;
 
-        List<Alarm> alarms = null;
+        List<Alarm> alarms = Collections.emptyList();
 
         try {
             alarms = pillBox.getAlarms(container.getContext(), day);
@@ -46,7 +47,7 @@ public class TomorrowFragment extends Fragment {
             e.printStackTrace();
         }
 
-        if(alarms != null) {
+        if(alarms.size() != 0) {
             for(Alarm alarm: alarms) {
                 TableRow tbrow = new TableRow(container.getContext());
 
@@ -73,6 +74,20 @@ public class TomorrowFragment extends Fragment {
 
                 stk.addView(tbrow);
             }
+        } else {
+            TableRow tbrow = new TableRow(container.getContext());
+
+            TextView t1v = new TextView(container.getContext());
+            t1v.setText("You don't have any alarms for Tomorrow!");
+            t1v.setTextColor(Color.WHITE);
+            t1v.setGravity(Gravity.CENTER);
+            t1v.setPadding(30, 30, 30, 30);
+            t1v.setTextSize(25);
+            t1v.setTypeface(lightFont);
+            t1v.setMaxEms(10);
+            tbrow.addView(t1v);
+
+            stk.addView(tbrow);
         }
         return rootView;
     }
