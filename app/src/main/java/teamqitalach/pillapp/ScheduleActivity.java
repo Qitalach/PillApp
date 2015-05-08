@@ -2,6 +2,7 @@ package teamqitalach.pillapp;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -19,7 +20,7 @@ import java.util.List;
 import Model.Alarm;
 import Model.PillBox;
 
-public class SettingActivity extends ActionBarActivity {
+public class ScheduleActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +42,15 @@ public class SettingActivity extends ActionBarActivity {
 
         for (int i = 1; i < 8; i++) {
 
-            String day = "";
+            String day = days.get(i-1);
             TableRow headerRow = new TableRow(this);
             TextView headerText = new TextView(this);
-            headerText.setText(days.get(i-1));
+            headerText.setText(day);
             headerText.setTextColor(Color.WHITE);
+            headerText.setPadding(30, 0, 0, 0);
+            headerText.setTypeface(null, Typeface.BOLD);
             headerRow.addView(headerText);
             headerRow.setBackgroundColor(color);
-            headerRow.setGravity(Gravity.CENTER);
             stk.addView(headerRow);
 
             try {
@@ -57,7 +59,7 @@ public class SettingActivity extends ActionBarActivity {
                 e.printStackTrace();
             }
 
-            if(alarms != null) {
+            if(alarms.size() != 0) {
                 for(Alarm alarm: alarms) {
                     TableRow tbrow = new TableRow(this);
 
@@ -74,6 +76,12 @@ public class SettingActivity extends ActionBarActivity {
 
                     stk.addView(tbrow);
                 }
+            } else {
+                TableRow tbrow = new TableRow(this);
+                TextView tv = new TextView(this);
+                tv.setText("You don't have any alarms for " + day + ".");
+                tbrow.addView(tv);
+                stk.addView(tbrow);
             }
 
         }
