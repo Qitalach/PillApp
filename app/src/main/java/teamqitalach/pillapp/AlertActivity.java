@@ -81,7 +81,11 @@ public class AlertActivity extends FragmentActivity {
         else
             stringMinute = "" + minute;
 
-        Toast.makeText(getBaseContext(),  pillName + " was taken at "+ hour % 12 + ":" + stringMinute + " " + am_pm + ".", Toast.LENGTH_SHORT).show();
+        int nonMilitaryHour = hour % 12;
+        if (nonMilitaryHour == 0)
+            nonMilitaryHour = 12;
+
+        Toast.makeText(getBaseContext(),  pillName + " was taken at "+ nonMilitaryHour + ":" + stringMinute + " " + am_pm + ".", Toast.LENGTH_SHORT).show();
 
         Intent returnHistory = new Intent(getBaseContext(), MainActivity.class);
         startActivity(returnHistory);
