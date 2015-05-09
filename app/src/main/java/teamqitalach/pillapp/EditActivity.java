@@ -201,6 +201,9 @@ public class EditActivity extends ActionBarActivity {
                         /** Converting the date and time in to milliseconds elapsed since epoch */
                         long alarm_time = calendar.getTimeInMillis();
 
+                        if (calendar.before(Calendar.getInstance()))
+                            alarm_time += AlarmManager.INTERVAL_DAY * 7;
+
                         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarm_time,
                                 alarmManager.INTERVAL_DAY * 7, operation);
                     }
