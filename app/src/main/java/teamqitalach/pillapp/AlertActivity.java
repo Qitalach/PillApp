@@ -50,7 +50,7 @@ public class AlertActivity extends FragmentActivity {
         alarmManager.set(AlarmManager.RTC_WAKEUP, min, operation);
         Toast.makeText(getBaseContext(), "Alarm for " + pillName + " was snoozed for 10 minutes", Toast.LENGTH_SHORT).show();
 
-        this.finish();
+        finish();
 
     }
 
@@ -89,5 +89,10 @@ public class AlertActivity extends FragmentActivity {
 
         Intent returnHistory = new Intent(getBaseContext(), MainActivity.class);
         startActivity(returnHistory);
+        finish();
+    }
+
+    public void doNegativeClick(){
+        finish();
     }
 }
