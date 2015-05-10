@@ -21,6 +21,15 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * This activity is based on the code at
+ * http://www.feelzdroid.com/2014/10/android-action-bar-tabs-swipe-views.html
+ *
+ * This fragment handles the view and controller of the home screen
+ * It allows the user to swipe between the today, tomorrow and history tabs
+ * It also contains the action bar buttons to the add, schedule, and pill box pages
+ */
+
 public class MainActivity extends ActionBarActivity implements android.support.v7.app.ActionBar.TabListener{
     private ViewPager tabsviewPager;
     private TabsAdapter mTabsAdapter;

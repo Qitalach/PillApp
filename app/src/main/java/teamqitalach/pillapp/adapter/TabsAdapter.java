@@ -11,6 +11,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+/**
+ * This fragment is based on the code at
+ * http://www.feelzdroid.com/2014/10/android-action-bar-tabs-swipe-views.html
+ *
+ * This is a customized fragment pager adapter that handles the controller of
+ * the swipe tabs we use in the main page/activity.
+ */
+
 public class TabsAdapter extends FragmentPagerAdapter {
 
     private int TOTAL_TABS = 3;

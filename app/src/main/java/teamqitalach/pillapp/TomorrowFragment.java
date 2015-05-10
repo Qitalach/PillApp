@@ -20,6 +20,13 @@ import java.util.List;
 import Model.Alarm;
 import Model.PillBox;
 
+/**
+ * This fragment is based on the code at
+ * http://www.feelzdroid.com/2014/10/android-action-bar-tabs-swipe-views.html
+ *
+ * This fragment handles the view and controller of the tomorrow tab on home screen
+ */
+
 public class TomorrowFragment extends Fragment {
 
     @Override

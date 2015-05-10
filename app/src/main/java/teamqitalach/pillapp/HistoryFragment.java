@@ -15,6 +15,13 @@ import android.widget.TextView;
 import Model.History;
 import Model.PillBox;
 
+/**
+ * This fragment is based on the code at
+ * http://www.feelzdroid.com/2014/10/android-action-bar-tabs-swipe-views.html
+ *
+ * This fragment handles the view and controller of the history tab on home screen
+ */
+
 public class HistoryFragment extends Fragment {
 
     @Override

@@ -15,6 +15,9 @@ import teamqitalach.pillapp.R;
 /**
  * Utilized the link below as a reference guide:
  * http://www.androidhive.info/2013/07/android-expandable-list-view-tutorial/
+ *
+ * This is a customized expandable list adapter that handles the controller of
+ * the expandable list view we use in the pill box page/activity.
  */
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
