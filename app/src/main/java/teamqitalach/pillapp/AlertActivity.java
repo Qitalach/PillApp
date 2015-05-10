@@ -72,7 +72,6 @@ public class AlertActivity extends FragmentActivity {
         history.setDateString(dateString);
         history.setPillName(pillName);
 
-        pill.addHistory(history);
         pillBox.addToHistory(this, history);
 
         String stringMinute;
