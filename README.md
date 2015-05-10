@@ -30,8 +30,9 @@ This will take you to the Schedule Activity where you can see all the pills and 
 
 Attributions:
 ---
-- We use the icon designed by MedicalWP and obtained from IconArchive.com (http://www.iconarchive.com/show/medical-icons-by-medicalwp/Pills-blue-icon.html). We use the Android Launcher Icon Generator (https://romannurik.github.io/AndroidAssetStudio/icons-launcher.html) to generator the icon image files and save them in the res/mipmap folder.
-- Some fonts are Roboto fonts designed by Google. We store all the Roboto fonts (including those we never u in the assets/fonts folder. We get all the font filesfrom Google at http://developer.android.com/design/style/typography.html.
+- We use the icon designed by MedicalWP and obtained from IconArchive.com (http://www.iconarchive.com/show/medical-icons-by-medicalwp/Pills-blue-icon.html).
+- We use the Android Launcher Icon Generator (https://romannurik.github.io/AndroidAssetStudio/icons-launcher.html) to generator the icon image files and save them in the res/mipmap folder.
+- Some fonts are Roboto fonts designed by Google. We store all the Roboto fonts (including those we never used but may be used in the future) in the assets/fonts folder. We get all the font files from Google at http://developer.android.com/design/style/typography.html.
 - We use the Android Action Bar Style Generator created by Jeff Gilfelt (http://jgilfelt.github.io/android-actionbarstylegenerator/) to generate the theme of our action bar. Themes are saved in style.xml in the res/values folder. All the image files associated with the themes are saved in the res/drawable folder. 
 - We use the Android Action Bar and Tab Icon Generator (https://romannurik.github.io/AndroidAssetStudio/icons-actionbar.html) to generator the action bar icons. All the related image files are saved in the res/drawable folder. 
 - We store the hex codes of all the light blue colors from Google’s color palette (http://www.google.com/design/spec/style/color.html) in colors.xml in the res/values folder. 
