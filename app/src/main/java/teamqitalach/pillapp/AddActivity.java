@@ -137,7 +137,7 @@ public class AddActivity extends ActionBarActivity {
                         Intent intent = new Intent(getBaseContext(), AlertActivity.class);
                         intent.putExtra("pill_name", pill_name);
 
-                        operation = PendingIntent.getActivity(getBaseContext(), id, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
+                        operation = PendingIntent.getActivity(getBaseContext(), id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
                         /** Getting a reference to the System Service ALARM_SERVICE */
                         alarmManager = (AlarmManager) getBaseContext().getSystemService(ALARM_SERVICE);

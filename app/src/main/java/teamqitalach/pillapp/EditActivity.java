@@ -216,7 +216,7 @@ public class EditActivity extends ActionBarActivity {
                         pillBox.deleteAlarm(getApplicationContext(), alarmID);
 
                         Intent intent = new Intent(getBaseContext(), AlertActivity.class);
-                        PendingIntent operation = PendingIntent.getActivity(getBaseContext(), (int) alarmID, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
+                        PendingIntent operation = PendingIntent.getActivity(getBaseContext(), (int) alarmID, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                         AlarmManager alarmManager = (AlarmManager) getBaseContext().getSystemService(ALARM_SERVICE);
                         alarmManager.cancel(operation);
                     }
@@ -240,7 +240,7 @@ public class EditActivity extends ActionBarActivity {
         OnClickListener cancelClickListener = new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent returnHome = new Intent(getBaseContext(), MainActivity.class);
+                Intent returnHome = new Intent(getBaseContext(), PillBoxActivity.class);
                 startActivity(returnHome);
                 finish();
             }
