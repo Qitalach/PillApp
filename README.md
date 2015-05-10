@@ -37,3 +37,4 @@ Attributions:
 - We use the Android Action Bar and Tab Icon Generator (https://romannurik.github.io/AndroidAssetStudio/icons-actionbar.html) to generator the action bar icons. All the related image files are saved in the res/drawable folder. 
 - We store the hex codes of all the light blue colors from Google’s color palette (http://www.google.com/design/spec/style/color.html) in colors.xml in the res/values folder. 
 - We use the codes from a couple of tutorials online as our templates. We include their links in the comments in the files that utilize them. See more details in files in the java folder.
+- This project was created by Charles Park, Qinghao Peng, Laura Barstow, and Taylor Keppler. Special thanks to Paul Cantrell for making this experience possible with all the help, guidance, and support!
