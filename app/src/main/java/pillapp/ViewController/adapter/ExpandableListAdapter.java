@@ -1,4 +1,4 @@
-package teamqitalach.pillapp.adapter;
+package pillapp.ViewController.adapter;
 
 import java.util.HashMap;
 import java.util.List;

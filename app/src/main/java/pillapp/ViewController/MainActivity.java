@@ -1,6 +1,7 @@
-package teamqitalach.pillapp;
+package pillapp.ViewController;
 
-import teamqitalach.pillapp.adapter.TabsAdapter;
+import pillapp.ViewController.adapter.TabsAdapter;
+import teamqitalach.pillapp.R;
 
 import android.content.Intent;
 import android.graphics.Color;

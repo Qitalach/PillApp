@@ -1,4 +1,4 @@
-package Model;
+package pillapp.Model;
 
 import java.util.Comparator;
 

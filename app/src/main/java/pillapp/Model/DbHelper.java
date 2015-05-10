@@ -1,4 +1,4 @@
-package Model;
+package pillapp.Model;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -407,7 +407,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Get a single Model-Alarm
+     * Get a single pillapp.Model-Alarm
      * Used as a helper function
      */
     public int getDayOfWeek(long alarm_id) throws URISyntaxException {

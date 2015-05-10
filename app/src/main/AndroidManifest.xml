@@ -8,17 +8,17 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.Blue" >
         <activity
-            android:name=".AddActivity"
+            android:name="pillapp.ViewController.AddActivity"
             android:label="@string/title_activity_add"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName="pillapp.ViewController.MainActivity" >
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="pillapp.ViewController.MainActivity" />
         </activity>
         <activity
-            android:name=".AlertActivity"
+            android:name="pillapp.ViewController.AlertActivity"
             android:label="@string/title_activity_alert"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" >
             <intent-filter>
@@ -28,7 +28,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="pillapp.ViewController.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,21 +37,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".PillBoxActivity"
+            android:name="pillapp.ViewController.PillBoxActivity"
             android:label="@string/title_activity_edit" >
         </activity>
         <activity
-            android:name=".ScheduleActivity"
+            android:name="pillapp.ViewController.ScheduleActivity"
             android:label="@string/title_activity_setting"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName="pillapp.ViewController.MainActivity" >
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="pillapp.ViewController.MainActivity" />
         </activity>
         <activity
-            android:name=".EditActivity"
+            android:name="pillapp.ViewController.EditActivity"
             android:label="@string/title_activity_edit" >
         </activity>
     </application>

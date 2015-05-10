@@ -1,18 +1,17 @@
-package teamqitalach.pillapp;
+package pillapp.ViewController;
 
 import android.content.Intent;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import Model.Alarm;
-import Model.Pill;
-import Model.PillBox;
+import pillapp.Model.Alarm;
+import pillapp.Model.Pill;
+import pillapp.Model.PillBox;
 
-import Model.PillComparator;
-import teamqitalach.pillapp.adapter.ExpandableListAdapter;
+import pillapp.Model.PillComparator;
+import pillapp.ViewController.adapter.ExpandableListAdapter;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -26,6 +25,8 @@ import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupCollapseListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.Toast;
+
+import teamqitalach.pillapp.R;
 
 public class PillBoxActivity extends ActionBarActivity {
     ExpandableListAdapter listAdapter;

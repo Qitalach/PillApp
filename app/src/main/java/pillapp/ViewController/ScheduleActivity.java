@@ -1,4 +1,4 @@
-package teamqitalach.pillapp;
+package pillapp.ViewController;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -16,8 +16,10 @@ import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
 
-import Model.Alarm;
-import Model.PillBox;
+import pillapp.Model.Alarm;
+import pillapp.Model.PillBox;
+
+import teamqitalach.pillapp.R;
 
 public class ScheduleActivity extends ActionBarActivity {
 

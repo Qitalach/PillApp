@@ -1,4 +1,4 @@
-package teamqitalach.pillapp;
+package pillapp.ViewController;
 
 /**
  * Created by CharlesPK3 on 3/21/15.

@@ -1,4 +1,4 @@
-package Model;
+package pillapp.Model;
 
 import java.util.Collections;
 import java.util.LinkedList;

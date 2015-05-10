@@ -1,11 +1,11 @@
-package teamqitalach.pillapp.adapter;
+package pillapp.ViewController.adapter;
 
 /**
  * Created by Qinghao on 3/11/2015.
  */
-import teamqitalach.pillapp.HistoryFragment;
-import teamqitalach.pillapp.TodayFragment;
-import teamqitalach.pillapp.TomorrowFragment;
+import pillapp.ViewController.HistoryFragment;
+import pillapp.ViewController.TodayFragment;
+import pillapp.ViewController.TomorrowFragment;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

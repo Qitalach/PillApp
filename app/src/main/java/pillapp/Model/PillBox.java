@@ -1,4 +1,4 @@
-package Model;
+package pillapp.Model;
 
 import android.content.Context;
 import java.net.URISyntaxException;

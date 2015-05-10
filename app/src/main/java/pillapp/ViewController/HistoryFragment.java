@@ -1,4 +1,4 @@
-package teamqitalach.pillapp;
+package pillapp.ViewController;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -12,8 +12,10 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import Model.History;
-import Model.PillBox;
+import pillapp.Model.History;
+import pillapp.Model.PillBox;
+
+import teamqitalach.pillapp.R;
 
 /**
  * This fragment is based on the code at

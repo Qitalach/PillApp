@@ -1,4 +1,4 @@
-package teamqitalach.pillapp;
+package pillapp.ViewController;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -11,9 +11,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import Model.History;
-import Model.Pill;
-import Model.PillBox;
+import pillapp.Model.History;
+import pillapp.Model.Pill;
+import pillapp.Model.PillBox;
 
 
 public class AlertActivity extends FragmentActivity {

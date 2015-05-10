@@ -1,9 +1,10 @@
-package teamqitalach.pillapp;
+package pillapp.ViewController;
 
 import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
 import android.widget.CheckBox;
+import teamqitalach.pillapp.R;
 
 /**
  * Utilized the link below as a reference guide:

@@ -84,7 +84,8 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp">
 
-                <teamqitalach.pillapp.CustomCheckBox android:id="@+id/checkbox_monday"
+                <pillapp.ViewController.CustomCheckBox
+                    android:id="@+id/checkbox_monday"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -94,7 +95,8 @@
                     android:padding="1dp"
                     android:gravity="center"/>
 
-                <teamqitalach.pillapp.CustomCheckBox android:id="@+id/checkbox_tuesday"
+                <pillapp.ViewController.CustomCheckBox
+                    android:id="@+id/checkbox_tuesday"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -104,7 +106,8 @@
                     android:padding="1dp"
                     android:gravity="center"/>
 
-                <teamqitalach.pillapp.CustomCheckBox android:id="@+id/checkbox_wednesday"
+                <pillapp.ViewController.CustomCheckBox
+                    android:id="@+id/checkbox_wednesday"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -114,7 +117,8 @@
                     android:padding="1dp"
                     android:gravity="center"/>
 
-                <teamqitalach.pillapp.CustomCheckBox android:id="@+id/checkbox_thursday"
+                <pillapp.ViewController.CustomCheckBox
+                    android:id="@+id/checkbox_thursday"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -124,7 +128,8 @@
                     android:padding="1dp"
                     android:gravity="center"/>
 
-                <teamqitalach.pillapp.CustomCheckBox android:id="@+id/checkbox_friday"
+                <pillapp.ViewController.CustomCheckBox
+                    android:id="@+id/checkbox_friday"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -134,7 +139,8 @@
                     android:padding="1dp"
                     android:gravity="center"/>
 
-                <teamqitalach.pillapp.CustomCheckBox android:id="@+id/checkbox_saturday"
+                <pillapp.ViewController.CustomCheckBox
+                    android:id="@+id/checkbox_saturday"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -144,7 +150,8 @@
                     android:padding="1dp"
                     android:gravity="center"/>
 
-                <teamqitalach.pillapp.CustomCheckBox android:id="@+id/checkbox_sunday"
+                <pillapp.ViewController.CustomCheckBox
+                    android:id="@+id/checkbox_sunday"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

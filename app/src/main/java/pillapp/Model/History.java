@@ -1,4 +1,4 @@
-package Model;
+package pillapp.Model;
 
 /**
  * Created by CharlesPK3 on 4/7/15.
