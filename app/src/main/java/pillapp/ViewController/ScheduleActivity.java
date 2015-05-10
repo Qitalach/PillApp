@@ -21,6 +21,12 @@ import pillapp.Model.PillBox;
 
 import teamqitalach.pillapp.R;
 
+/**
+ * This activity handles the view and controller of the week-at-a-glance page, where
+ * the user can view the schedule of alarms for all 7 days. The logic is the same as
+ * the logic in TodayFragment and TomorrowFragment.
+ */
+
 public class ScheduleActivity extends ActionBarActivity {
 
     @Override
@@ -58,6 +64,7 @@ public class ScheduleActivity extends ActionBarActivity {
             headerRow.setBackgroundColor(color);
             stk.addView(headerRow);
 
+            //Let headerText span two columns
             TableRow.LayoutParams params = (TableRow.LayoutParams)headerText.getLayoutParams();
             params.span = 2;
             headerText.setLayoutParams(params);
@@ -96,18 +103,12 @@ public class ScheduleActivity extends ActionBarActivity {
                 tbrow.addView(tv);
                 stk.addView(tbrow);
 
+                //Let tv span two columns
                 TableRow.LayoutParams params2 = (TableRow.LayoutParams)tv.getLayoutParams();
                 params2.span = 2;
                 tv.setLayoutParams(params2);
-
             }
-
         }
-
-
-
-
-
     }
 
 

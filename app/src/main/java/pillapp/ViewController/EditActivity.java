@@ -29,9 +29,14 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import teamqitalach.pillapp.R;
+
 /**
  * Utilized the link below as a reference guide:
  * http://wptrafficanalyzer.in/blog/setting-up-alarm-using-alarmmanager-and-waking-up-screen-and-unlocking-keypad-on-alarm-goes-off-in-android/
+ *
+ * This activity handles the view and controller of the edit page, where the user can edit an alarm
+ * It is very similar to the add activity, but it uses tempIds and tempNames in the PillBox model
+ * to indicate which alarms we need to edit or delete
  */
 public class EditActivity extends ActionBarActivity {
     private AlarmManager alarmManager;
@@ -44,6 +49,9 @@ public class EditActivity extends ActionBarActivity {
     List<Long> tempIds = pillBox.getTempIds();
     String tempPill_name;
 
+    // Time picker dialog that pops up when the user presses the time string
+    // This method specifies the hour and minute of the time picker before the user
+    // does anything
     TimePickerDialog.OnTimeSetListener t=new TimePickerDialog.OnTimeSetListener() {
         public void onTimeSet(TimePicker view, int hourOfDay,
                               int minuteOfHour) {
@@ -59,10 +67,14 @@ public class EditActivity extends ActionBarActivity {
         setContentView(R.layout.activity_edit);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Edit an Alarm");
+
+        // Set up the time string on the page
         timeLabel=(TextView)findViewById(R.id.reminder_time);
         Typeface lightFont = Typeface.createFromAsset(this.getAssets(), "fonts/Roboto-Light.ttf");
         timeLabel.setTypeface(lightFont);
 
+        // Set up the time string on the page
+        // Uses the tempIds in the pill box to get the time string
         try {
             Alarm firstAlarm = pillBox.getAlarmById(getApplicationContext(), tempIds.get(0));
             hour = firstAlarm.getHour();
@@ -184,7 +196,7 @@ public class EditActivity extends ActionBarActivity {
                         Intent intent = new Intent(getBaseContext(), AlertActivity.class);
                         intent.putExtra("pill_name", pill_name);
 
-                        operation = PendingIntent.getActivity(getBaseContext(), id, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
+                        operation = PendingIntent.getActivity(getBaseContext(), id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
                         /** Getting a reference to the System Service ALARM_SERVICE */
                         alarmManager = (AlarmManager) getBaseContext().getSystemService(ALARM_SERVICE);
@@ -221,6 +233,7 @@ public class EditActivity extends ActionBarActivity {
                         alarmManager.cancel(operation);
                     }
 
+                    // Delete the pill if there is no alarm for it
                     try {
                         List<Alarm> tempTracker = pillBox.getAlarmByPill(getBaseContext(), tempPill_name);
                         if(tempTracker.size() == 0)
@@ -332,11 +345,12 @@ public class EditActivity extends ActionBarActivity {
                 pillBox.deleteAlarm(getApplicationContext(), alarmID);
 
                 Intent intent = new Intent(getBaseContext(), AlertActivity.class);
-                PendingIntent operation = PendingIntent.getActivity(getBaseContext(), (int) alarmID, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
+                PendingIntent operation = PendingIntent.getActivity(getBaseContext(), (int) alarmID, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                 AlarmManager alarmManager = (AlarmManager) getBaseContext().getSystemService(ALARM_SERVICE);
                 alarmManager.cancel(operation);
             }
 
+            // Delete the pill if there is no alarm for it
             try {
                 List<Alarm> tempTracker = pillBox.getAlarmByPill(getBaseContext(), tempPill_name);
                 if(tempTracker.size() == 0)
@@ -358,6 +372,10 @@ public class EditActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * This method takes hours and minute as input and returns
+     * a string that is like "12:01pm"
+     */
     public String setTime(int hour, int minute) {
         String am_pm = (hour < 12) ? "am" : "pm";
         int nonMilitaryHour = hour % 12;

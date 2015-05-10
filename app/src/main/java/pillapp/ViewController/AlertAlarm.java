@@ -12,6 +12,14 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.WindowManager.LayoutParams;
 
+/**
+ * Utilized the link below as a reference guide:
+ * http://wptrafficanalyzer.in/blog/setting-up-alarm-using-alarmmanager-and-waking-up-screen-and-unlocking-keypad-on-alarm-goes-off-in-android/
+ *
+ * This is a dialog box that AlertActivity called when it is triggered.
+ * It contains three buttons to let the user respond to an alarm.
+ */
+
 public class AlertAlarm extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

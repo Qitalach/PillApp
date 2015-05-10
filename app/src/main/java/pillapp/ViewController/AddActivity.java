@@ -34,6 +34,8 @@ import android.widget.Toast;
 /**
  * Utilized the link below as a reference guide:
  * http://wptrafficanalyzer.in/blog/setting-up-alarm-using-alarmmanager-and-waking-up-screen-and-unlocking-keypad-on-alarm-goes-off-in-android/
+ *
+ * This activity handles the view and controller of the add page, where the user can add an alarm
  */
 public class AddActivity extends ActionBarActivity {
     private AlarmManager alarmManager;
@@ -44,6 +46,9 @@ public class AddActivity extends ActionBarActivity {
     TextView timeLabel;
     PillBox pillBox = new PillBox();
 
+    // Time picker dialog that pops up when the user presses the time string
+    // This method specifies the hour and minute of the time picker before the user
+    // does anything
     TimePickerDialog.OnTimeSetListener t=new TimePickerDialog.OnTimeSetListener() {
         public void onTimeSet(TimePicker view, int hourOfDay,
                               int minuteOfHour) {
@@ -59,10 +64,13 @@ public class AddActivity extends ActionBarActivity {
         setContentView(R.layout.activity_add);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Add an Alarm");
+
+        // Set up the time string on the page
         timeLabel=(TextView)findViewById(R.id.reminder_time);
         Typeface lightFont = Typeface.createFromAsset(this.getAssets(), "fonts/Roboto-Light.ttf");
         timeLabel.setTypeface(lightFont);
 
+        // Get the time right now and set it to be the time string
         Calendar rightNow = Calendar.getInstance();
         hour = rightNow.get(Calendar.HOUR_OF_DAY);
         minute = rightNow.get(Calendar.MINUTE);
@@ -245,7 +253,7 @@ public class AddActivity extends ActionBarActivity {
                 else
                     dayOfWeekList[0] = false;
                 break;
-            case R.id.every_monday:
+            case R.id.every_day:
                 LinearLayout ll = (LinearLayout) findViewById(R.id.checkbox_layout);
                 for (int i = 0; i < ll.getChildCount(); i++) {
                     View v = ll.getChildAt(i);
@@ -274,6 +282,10 @@ public class AddActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * This method takes hours and minute as input and returns
+     * a string that is like "12:01pm"
+     */
     public String setTime(int hour, int minute) {
         String am_pm = (hour < 12) ? "am" : "pm";
         int nonMilitaryHour = hour % 12;

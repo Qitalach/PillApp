@@ -9,6 +9,9 @@ import teamqitalach.pillapp.R;
 /**
  * Utilized the link below as a reference guide:
  * http://stackoverflow.com/questions/20015463/defining-custom-checkbox-in-android
+ *
+ * This is a customized check box used in AddActivity to allow the user to select
+ * days of the week. The background gets blue when the checkbox is selected.
  */
 public class CustomCheckBox extends CheckBox {
 
@@ -19,6 +22,7 @@ public class CustomCheckBox extends CheckBox {
     @Override
     public void setChecked(boolean t){
         if(t) {
+            // checkbox_background is blue
             this.setBackgroundResource(R.drawable.checkbox_background);
             this.setTextColor(Color.WHITE);
         } else {

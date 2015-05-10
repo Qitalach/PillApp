@@ -12,8 +12,8 @@ import java.util.List;
  */
 public class PillBox {
     private DbHelper db;
-    private static List<Long> tempIds;
-    private static String tempName;
+    private static List<Long> tempIds; // Ids of the alarms to be deleted or edited
+    private static String tempName; // Ids of the alarms to be deleted or edited
 
     public List<Long> getTempIds() { return Collections.unmodifiableList(tempIds); }
 

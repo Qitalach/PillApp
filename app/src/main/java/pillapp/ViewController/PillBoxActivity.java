@@ -28,11 +28,18 @@ import android.widget.Toast;
 
 import teamqitalach.pillapp.R;
 
+/**
+ * This activity handles the view and controller of the pillbox page, where
+ * the user can view alarms by pills and edit or delete an alarm
+ */
 public class PillBoxActivity extends ActionBarActivity {
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
+    // This data structure allows us to get the ids of the alarms we want to edit
+    // and store them in the tempId in the pill box model. The structure is similar
+    // to the struture of listDataChild.
     List<List<List<Long>>> alarmIDData;
 
     @Override
@@ -135,7 +142,10 @@ public class PillBoxActivity extends ActionBarActivity {
         }
     }
 
-    /** Helper function to obtain a string of the days of the week */
+    /**
+     * Helper function to obtain a string of the days of the week
+     * that can be used as a boolean list
+     */
     private String daysList(Alarm alarm){
         String days = "#";
         for(int i=0; i<7; i++){

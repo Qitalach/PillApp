@@ -15,6 +15,16 @@ import pillapp.Model.History;
 import pillapp.Model.Pill;
 import pillapp.Model.PillBox;
 
+/**
+ * Utilized the link below as a reference guide:
+ * http://wptrafficanalyzer.in/blog/setting-up-alarm-using-alarmmanager-and-waking-up-screen-and-unlocking-keypad-on-alarm-goes-off-in-android/
+ *
+ * This activity handles the view and controller of the alert page, which contains
+ * a dialog fragment AlertAlarm that shows the dialog box to let the user respond to an alarm.
+ * This is the "notification" we are using right now. But it only contains a dialog box so it is
+ * not a real notification. We can change this to a real notification that has a ringtone or a
+ * vibrating function in the future.
+ */
 
 public class AlertActivity extends FragmentActivity {
 
@@ -32,6 +42,7 @@ public class AlertActivity extends FragmentActivity {
         alert.show(getSupportFragmentManager(), "AlertAlarm");
     }
 
+    // Snooze
     public void doNeutralClick(String pillName){
         final int _id = (int) System.currentTimeMillis();
         final long minute = 60000;
@@ -42,7 +53,7 @@ public class AlertActivity extends FragmentActivity {
         Intent intent = new Intent(getBaseContext(), AlertActivity.class);
         intent.putExtra("pill_name", pillName);
 
-        operation = PendingIntent.getActivity(getBaseContext(), _id, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
+        operation = PendingIntent.getActivity(getBaseContext(), _id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         /** Getting a reference to the System Service ALARM_SERVICE */
         alarmManager = (AlarmManager) getBaseContext().getSystemService(ALARM_SERVICE);
@@ -54,6 +65,7 @@ public class AlertActivity extends FragmentActivity {
 
     }
 
+    // I took it
     public void doPositiveClick(String pillName){
         PillBox pillBox = new PillBox();
         Pill pill = pillBox.getPillByName(this, pillName);
@@ -91,6 +103,7 @@ public class AlertActivity extends FragmentActivity {
         finish();
     }
 
+    // I won't take it
     public void doNegativeClick(){
         finish();
     }

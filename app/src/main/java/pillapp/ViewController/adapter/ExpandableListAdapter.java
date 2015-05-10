@@ -56,14 +56,18 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             convertView = infalInflater.inflate(R.layout.list_item, null);
         }
 
+        // childText should be a string that we can split into two parts
         String[] parts = childText.split("#");
+        // The first part is the time
         String time = parts[0];
+        // The second part is a string of 0 and 1 that works as a boolean list
         String daysOfWeek = parts[1];
 
         TextView timeListChild = (TextView) convertView
                 .findViewById(R.id.pill_box_time);
         timeListChild.setText(time);
 
+        // Get all the textview objects from the xml file
         TextView monday = (TextView) convertView
                 .findViewById(R.id.pill_box_monday);
         TextView tuesday = (TextView) convertView
@@ -79,9 +83,12 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         TextView sunday = (TextView) convertView
                 .findViewById(R.id.pill_box_sunday);
 
+        // The color indicates the days of week when the alarm goes off
         int colorSelected = _context.getResources().getColor(R.color.blue600);
+        // The colors indicates the days of week when the alarm doesn't go off
         int colorNotSelected = Color.parseColor("#f4f4f4");
 
+        // Use dayOfWeek as a boolean list to change the colors of the textviews
         for (int i = 0; i < 7; i++){
             if (i==0) {
                 if (daysOfWeek.substring(i, i+1).equals("1")) {
