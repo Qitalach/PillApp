@@ -68,7 +68,7 @@
                 android:textColor="@color/blue600"
                 android:layout_marginTop="8dp"/>
 
-            <CheckBox android:id="@+id/every_monday"
+            <CheckBox android:id="@+id/every_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Every day"
@@ -80,7 +80,7 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/every_monday"
+                android:layout_below="@+id/every_day"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp">
 

@@ -320,7 +320,7 @@ public class EditActivity extends ActionBarActivity {
                 else
                     dayOfWeekList[0] = false;
                 break;
-            case R.id.every_monday:
+            case R.id.every_day:
                 LinearLayout ll = (LinearLayout) findViewById(R.id.checkbox_layout);
                 for (int i=0; i < ll.getChildCount(); i++) {
                     View v = ll.getChildAt(i);
