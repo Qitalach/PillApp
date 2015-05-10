@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -292,6 +293,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         c.close();
 
+
         return combineAlarms(alarmsByPill);
     }
 
@@ -399,6 +401,8 @@ public class DbHelper extends SQLiteOpenHelper {
                 combinedAlarms.add(newAlarm);
             }
         }
+
+        Collections.sort(combinedAlarms);
         return combinedAlarms;
     }
 

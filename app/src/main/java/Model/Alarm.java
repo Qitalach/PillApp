@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Alarm implements Comparable<Alarm>{
     private long id;  // DB id number
-    private int hour;
+    private int hour; //
     private int minute;
     private String pillName;
     private List<Long> ids = new LinkedList<Long>();
@@ -41,6 +41,10 @@ public class Alarm implements Comparable<Alarm>{
 
     public void setPillName(String pillName) { this.pillName = pillName; }
 
+    /**
+     * Overrides the compareTo() method so that alarms can be sorted by time of day from earliest to
+     * latest.
+     */
     @Override
     public int compareTo(Alarm anotherAlarm) {
         if (hour < anotherAlarm.getHour())
@@ -57,6 +61,10 @@ public class Alarm implements Comparable<Alarm>{
         }
     }
 
+    /**
+     * A helper method which returns the time of the alarm in string form
+     *  hour:minutes am/pm
+     */
     public String getStringTime() {
         int nonMilitaryHour = hour % 12;
         if (nonMilitaryHour == 0)
