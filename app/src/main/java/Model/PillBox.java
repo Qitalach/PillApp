@@ -7,6 +7,8 @@ import java.util.List;
 
 /**
  * Created by CharlesPK3 on 4/3/15.
+ * Is used to retrieve pills and alarms by other classes.
+ * Has access to and can read and write to the database.
  */
 public class PillBox {
     private DbHelper db;
