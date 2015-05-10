@@ -11,10 +11,12 @@ import Model.Alarm;
 import Model.Pill;
 import Model.PillBox;
 
+import Model.PillComparator;
 import teamqitalach.pillapp.adapter.ExpandableListAdapter;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -113,6 +115,7 @@ public class PillBoxActivity extends ActionBarActivity {
 
         PillBox pillbox = new PillBox();
         List<Pill> pills = pillbox.getPills(this);
+        Collections.sort(pills, new PillComparator());
 
         for (Pill pill: pills){
             String name = pill.getPillName();
