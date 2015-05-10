@@ -28,7 +28,7 @@ This will take you to the Pill Box Activity where you will be able to see all th
 ######Calendar sign: 
 This will take you to the Schedule Activity where you can see all the pills and alarms organized by the day of week.
 
-List of use cases:
+######List of use cases:
 - Add an alarm: Press the plus sign button and go to the Add Activity. Enter information and press "Set Alarm".
 - Edit an alarm: Press the suitcase sign and go to the Pill Box Activity. Select a pill and then an alarm of the pill. Enter information and press "Set Alarm".
 - Delete an alarm: Press the suitcase sign button and go to the Pill Box Activity. Select a pill and then an alarm of the pill. Press the trash can icon at the top right corner.
