@@ -18,7 +18,7 @@ Known Bugs and Future Plans:
 ---
 See GitHub issues. (https://github.com/Qitalach/PillApp/issues)
 
-What each buttons do:
+Use Cases and What Each Button Does:
 ---
 In the Home page, you will see 3 buttons in the top right of the application.
 ######Plus sign: 
@@ -27,6 +27,16 @@ This will take you to the Add Activity where you will be able to create an alarm
 This will take you to the Pill Box Activity where you will be able to see all the pills and alarms created. This will also be the place where you can edit and delete any pill and alarm you desire.
 ######Calendar sign: 
 This will take you to the Schedule Activity where you can see all the pills and alarms organized by the day of week.
+
+List of use cases:
+- Add an alarm: Press the plus sign button and go to the Add Activity. Enter information and press "Set Alarm".
+- Edit an alarm: Press the suitcase sign and go to the Pill Box Activity. Select a pill and then an alarm of the pill. Enter information and press "Set Alarm".
+- Delete an alarm: Press the suitcase sign button and go to the Pill Box Activity. Select a pill and then an alarm of the pill. Press the trash can icon at the top right corner.
+- React to an alarm: When the dialog box pops up, press one of the three buttons to indicate "I took it", "Snooze", or "I won't take it".
+- View the schedule for today and tomorrow: Swipe to the today or tomorrow tab on the home screen.
+- View the schedule for the whole week: Press the calendar sign button and go to the Schedule Activity.
+- View the alarms by pill: Press the suitcase sign button and go to the Pill Box Activity.
+- View the history: Swipe to the history tab on the home screen.
 
 Attributions:
 ---
