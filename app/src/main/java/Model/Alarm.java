@@ -6,6 +6,11 @@ import java.util.List;
 
 /**
  * Created by CharlesPK3 on 4/3/15.
+ *
+ * This class represents each alarm object the user creates for a pill. These alarm objects are
+ * separate from the alarmManager alarms (which represent only one day a week) utilized by the app.
+ * The alarm objects represents one alarm time for one pill on all of its selected days. To connect
+ * with the alarmManager alarms, each alarm contains a list of these alarms' ids
  */
 public class Alarm implements Comparable<Alarm>{
     private long id;  // DB id number
